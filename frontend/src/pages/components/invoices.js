@@ -14,7 +14,7 @@ import {
 export default function Invoices() {
     return(
        
-          <TableContainer bg='orange.300'>
+          <TableContainer bg='orange.300' mt={"100"}>
             <Table variant="striped" colorScheme="orange" size="sm">
               <Thead>
                 <Tr fontWeight={"bold"}>

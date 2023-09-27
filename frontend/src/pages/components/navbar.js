@@ -33,13 +33,14 @@ export default function Navbar(){
        
           
             <Box>
-            <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            
+            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
               Κινήσεις
             </Button>
-            <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
               Συναλλασσόμενοι
             </Button>
-            <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
              Εκτυπώσεις
             </Button>
             </Box>
