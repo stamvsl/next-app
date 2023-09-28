@@ -33,6 +33,9 @@ export default function Navbar(){
        
           
             <Box>
+            <Button as={'a'} fontSize={'lg'} fontWeight={"bold"} variant={'link'} href={'#'}  color={'white'} mr="6">
+              Κεντρική
+            </Button>
             
             <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
               Κινήσεις
@@ -42,6 +45,9 @@ export default function Navbar(){
             </Button>
             <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
              Εκτυπώσεις
+            </Button>
+            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+             Ρυθμίσεις
             </Button>
             </Box>
             <Spacer />

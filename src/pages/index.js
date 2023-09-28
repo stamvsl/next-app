@@ -2,6 +2,7 @@ import Navbar from './components/navbar';
 import Boxes from './components/boxes';
 import Invoices from './components/invoices'
 import Head from "next/head";
+
 import {
   Input,
   Container,

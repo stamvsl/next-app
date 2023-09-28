@@ -1,8 +1,15 @@
-import { Flex, Box,  Button, Wrap } from "@chakra-ui/react";
+import { Flex, Box,  Button, Icon, Text } from "@chakra-ui/react";
+
+import { AiOutlinePrinter } from 'react-icons/Ai';
+import { BsPeople } from 'react-icons/Bs'
+import { IoSettingsOutline } from 'react-icons/Io5'
+import { MdAppRegistration } from 'react-icons/Md'
 
 export default function Boxes() {
   return (
+   
     <Box >
+       
       <Flex height={"500"} >
         <Button 
         fontWeight={"bold"}
@@ -19,7 +26,11 @@ export default function Boxes() {
         _hover={{
             bg: 'orange.300',
            }}>
-          Κινήσεις
+          <Box>
+          <MdAppRegistration size="250" color="white"  />
+          {/* <Text>Κινήσεις</Text> */}
+          </Box>
+         
         </Button>
 
         <Button 
@@ -38,7 +49,10 @@ export default function Boxes() {
             bg: 'orange.300',
            }}
            >
-          Εκτυπώσεις
+          <Box>
+          <AiOutlinePrinter size="250" color="white"  />
+          {/* <Text>Εκτυπώσεις</Text> */}
+          </Box>
         </Button>
 
         <Button
@@ -56,7 +70,10 @@ export default function Boxes() {
         _hover={{
             bg: 'orange.300',
            }}> 
-          Συναλλασσόμενοι
+          <Box>
+          <BsPeople size="250" color="white"  />
+          {/* <Text>Συναλλασσόμενοι</Text> */}
+          </Box>
         </Button>
 
         <Button
@@ -74,7 +91,10 @@ export default function Boxes() {
         _hover={{
             bg: 'orange.300',
            }}> 
-          Ρυθμίσεις
+          <Box>
+          <IoSettingsOutline size="250" color="white"  />
+          {/* <Text>Ρυθμίσεις</Text> */}
+          </Box>
         </Button>
 
       </Flex>
