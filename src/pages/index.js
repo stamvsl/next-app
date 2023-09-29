@@ -1,6 +1,6 @@
-import Navbar from './components/navbar';
-import Boxes from './components/boxes';
-import Invoices from './components/invoices'
+import Navbar from '../components/Navbar';
+import Boxes from '../components/Boxes';
+import Invoices from '../components/Invoices'
 import Head from "next/head";
 
 import {
@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <main>
         <Container bg="orange.100" maxW="100vw" height="100vh">
-          <Navbar />
+         
           <Container maxW="100vw">
             <Boxes />
           </Container>

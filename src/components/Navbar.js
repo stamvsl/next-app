@@ -22,12 +22,12 @@ export default function Navbar(){
           borderStyle={'solid'}
           borderColor={useColorModeValue('gray.200', 'gray.900')}
           align={'center'}>
-          <Flex
+          {/* <Flex
             flex={{ base: 1, md: 'auto' }}
             ml={{ base: -2 }}
             display={{ base: 'flex', md: 'none' }}>
             
-          </Flex >
+          </Flex > */}
             
          
        
