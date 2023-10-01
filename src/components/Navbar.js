@@ -14,7 +14,7 @@ export default function Navbar(){
         <Box >
         <Flex
           bg="orange.300"
-          // minH={'60px'}
+          minH={'60px'}
           py={{ base: 2 }}
           px={{ base: 4 }}
           // borderBottom={1}
