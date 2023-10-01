@@ -17,10 +17,10 @@ export default function Home() {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <main>
+      <main >
         <Container bg="orange.100" maxW="100vw" height="100vh">
          
-          <Container maxW="100vw">
+          <Container>
             <Boxes />
           </Container>
 

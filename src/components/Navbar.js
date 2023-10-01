@@ -14,13 +14,12 @@ export default function Navbar(){
         <Box >
         <Flex
           bg="orange.300"
-         
-          minH={'60px'}
+          // minH={'60px'}
           py={{ base: 2 }}
           px={{ base: 4 }}
-          borderBottom={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.900')}
+          // borderBottom={1}
+          // borderStyle={'solid'}
+          // borderColor={useColorModeValue('gray.200', 'gray.900')}
           align={'center'}>
           {/* <Flex
             flex={{ base: 1, md: 'auto' }}
@@ -55,6 +54,7 @@ export default function Navbar(){
             <Box>
 
             <Button
+           
            as={'a'}
            display={{ base: 'none', md: 'inline-flex' }}
            fontSize={'sm'}
