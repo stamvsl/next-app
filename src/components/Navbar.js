@@ -1,4 +1,6 @@
 
+
+
 import {
     Box,
     Flex,
@@ -11,12 +13,13 @@ import {
 
 export default function Navbar(){
     return(
-        <Box >
+        <Box>
         <Flex
           bg="orange.300"
           minH={'60px'}
           py={{ base: 2 }}
           px={{ base: 4 }}
+          
           // borderBottom={1}
           // borderStyle={'solid'}
           // borderColor={useColorModeValue('gray.200', 'gray.900')}
@@ -31,21 +34,21 @@ export default function Navbar(){
          
        
           
-            <Box>
-            <Button as={'a'} fontSize={'lg'} fontWeight={"bold"} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Box >
+            <Button as={'a'} fontSize={'2em'} fontWeight={"bold"} variant={'link'} href={'#'}  color={'white'} mr="10" >
               Κεντρική
             </Button>
             
-            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'2em'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="10">
               Κινήσεις
             </Button>
-            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'2em'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="10">
               Συναλλασσόμενοι
             </Button>
-            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'2em'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="10">
              Εκτυπώσεις
             </Button>
-            <Button as={'a'} fontSize={'lg'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="6">
+            <Button as={'a'} fontSize={'2em'} fontWeight={400} variant={'link'} href={'#'}  color={'white'} mr="10">
              Ρυθμίσεις
             </Button>
             </Box>

@@ -14,10 +14,10 @@ import {
 export default function Invoices() {
     return(
        
-          <TableContainer bg='orange.300' mt={"100"}>
-            <Table variant="striped" colorScheme="orange" size="sm">
+          <TableContainer  padding={"100"} >
+            <Table bg='orange.300' variant="striped" colorScheme="orange" >
               <Thead>
-                <Tr fontWeight={"bold"}>
+                <Tr fontWeight={"bold"} >
                   <Td >Α/Α</Td>
                   <Td>ΗΜΕΡΟΜΗΝΙΑ</Td>
                   <Td>ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΣ</Td>

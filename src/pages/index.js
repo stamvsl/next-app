@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Boxes from '../components/Boxes';
 import Invoices from '../components/Invoices'
+import Transactors from '@/components/Transactors';
 import Head from "next/head";
 
 import {
@@ -9,6 +10,7 @@ import {
   Text
  
 } from "@chakra-ui/react";
+import Entries from '@/components/Entries';
 
 
 export default function Home() {
@@ -18,10 +20,10 @@ export default function Home() {
         <title>Create Next App</title>
       </Head>
       <main >
-        <Container bg="orange.100" maxW="100vw" height="100vh">
+        <Container bg="orange.100" maxW="100vw" height="100vh" >
          
-          <Container>
-            <Boxes />
+          <Container maxW={"1400px"}>
+            <Entries />
           </Container>
 
           {/* <Container maxW="100vw">

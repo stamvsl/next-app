@@ -8,8 +8,8 @@ import { MdAppRegistration } from 'react-icons/Md'
 export default function Boxes() {
  
   return (
-    <Box padding={"50"}>
-      <Grid
+    <Box padding={"50"}  display={"Grid"} justifyContent={"center"}>
+      <Grid  
         gridTemplateColumns={{ md: "1fr 1fr", sm: "1fr" }}
         gridTemplateRows={{ md: "1fr 1fr", sm: "1fr" }}
         gap="10"
@@ -22,6 +22,7 @@ export default function Boxes() {
                "4"
         }`}
         justifyContent={"center"}
+        
       >
         <GridItem>
           <CustomButton Icon={MdAppRegistration} area={"1"} />
