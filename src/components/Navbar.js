@@ -1,3 +1,6 @@
+import NextLink from "next/link";
+import { Link } from "@chakra-ui/react";
+
 import {
   Box,
   Flex,
@@ -29,29 +32,29 @@ export default function Navbar() {
           </Flex > */}
 
         <Box>
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={"bold"}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
-            Κεντρική
-          </Button>
-
-          <Button
+          <Link as={NextLink} href={"/"}>
+            <Button
+              fontSize={"2em"}
+              fontWeight={"bold"}
+              variant={"link"}
+              color={"white"}
+              mr="10"
+            >
+              Κεντρική
+            </Button>
+          </Link>
+          <a
             as={"a"}
             fontSize={"2em"}
             fontWeight={400}
             variant={"link"}
-            href={"#"}
+            href={"/entries"}
             color={"white"}
             mr="10"
           >
             Κινήσεις
-          </Button>
+          </a>
+
           <Button
             as={"a"}
             fontSize={"2em"}

@@ -7,6 +7,7 @@ import {
   HStack,
   VStack,
   Box,
+  Flex,
 } from "@chakra-ui/react";
 
 export default function Entries() {
