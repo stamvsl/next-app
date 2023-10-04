@@ -1,14 +1,8 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  Stack,
-  useColorModeValue,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Stack, useColorModeValue, Spacer } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Link } from "@chakra-ui/react";
 
-export default function Navbar() {
+export default function Navbar({ children }) {
   return (
     <Box>
       <Flex
@@ -29,60 +23,21 @@ export default function Navbar() {
           </Flex > */}
 
         <Box>
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={"bold"}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
+          <Button as={"a"} fontSize={"2em"} fontWeight={"bold"} variant={"link"} href={"#"} color={"white"} mr="10">
             Κεντρική
           </Button>
-
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
-            Κινήσεις
-          </Button>
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
+          <Link as={NextLink} href="/manos">
+            <Button fontSize={"2em"} fontWeight={400} variant={"link"} color={"white"} mr="10">
+              Κινήσεις
+            </Button>
+          </Link>
+          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
             Συναλλασσόμενοι
           </Button>
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
+          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
             Εκτυπώσεις
           </Button>
-          <Button
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-            color={"white"}
-            mr="10"
-          >
+          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
             Ρυθμίσεις
           </Button>
         </Box>
@@ -105,6 +60,7 @@ export default function Navbar() {
           </Button>
         </Box>
       </Flex>
+      {children}
     </Box>
   );
 }

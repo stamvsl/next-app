@@ -8,8 +8,9 @@ config.autoAddCss = false;
 export default function App({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <Navbar />
-      <Component {...pageProps} />
+      <Navbar>
+        <Component {...pageProps} />
+      </Navbar>
     </ChakraProvider>
   );
 }
