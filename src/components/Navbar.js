@@ -23,10 +23,12 @@ export default function Navbar({ children }) {
           </Flex > */}
 
         <Box>
-          <Button as={"a"} fontSize={"2em"} fontWeight={"bold"} variant={"link"} href={"#"} color={"white"} mr="10">
-            Κεντρική
-          </Button>
-          <Link as={NextLink} href="/manos">
+          <Link as={NextLink} href="/">
+            <Button fontSize={"2em"} fontWeight={"bold"} variant={"link"} color={"white"} mr="10">
+              Κεντρική
+            </Button>
+          </Link>
+          <Link as={NextLink} href="/manos/id">
             <Button fontSize={"2em"} fontWeight={400} variant={"link"} color={"white"} mr="10">
               Κινήσεις
             </Button>
