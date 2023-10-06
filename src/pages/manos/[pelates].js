@@ -16,5 +16,5 @@ export async function getServerSideProps({ params }) {
 
   // make a db call and get all related data with the customer id = params.pelates
 
-  return { props: { id: params.pelates, stam: "xaxa" } };
+  return { props: { id: params.pelates, stam: "xoxo" } };
 }
