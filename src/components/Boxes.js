@@ -1,3 +1,5 @@
+import NextLink from "next/link";
+import { Link } from "@chakra-ui/react";
 import {
   Flex,
   Box,
@@ -34,7 +36,9 @@ export default function Boxes() {
         justifyContent={"center"}
       >
         <GridItem>
-          <CustomButton Icon={MdAppRegistration} area={"1"} />
+          <Link as={NextLink} href="/entries">
+            <CustomButton Icon={MdAppRegistration} area={"1"} />
+          </Link>
         </GridItem>
         <GridItem>
           <CustomButton Icon={BsPeople} area={"2"} />

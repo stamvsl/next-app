@@ -1,26 +1,33 @@
-<<<<<<< HEAD
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
-
+import Entries from "./Entries";
 import {
   Box,
   Flex,
+  Icon,
   Text,
   Button,
   Stack,
   useColorModeValue,
   Spacer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  HamburgerIcon,
 } from "@chakra-ui/react";
-=======
-import { Box, Flex, Text, Button, Stack, useColorModeValue, Spacer } from "@chakra-ui/react";
-import NextLink from "next/link";
-import { Link } from "@chakra-ui/react";
->>>>>>> c542cbb370e282c953e787de95bc7b0bfcabeb9c
-
+import { AiFillHome } from "react-icons/Ai";
+import { AiOutlinePrinter } from "react-icons/Ai";
+import { BsPeople } from "react-icons/Bs";
+import { IoSettingsOutline } from "react-icons/Io5";
+import { MdAppRegistration } from "react-icons/Md";
+import { GiHamburgerMenu } from "react-icons/Gi";
 export default function Navbar({ children }) {
   return (
     <Box>
       <Flex
+        display={{ base: "none", md: "flex" }}
         bg="orange.300"
         minH={"60px"}
         py={{ base: 2 }}
@@ -38,8 +45,7 @@ export default function Navbar({ children }) {
           </Flex > */}
 
         <Box>
-<<<<<<< HEAD
-          <Link as={NextLink} href={"/"}>
+          <Link as={NextLink} href="/">
             <Button
               fontSize={"2em"}
               fontWeight={"bold"}
@@ -47,20 +53,21 @@ export default function Navbar({ children }) {
               color={"white"}
               mr="10"
             >
-              Κεντρική
+              <Icon as={AiFillHome} />
             </Button>
           </Link>
-          <a
-            as={"a"}
-            fontSize={"2em"}
-            fontWeight={400}
-            variant={"link"}
-            href={"/entries"}
-            color={"white"}
-            mr="10"
-          >
-            Κινήσεις
-          </a>
+
+          <Link as={NextLink} href="/entries">
+            <Button
+              fontSize={"2em"}
+              fontWeight={400}
+              variant={"link"}
+              color={"white"}
+              mr="10"
+            >
+              Κινήσεις
+            </Button>
+          </Link>
 
           <Button
             as={"a"}
@@ -71,25 +78,28 @@ export default function Navbar({ children }) {
             color={"white"}
             mr="10"
           >
-=======
-          <Link as={NextLink} href="/">
-            <Button fontSize={"2em"} fontWeight={"bold"} variant={"link"} color={"white"} mr="10">
-              Κεντρική
-            </Button>
-          </Link>
-          <Link as={NextLink} href="/manos/id">
-            <Button fontSize={"2em"} fontWeight={400} variant={"link"} color={"white"} mr="10">
-              Κινήσεις
-            </Button>
-          </Link>
-          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
->>>>>>> c542cbb370e282c953e787de95bc7b0bfcabeb9c
             Συναλλασσόμενοι
           </Button>
-          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
+          <Button
+            as={"a"}
+            fontSize={"2em"}
+            fontWeight={400}
+            variant={"link"}
+            href={"#"}
+            color={"white"}
+            mr="10"
+          >
             Εκτυπώσεις
           </Button>
-          <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
+          <Button
+            as={"a"}
+            fontSize={"2em"}
+            fontWeight={400}
+            variant={"link"}
+            href={"#"}
+            color={"white"}
+            mr="10"
+          >
             Ρυθμίσεις
           </Button>
         </Box>
@@ -99,6 +109,81 @@ export default function Navbar({ children }) {
           <Button
             as={"a"}
             display={{ base: "none", md: "inline-flex" }}
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"orange.500"}
+            href={"#"}
+            _hover={{
+              bg: "orange.700",
+            }}
+          >
+            Έξοδος
+          </Button>
+        </Box>
+      </Flex>
+
+      <Flex display={{ base: "flex", md: "none" }} bg="orange.300">
+        <Menu>
+          <MenuButton
+            background={"orange.500"}
+            border={"none"}
+            as={IconButton}
+            aria-label="Options"
+            icon={<Icon as={GiHamburgerMenu} color={"white"} />}
+            variant="outline"
+            _hover={{
+              background: "orange.100",
+            }}
+            _expanded={{ bg: "orange.100" }}
+          />
+          <MenuList bg="orange.300" border={"none"}>
+            <MenuItem
+              icon={<Icon as={MdAppRegistration} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Κινήσεις
+            </MenuItem>
+            <MenuItem
+              icon={<Icon as={BsPeople} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Συναλλασσόμενοι
+            </MenuItem>
+            <MenuItem
+              icon={<Icon as={AiOutlinePrinter} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Εκτυπώσεις
+            </MenuItem>
+            <MenuItem
+              icon={<Icon as={MdAppRegistration} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Ρυθμίσεις
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <Spacer />
+        <Box>
+          <Button
+            as={"a"}
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
