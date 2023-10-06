@@ -26,44 +26,51 @@ import { GiHamburgerMenu } from "react-icons/Gi";
 
 const Navbar = () => (
   <>
-    <Flex
-      display={{ base: "none", md: "flex" }}
-      bg="orange.300"
-      minH={"60px"}
-      // py={{ base: 2 }}
-      px={{ base: 4 }}
-      // borderBottom={1}
-      // borderStyle={'solid'}
-      // borderColor={useColorModeValue('gray.200', 'gray.900')}
-      align={"center"}
-    >
-      {/* <Flex
-        flex={{ base: 1, md: 'auto' }}
-        ml={{ base: -2 }}
-        display={{ base: 'flex', md: 'none' }}>
-        
-      </Flex > */}
-
+    <Flex display={{ base: "none", lg: "flex" }} bg="orange.300" minH={"60px"} px={{ base: 4 }} align={"center"}>
       <Box>
         <Link as={NextLink} href="/">
-          <Button fontSize={"2em"} fontWeight={"bold"} variant={"link"} color={"white"} mr="10">
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={"bold"} variant={"link"} color={"white"} mr="10">
             <Icon as={AiFillHome} />
           </Button>
         </Link>
 
         <Link as={NextLink} href="/entries">
-          <Button fontSize={"2em"} fontWeight={400} variant={"link"} color={"white"} mr="10">
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mr="10">
             Κινήσεις
           </Button>
         </Link>
 
-        <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
+        <Button
+          as={"a"}
+          fontSize={{ base: "1.5em", xl: "2em" }}
+          fontWeight={400}
+          variant={"link"}
+          href={"#"}
+          color={"white"}
+          mr="10"
+        >
           Συναλλασσόμενοι
         </Button>
-        <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
+        <Button
+          as={"a"}
+          fontSize={{ base: "1.5em", xl: "2em" }}
+          fontWeight={400}
+          variant={"link"}
+          href={"#"}
+          color={"white"}
+          mr="10"
+        >
           Εκτυπώσεις
         </Button>
-        <Button as={"a"} fontSize={"2em"} fontWeight={400} variant={"link"} href={"#"} color={"white"} mr="10">
+        <Button
+          as={"a"}
+          fontSize={{ base: "1.5em", xl: "2em" }}
+          fontWeight={400}
+          variant={"link"}
+          href={"#"}
+          color={"white"}
+          mr="10"
+        >
           Ρυθμίσεις
         </Button>
       </Box>
@@ -87,7 +94,7 @@ const Navbar = () => (
       </Box>
     </Flex>
 
-    <Flex display={{ base: "flex", md: "none" }} bg="orange.300">
+    <Flex display={{ base: "flex", lg: "none" }} bg="orange.300">
       <Menu>
         <MenuButton
           background={"orange.500"}
