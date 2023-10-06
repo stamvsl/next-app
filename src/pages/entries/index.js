@@ -10,10 +10,8 @@ export default function entries() {
         <title>Create Next App</title>
       </Head>
       <main>
-        <Container bg="orange.100" maxW="100vw" height="100vh">
-          <Container maxW={"1400px"}>
-            <Entries />
-          </Container>
+        <Container maxW={"1400px"}>
+          <Entries />
         </Container>
       </main>
     </>
