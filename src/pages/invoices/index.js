@@ -1,3 +1,4 @@
+import Tables from "@/components/Tables";
 // import { useEffect, useState } from "react";
 // import esoda from "../../../public/mockData/esoda.json";
 
@@ -14,9 +15,10 @@ const Invoices = ({ esoda }) => {
   //   }, []);
   console.log("esoda :>> ", esoda);
   return (
-    <div>
-      <h1>Invoices</h1> <h3>{JSON.stringify(esoda[0])}</h3>
-    </div>
+    // <div>
+    //   <h1>Invoices</h1> <h3>{JSON.stringify(esoda[0])}</h3>
+    // </div>
+    <Tables />
   );
 };
 export default Invoices;

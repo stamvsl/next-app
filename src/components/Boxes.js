@@ -23,32 +23,30 @@ export default function Boxes() {
   return (
     <Box padding={"50"} display={"Grid"} justifyContent={"center"}>
       <Grid
-        gridTemplateColumns={{ md: "1fr 1fr", sm: "1fr" }}
-        gridTemplateRows={{ md: "1fr 1fr", sm: "1fr" }}
+        gridTemplateColumns={{ base: "1fr 1fr" }}
+        gridTemplateRows={{ base: "1fr 1fr" }}
         gap="10"
-        templateAreas={`{md: "1 2"
+        templateAreas={`{base: "1 2"
                 "3 4",
-            sm:"1"
-               "2"
-               "3"
-               "4"
+            sm:"1 2"
+            "3 4"
         }`}
         justifyContent={"center"}
       >
-        <GridItem>
+        <Box>
           <Link as={NextLink} href="/entries">
-            <CustomButton Icon={MdAppRegistration} area={"1"} />
+            <CustomButton Icon={MdAppRegistration} />
           </Link>
-        </GridItem>
-        <GridItem>
-          <CustomButton Icon={BsPeople} area={"2"} />
-        </GridItem>
-        <GridItem>
-          <CustomButton Icon={AiOutlinePrinter} area={"3"} />
-        </GridItem>
-        <GridItem>
-          <CustomButton Icon={IoSettingsOutline} area={"4"} />
-        </GridItem>
+        </Box>
+        <Box>
+          <CustomButton Icon={BsPeople} />
+        </Box>
+        <Box>
+          <CustomButton Icon={AiOutlinePrinter} />
+        </Box>
+        <Box>
+          <CustomButton Icon={IoSettingsOutline} />
+        </Box>
       </Grid>
     </Box>
   );
