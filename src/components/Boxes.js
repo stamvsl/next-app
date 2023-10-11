@@ -14,10 +14,10 @@ import {
   Center,
 } from "@chakra-ui/react";
 import CustomButton from "./CustomButton";
-import { AiOutlinePrinter } from "react-icons/Ai";
-import { BsPeople } from "react-icons/Bs";
-import { IoSettingsOutline } from "react-icons/Io5";
-import { MdAppRegistration } from "react-icons/Md";
+import { AiOutlinePrinter } from "react-icons/ai";
+import { BsPeople } from "react-icons/bs";
+import { IoSettingsOutline } from "react-icons/io5";
+import { MdAppRegistration } from "react-icons/md";
 
 export default function Boxes() {
   return (
