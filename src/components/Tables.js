@@ -1,13 +1,4 @@
-import {
-  Table,
-  TableContainer,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  colorScheme,
-} from "@chakra-ui/react";
+import { Table, TableContainer, Thead, Tbody, Tr, Th, Td, colorScheme } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
 export default function Tables() {
@@ -37,8 +28,8 @@ export default function Tables() {
           </Tr>
         </Thead>
         <Tbody>
-          {mockData?.map((data) => (
-            <Tr>
+          {mockData?.map((data, index) => (
+            <Tr key={index}>
               <Td>{data.q}</Td>
               <Td>{data.date}</Td>
               <Td>{data.final_price}</Td>
