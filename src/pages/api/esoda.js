@@ -4,11 +4,12 @@ export default async function handle(req, res) {
   if (req.method == "GET") {
     // const { title } = req.body;
 
-    const esoda = await prisma.Esoda.findMany({
+    const esoda = await prisma.User.findUnique({
       where: {
-        userName: {
-          id: 2,
-        },
+        id: 1, // Replace with the specific user ID you want to query
+      },
+      include: {
+        esoda: true,
       },
     });
 
