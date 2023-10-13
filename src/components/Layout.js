@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <Box>
         <Navbar />
       </Box>
-      <Box>{children}</Box>
+      <Box mt="60px">{children}</Box>
     </Container>
   );
 }

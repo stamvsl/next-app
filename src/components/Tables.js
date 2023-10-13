@@ -1,6 +1,6 @@
-import { Table, TableContainer, Thead, Tbody, Tr, Th, Td, colorScheme } from "@chakra-ui/react";
-
+import { Grid, GridItem, Box, SimpleGrid, Center } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+
 export default function Tables() {
   const [mockData, setMockData] = useState([]);
 
@@ -11,39 +11,43 @@ export default function Tables() {
   }, []);
 
   return (
-    <TableContainer>
-      <Table variant={"striped"}>
-        <Thead>
-          <Tr>
-            <Th>τριμηνο</Th>
-            <Th>ημερομηνια</Th>
-            <Th>Τελικη τιμη</Th>
-            <Th>Καθαρη αξια</Th>
-            <Th>κατηγορια φπα</Th>
-            <Th>αξια φπα</Th>
-            <Th>εταιρεια</Th>
-            <Th>πελατης</Th>
-            <Th>FIELD9</Th>
-            <Th>FIELD10</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {mockData?.map((data, index) => (
-            <Tr key={index}>
-              <Td>{data.q}</Td>
-              <Td>{data.date}</Td>
-              <Td>{data.final_price}</Td>
-              <Td>{data.income}</Td>
-              <Td>{data.vat_perc}</Td>
-              <Td>{data.vat_euro}</Td>
-              <Td>{data.for_company}</Td>
-              <Td>{data.client}</Td>
-              <Td>{data.FIELD9}</Td>
-              <Td>{data.FIELD10}</Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+    <Box>
+      <Box w={"80vw"} m={"auto"} bg={"orange.200"}>
+        <Grid
+          bg={"orange.300"}
+          templateColumns="repeat(10, 1fr)"
+          border={"1px solid black"}
+          position={"sticky"}
+          zIndex={"1"}
+          fontWeight={"Bold"}
+        >
+          <GridItem>τριμηνο</GridItem>
+          <GridItem>ημερομηνια</GridItem>
+          <GridItem>Τελικη τιμη</GridItem>
+          <GridItem>Καθαρη αξια</GridItem>
+          <GridItem>κατηγορια φπα</GridItem>
+          <GridItem>αξια φπα</GridItem>
+          <GridItem>εταιρεια</GridItem>
+          <GridItem>πελατης</GridItem>
+          <GridItem>FIELD9</GridItem>
+          <GridItem>FIELD10</GridItem>
+        </Grid>
+
+        {mockData?.map((data) => (
+          <Grid templateColumns="repeat(10, 1fr)" border={"1px solid black"}>
+            <GridItem>{data.q}</GridItem>
+            <GridItem>{data.date}</GridItem>
+            <GridItem>{data.final_price}</GridItem>
+            <GridItem>{data.income}</GridItem>
+            <GridItem>{data.vat_perc}</GridItem>
+            <GridItem>{data.vat_euro}</GridItem>
+            <GridItem>{data.for_company}</GridItem>
+            <GridItem>{data.client}</GridItem>
+            <GridItem>{data.FIELD9}</GridItem>
+            <GridItem>{data.FIELD10}</GridItem>
+          </Grid>
+        ))}
+      </Box>
+    </Box>
   );
 }

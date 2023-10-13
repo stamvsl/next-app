@@ -26,16 +26,36 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => (
   <>
-    <Flex display={{ base: "none", lg: "flex" }} bg="orange.300" minH={"60px"} px={{ base: 4 }} align={"center"}>
+    <Flex
+      display={{ base: "none", lg: "flex" }}
+      bg="orange.300"
+      minH={"60px"}
+      w={"100vw"}
+      px={{ base: 4 }}
+      align={"center"}
+      position={"fixed"}
+    >
       <Box>
         <Link as={NextLink} href="/">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={"bold"} variant={"link"} color={"white"} mr="10">
+          <Button
+            fontSize={{ base: "1.5em", xl: "2em" }}
+            fontWeight={"bold"}
+            variant={"link"}
+            color={"white"}
+            mr="10"
+          >
             <Icon as={AiFillHome} />
           </Button>
         </Link>
 
         <Link as={NextLink} href="/entries">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mr="10">
+          <Button
+            fontSize={{ base: "1.5em", xl: "2em" }}
+            fontWeight={400}
+            variant={"link"}
+            color={"white"}
+            mr="10"
+          >
             Κινήσεις
           </Button>
         </Link>
@@ -94,7 +114,12 @@ const Navbar = () => (
       </Box>
     </Flex>
 
-    <Flex display={{ base: "flex", lg: "none" }} bg="orange.300">
+    <Flex
+      display={{ base: "flex", lg: "none" }}
+      bg="orange.300"
+      minH={"60px"}
+      alignItems={"center"}
+    >
       <Menu>
         <MenuButton
           background={"orange.500"}
