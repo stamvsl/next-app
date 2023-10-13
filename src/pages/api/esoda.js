@@ -1,8 +1,20 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import esoda from "../../../public/mockData/esoda.json";
+import prisma from "../../../lib/prisma";
 
-// normally we should call out DB from here. ** in our case our DB is a local json file
+export default async function handle(req, res) {
+  if (req.method == "GET") {
+    // const { title } = req.body;
 
-export default function handler(req, res) {
-  res.status(200).json({ data: esoda.data });
+    const esoda = await prisma.Esoda.findMany({
+      where: {
+        userName: {
+          id: 2,
+        },
+      },
+    });
+
+    return res.json(esoda);
+  } else {
+    // return error msg
+    return res.status(405).json({ msg: "We only support GET" });
+  }
 }

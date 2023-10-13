@@ -32,5 +32,5 @@ export async function getServerSideProps({ params }) {
   const res = await fetch("http://localhost:3000/api/esoda");
   const esoda = await res.json();
 
-  return { props: { esoda: esoda.data } };
+  return { props: { esoda: esoda.data || [] } };
 }
