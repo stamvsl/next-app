@@ -62,34 +62,34 @@ const Navbar = () => (
           </Button>
         </Link>
 
+        <Link as={NextLink} href="/transactors">
+          <Button
+            fontSize={{ base: "1.5em", xl: "2em" }}
+            fontWeight={400}
+            variant={"link"}
+            color={"white"}
+            mr="10"
+          >
+            Συναλλασσόμενοι
+          </Button>
+        </Link>
+        <Link as={NextLink} href="/prints">
+          <Button
+            fontSize={{ base: "1.5em", xl: "2em" }}
+            fontWeight={400}
+            variant={"link"}
+            color={"white"}
+            mr="10"
+          >
+            Εκτυπώσεις
+          </Button>
+        </Link>
         <Button
           as={"a"}
           fontSize={{ base: "1.5em", xl: "2em" }}
           fontWeight={400}
           variant={"link"}
-          href={"#"}
-          color={"white"}
-          mr="10"
-        >
-          Συναλλασσόμενοι
-        </Button>
-        <Button
-          as={"a"}
-          fontSize={{ base: "1.5em", xl: "2em" }}
-          fontWeight={400}
-          variant={"link"}
-          href={"#"}
-          color={"white"}
-          mr="10"
-        >
-          Εκτυπώσεις
-        </Button>
-        <Button
-          as={"a"}
-          fontSize={{ base: "1.5em", xl: "2em" }}
-          fontWeight={400}
-          variant={"link"}
-          href={"#"}
+          href={"/prints"}
           color={"white"}
           mr="10"
         >
@@ -135,37 +135,56 @@ const Navbar = () => (
           }}
           _expanded={{ bg: "orange.100" }}
         />
+
         <MenuList bg="orange.300" border={"none"}>
-          <MenuItem
-            icon={<Icon as={MdAppRegistration} color={"white"} />}
-            bg="orange.300"
-            color="white"
-            _hover={{
-              background: "orange.500",
-            }}
-          >
-            Κινήσεις
-          </MenuItem>
-          <MenuItem
-            icon={<Icon as={BsPeople} color={"white"} />}
-            bg="orange.300"
-            color="white"
-            _hover={{
-              background: "orange.500",
-            }}
-          >
-            Συναλλασσόμενοι
-          </MenuItem>
-          <MenuItem
-            icon={<Icon as={AiOutlinePrinter} color={"white"} />}
-            bg="orange.300"
-            color="white"
-            _hover={{
-              background: "orange.500",
-            }}
-          >
-            Εκτυπώσεις
-          </MenuItem>
+          <Link as={NextLink} href="/">
+            <MenuItem
+              icon={<Icon as={AiFillHome} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Κεντρική
+            </MenuItem>
+          </Link>
+          <Link as={NextLink} href="/entries">
+            <MenuItem
+              icon={<Icon as={MdAppRegistration} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Κινήσεις
+            </MenuItem>
+          </Link>
+          <Link as={NextLink} href="/transactors">
+            <MenuItem
+              icon={<Icon as={BsPeople} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Συναλλασσόμενοι
+            </MenuItem>
+          </Link>
+          <Link as={NextLink} href="/prints">
+            <MenuItem
+              icon={<Icon as={AiOutlinePrinter} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Εκτυπώσεις
+            </MenuItem>
+          </Link>
           <MenuItem
             icon={<Icon as={MdAppRegistration} color={"white"} />}
             bg="orange.300"

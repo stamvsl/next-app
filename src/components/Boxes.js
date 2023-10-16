@@ -39,13 +39,20 @@ export default function Boxes() {
           </Link>
         </Box>
         <Box>
-          <CustomButton Icon={BsPeople} />
+          <Link as={NextLink} href="/transactors">
+            <CustomButton Icon={BsPeople} />
+          </Link>
+        </Box>
+
+        <Box>
+          <Link as={NextLink} href="/prints">
+            <CustomButton Icon={AiOutlinePrinter} />
+          </Link>
         </Box>
         <Box>
-          <CustomButton Icon={AiOutlinePrinter} />
-        </Box>
-        <Box>
-          <CustomButton Icon={IoSettingsOutline} />
+          <Link as={NextLink} href="/entries">
+            <CustomButton Icon={IoSettingsOutline} />
+          </Link>
         </Box>
       </Grid>
     </Box>

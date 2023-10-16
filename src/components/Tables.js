@@ -1,7 +1,7 @@
 import { Grid, GridItem, Box, SimpleGrid, Center } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
-export default function Tables() {
+export default function Prints() {
   const [esoda, setEsoda] = useState([]);
 
   useEffect(() => {
