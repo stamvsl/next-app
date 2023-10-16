@@ -31,7 +31,9 @@ const Navbar = () => (
       bg="orange.300"
       minH={"60px"}
       w={"100vw"}
-      px={{ base: 4 }}
+      px="20px"
+      mx="0"
+      mt="-60px"
       align={"center"}
       position={"fixed"}
     >

@@ -6,7 +6,7 @@ export default async function handle(req, res) {
 
     const esoda = await prisma.User.findUnique({
       where: {
-        id: 1, // Replace with the specific user ID you want to query
+        email: "manos.arvanitakis@gmail.com", // Replace with the specific user ID you want to query
       },
       include: {
         esoda: true,

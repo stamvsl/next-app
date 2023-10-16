@@ -9,30 +9,35 @@ export default function Tables() {
       .then((res) => res.json())
       .then((esoda) => setEsoda(esoda));
   }, []);
-
+  console.log("esoda: ", esoda);
   return (
     <Box>
       <Box w={"80vw"} m={"auto"} bg={"orange.200"}>
-        <Grid
-          bg={"orange.300"}
-          templateColumns="repeat(10, 1fr)"
-          border={"1px solid black"}
-          position={"sticky"}
-          zIndex={"1"}
-          fontWeight={"Bold"}
-        >
-          <GridItem>τριμηνο</GridItem>
-          <GridItem>ημερομηνια</GridItem>
-          <GridItem>Τελικη τιμη</GridItem>
-          <GridItem>Καθαρη αξια</GridItem>
-          <GridItem>κατηγορια φπα</GridItem>
-          <GridItem>αξια φπα</GridItem>
-          <GridItem>εταιρεια</GridItem>
-          <GridItem>πελατης</GridItem>
-        </Grid>
+        <Box position="sticky" top="60px">
+          <Grid
+            bg={"orange.300"}
+            templateColumns="repeat(10, 1fr)"
+            border={"1px solid black"}
+            zIndex={"1"}
+            fontWeight={"Bold"}
+          >
+            <GridItem>τριμηνο</GridItem>
+            <GridItem>ημερομηνια</GridItem>
+            <GridItem>Τελικη τιμη</GridItem>
+            <GridItem>Καθαρη αξια</GridItem>
+            <GridItem>κατηγορια φπα</GridItem>
+            <GridItem>αξια φπα</GridItem>
+            <GridItem>εταιρεια</GridItem>
+            <GridItem>πελατης</GridItem>
+          </Grid>
+        </Box>
 
-        {esoda?.map((data, index) => (
-          <Grid key={index} templateColumns="repeat(10, 1fr)" border={"1px solid black"}>
+        {esoda.esoda?.map((data, index) => (
+          <Grid
+            key={index}
+            templateColumns="repeat(10, 1fr)"
+            border={"1px solid black"}
+          >
             <GridItem>{data.q}</GridItem>
             <GridItem>{data.date}</GridItem>
             <GridItem>{data.finalPrice}</GridItem>
