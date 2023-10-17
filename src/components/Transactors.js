@@ -17,7 +17,7 @@ import {
 
 export default function Transactors() {
   return (
-    <Box w={"1400px"} p={"20"}>
+    <Box w={"1400px"} p={"20"} position="fixed">
       <RadioGroup defaultValue="2">
         <Stack spacing={5} direction="row">
           <Radio value="1" colorScheme="orange">

@@ -21,7 +21,14 @@ import { MdAppRegistration } from "react-icons/md";
 
 export default function Boxes() {
   return (
-    <Box padding={"50"} display={"Grid"} justifyContent={"center"}>
+    <Box
+      padding={"50"}
+      display={"Grid"}
+      justifyContent={"center"}
+      position={"fixed"}
+      inset={"0"}
+      mt={"60px"}
+    >
       <Grid
         gridTemplateColumns={{ base: "1fr 1fr" }}
         gridTemplateRows={{ base: "1fr 1fr" }}
