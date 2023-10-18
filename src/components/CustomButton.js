@@ -1,10 +1,13 @@
-import { Flex, Box, Button, Icon, Text, Grid, boxSize } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 export default function CustomButton({ Icon, link, text }) {
   return (
-    <Button
+    <Flex
+      justifyContent="center"
+      alignItems="center"
       h={{ base: "120", sm: "250", md: "350" }}
       minW={{ base: "120", sm: "250", md: "350" }}
+      margin="15px 0 15px 0"
       shadow="lg"
       bg="tomato"
       borderRadius="30"
@@ -13,6 +16,6 @@ export default function CustomButton({ Icon, link, text }) {
       }}
     >
       <Icon size="50%" color="white" />
-    </Button>
+    </Flex>
   );
 }

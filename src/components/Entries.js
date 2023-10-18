@@ -12,7 +12,7 @@ import {
 
 export default function Entries() {
   return (
-    <Box p={{ base: "12px", sm: "25px" }} position={"fixed"}>
+    <Box p={{ base: "12px", sm: "25px" }}>
       <RadioGroup defaultValue="2">
         <HStack spacing={5}>
           <Radio value="1" colorScheme="orange">

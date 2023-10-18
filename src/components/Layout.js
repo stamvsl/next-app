@@ -4,17 +4,16 @@ import Navbar from "./Navbar";
 
 export default function Layout({ children }) {
   return (
-    <Container
+    <Flex
+      flexDirection="column"
+      height="100%"
       minHeight="100vh"
-      minWidth="100vw"
       bg="orange.100"
-      p="0px"
-      mx="0"
     >
-      <Box>
+      <Box position={"sticky"} top={"0"}>
         <Navbar />
       </Box>
-      <Box mt="60px">{children}</Box>
-    </Container>
+      <Flex justifyContent="center">{children}</Flex>
+    </Flex>
   );
 }

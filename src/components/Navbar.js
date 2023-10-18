@@ -5,17 +5,13 @@ import {
   Box,
   Flex,
   Icon,
-  Text,
   Button,
-  Stack,
-  useColorModeValue,
   Spacer,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   IconButton,
-  HamburgerIcon,
 } from "@chakra-ui/react";
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlinePrinter } from "react-icons/ai";
@@ -29,13 +25,8 @@ const Navbar = () => (
     <Flex
       display={{ base: "none", lg: "flex" }}
       bg="orange.300"
-      minH={"60px"}
-      w={"100vw"}
-      px="20px"
-      mx="0"
-      mt="-60px"
-      align={"center"}
-      position={"fixed"}
+      align="center"
+      height="60px"
     >
       <Box>
         <Link as={NextLink} href="/">
@@ -44,7 +35,7 @@ const Navbar = () => (
             fontWeight={"bold"}
             variant={"link"}
             color={"white"}
-            mr="10"
+            mx="15px"
           >
             <Icon as={AiFillHome} />
           </Button>
@@ -56,7 +47,7 @@ const Navbar = () => (
             fontWeight={400}
             variant={"link"}
             color={"white"}
-            mr="10"
+            mx="15px"
           >
             Κινήσεις
           </Button>
@@ -68,7 +59,7 @@ const Navbar = () => (
             fontWeight={400}
             variant={"link"}
             color={"white"}
-            mr="10"
+            mx="15px"
           >
             Συναλλασσόμενοι
           </Button>
@@ -79,7 +70,7 @@ const Navbar = () => (
             fontWeight={400}
             variant={"link"}
             color={"white"}
-            mr="10"
+            mx="15px"
           >
             Εκτυπώσεις
           </Button>
@@ -91,7 +82,7 @@ const Navbar = () => (
           variant={"link"}
           href={"/prints"}
           color={"white"}
-          mr="10"
+          mx="15px"
         >
           Ρυθμίσεις
         </Button>
