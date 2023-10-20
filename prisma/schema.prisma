@@ -25,7 +25,7 @@ model Esoda {
   date       DateTime /// Consider using DateTime type to store date in a more structured way
   finalPrice Float
   income     Float
-  vatPerc    Float
+  vatPerc    Int
   vatEuro    Float
   forCompany Float
   client     String
