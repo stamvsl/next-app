@@ -1,3 +1,4 @@
+import calculateFormValues from "./calculateFormValues";
 import { useState } from "react";
 import {
   Flex,
@@ -26,6 +27,8 @@ const initialvalues = {
   comments: "",
 };
 
+calculateFormValues();
+
 export default function Entries() {
   const [formData, setFormData] = useState(initialvalues);
 
@@ -46,41 +49,8 @@ export default function Entries() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-
-    if (name === "grossValue") {
-      const grossValue = parseFloat(value);
-      const vatClass = parseFloat(formData.vatClass);
-      const netValue = grossValue / (1 + vatClass / 100);
-      const vatValue = grossValue - netValue;
-
-      setFormData((prevData) => ({
-        ...prevData,
-        netValue: netValue.toFixed(2),
-        vatValue: vatValue.toFixed(2),
-      }));
-    }
-
-    if (name === "netValue" || name === "vatClass") {
-      const netValue = parseFloat(
-        name === "netValue" ? value : formData.netValue
-      );
-      const vatClass = parseFloat(
-        name === "vatClass" ? value : formData.vatClass
-      );
-      const vatValue = (vatClass / 100) * netValue;
-      const grossValue = netValue + vatValue;
-
-      setFormData((prevData) => ({
-        ...prevData,
-        vatValue: vatValue.toFixed(2),
-        grossValue: grossValue.toFixed(2),
-      }));
-    }
+    const cloneState = calculateFormValues(formData, name, value);
+    setFormData(cloneState);
   };
 
   return (
@@ -140,7 +110,7 @@ export default function Entries() {
           <HStack>
             <FormLabel>Καθαρή αξία</FormLabel>
             <Input
-              type="text"
+              type="number"
               borderColor="orange.500"
               name="netValue"
               value={formData.netValue}
@@ -157,7 +127,7 @@ export default function Entries() {
               borderColor="orange.500"
               name="vatClass"
               onChange={handleChange}
-              defaultValue={"24"}
+              defaultValue={24}
             >
               <option value="0">0%</option>
               <option value="6">6%</option>
@@ -172,14 +142,11 @@ export default function Entries() {
           <HStack>
             <FormLabel>Αξία ΦΠΑ αξία</FormLabel>
             <Input
-              type="text"
+              type="number"
               borderColor="orange.500"
               name="vatValue"
               value={formData.vatValue}
-              onChange={(e) => {
-                handleChange(e);
-                calculateVatValue(e);
-              }}
+              onChange={handleChange}
             ></Input>
           </HStack>
         </FormControl>
@@ -188,7 +155,7 @@ export default function Entries() {
           <HStack>
             <FormLabel>Μικτή αξία</FormLabel>
             <Input
-              type="text"
+              type="number"
               borderColor="orange.500"
               name="grossValue"
               value={formData.grossValue}
