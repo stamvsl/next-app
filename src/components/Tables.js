@@ -7,7 +7,7 @@ export default function Prints() {
   useEffect(() => {
     fetch("/api/esoda")
       .then((res) => res.json())
-      .then((esoda) => setEsoda(esoda));
+      .then((esoda) => setEsoda(esoda || []));
   }, []);
   console.log("esoda: ", esoda);
   return (

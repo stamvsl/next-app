@@ -1,12 +1,12 @@
 import prisma from "../../../lib/prisma";
 
 export default async function handle(req, res) {
-  if (req.method == "POST") {
+  if (req.method == "GET") {
     // creating a new todo.
     // const { title } = req.body;
     const result = await prisma.User.create({
       data: {
-        email: "manosarvanitakis@gmail.com",
+        email: "manos.arvanitakis@gmail.com",
         name: "Manos Arvanitakis",
       },
     });

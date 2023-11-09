@@ -13,6 +13,8 @@ import {
   FormControl,
   FormLabel,
   Select,
+  colorScheme,
+  Textarea,
 } from "@chakra-ui/react";
 
 const initialvalues = {
@@ -52,80 +54,88 @@ export default function Entries() {
   };
 
   return (
-    <Box p={{ base: "12px", sm: "25px" }}>
-      <Flex flexDirection="column">
-        <FormControl>
-          <HStack>
+    <Box p={{ base: "12px", sm: "25px" }} w="800px">
+      <Flex flexDirection="column" flexGrow="2" flexWrap="wrap">
+        <HStack>
+          <HStack m="20px">
             <FormLabel>Date</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="date"
               value={formData.date}
               onChange={handleChange}
             ></Input>
           </HStack>
-        </FormControl>
-        <FormControl>
+
           <HStack>
             <FormLabel>Number</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="number"
               value={formData.number}
               onChange={handleChange}
             ></Input>
           </HStack>
-        </FormControl>
-        <FormControl>
-          <HStack>
-            <FormLabel>Transactor</FormLabel>
-            <Input
-              type="text"
-              borderColor="orange.500"
-              name="transactor"
-              value={formData.transactor}
-              onChange={handleChange}
-            ></Input>
-          </HStack>
-        </FormControl>
+        </HStack>
 
-        <FormControl>
-          <HStack>
-            <FormLabel>Description</FormLabel>
-            <Input
-              type="text"
-              borderColor="orange.500"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-            ></Input>
-          </HStack>
-        </FormControl>
+        <HStack m="20px">
+          <FormLabel>Transactor</FormLabel>
+          <Input
+            type="text"
+            bg="orange.100"
+            borderColor="orange.500"
+            focusBorderColor="orange.500"
+            _hover={{ borderColor: "orange.300" }}
+            name="transactor"
+            value={formData.transactor}
+            onChange={handleChange}
+          ></Input>
+        </HStack>
 
-        <FormControl>
-          <HStack>
+        <HStack m="20px">
+          <FormLabel>Description</FormLabel>
+          <Input
+            type="text"
+            bg="orange.100"
+            borderColor="orange.500"
+            focusBorderColor="orange.500"
+            _hover={{ borderColor: "orange.300" }}
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          ></Input>
+        </HStack>
+        <HStack>
+          <HStack m="20px">
             <FormLabel>Net Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="netValue"
               value={formData.netValue}
               onChange={handleChange}
             ></Input>
           </HStack>
-        </FormControl>
 
-        <FormControl>
-          <HStack>
+          <HStack m="20px">
             <FormLabel>VAT Class</FormLabel>
             <Select
               placeholder=">Κατηγορία ΦΠΑ"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="vatClass"
               onChange={handleChange}
               defaultValue={24}
+              bg="orange.100"
             >
               <option value="0">0%</option>
               <option value="6">6%</option>
@@ -134,66 +144,57 @@ export default function Entries() {
               <option value="24">24%</option>
             </Select>
           </HStack>
-        </FormControl>
 
-        <FormControl>
-          <HStack>
+          <HStack m="20px">
             <FormLabel>VAT Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="vatValue"
               value={formData.vatValue}
               onChange={handleChange}
             ></Input>
           </HStack>
-        </FormControl>
 
-        <FormControl>
-          <HStack>
+          <HStack m="20px">
             <FormLabel>Gross Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
               name="grossValue"
               value={formData.grossValue}
               onChange={handleChange}
             ></Input>
           </HStack>
-        </FormControl>
+        </HStack>
 
-        <FormControl>
-          <HStack>
-            <FormLabel>Σχόλια</FormLabel>
-            <textarea
-              type="text"
-              borderColor="orange.500"
-              name="comments"
-              value={formData.comments}
-              onChange={handleChange}
-            ></textarea>
-          </HStack>
-        </FormControl>
+        <HStack m="20px">
+          <FormLabel>Comments</FormLabel>
+          <Textarea
+            bg="orange.100"
+            type="text"
+            borderColor="orange.500"
+            focusBorderColor="orange.500"
+            _hover={{ borderColor: "orange.300" }}
+            name="comments"
+            value={formData.comments}
+            onChange={handleChange}
+          ></Textarea>
+        </HStack>
 
-        <Button onClick={handleClick} type="submit">
-          Καταχώριση
+        <Button
+          colorScheme="orange"
+          onClick={handleClick}
+          type="submit"
+          m="20px"
+        >
+          Submit
         </Button>
       </Flex>
     </Box>
   );
-}
-
-// direction={{ md: "row", base: "column" }}>
-
-{
-  /* <RadioGroup defaultValue="2">
-        <HStack spacing={5}>
-          <Radio value="1" colorScheme="orange">
-            Έσοδα
-          </Radio>
-          <Radio value="2" colorScheme="orange">
-            Έξοδα
-          </Radio>
-        </HStack>
-      </RadioGroup> */
 }
