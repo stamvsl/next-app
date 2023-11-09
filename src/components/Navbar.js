@@ -49,7 +49,7 @@ const Navbar = () => (
             color={"white"}
             mx="15px"
           >
-            Κινήσεις
+            Entries
           </Button>
         </Link>
 
@@ -61,7 +61,7 @@ const Navbar = () => (
             color={"white"}
             mx="15px"
           >
-            Συναλλασσόμενοι
+            Transactors
           </Button>
         </Link>
         <Link as={NextLink} href="/prints">
@@ -72,7 +72,7 @@ const Navbar = () => (
             color={"white"}
             mx="15px"
           >
-            Εκτυπώσεις
+            Prints
           </Button>
         </Link>
         <Button
@@ -84,7 +84,7 @@ const Navbar = () => (
           color={"white"}
           mx="15px"
         >
-          Ρυθμίσεις
+          Settings
         </Button>
       </Box>
       <Spacer />
@@ -102,7 +102,7 @@ const Navbar = () => (
             bg: "orange.700",
           }}
         >
-          Έξοδος
+          Exit
         </Button>
       </Box>
     </Flex>
@@ -137,7 +137,7 @@ const Navbar = () => (
                 background: "orange.500",
               }}
             >
-              Κεντρική
+              Home
             </MenuItem>
           </Link>
           <Link as={NextLink} href="/entries">
@@ -149,7 +149,7 @@ const Navbar = () => (
                 background: "orange.500",
               }}
             >
-              Κινήσεις
+              Entries
             </MenuItem>
           </Link>
           <Link as={NextLink} href="/transactors">
@@ -161,7 +161,7 @@ const Navbar = () => (
                 background: "orange.500",
               }}
             >
-              Συναλλασσόμενοι
+              Transactors
             </MenuItem>
           </Link>
           <Link as={NextLink} href="/prints">
@@ -173,7 +173,7 @@ const Navbar = () => (
                 background: "orange.500",
               }}
             >
-              Εκτυπώσεις
+              Prints
             </MenuItem>
           </Link>
           <MenuItem
@@ -184,7 +184,7 @@ const Navbar = () => (
               background: "orange.500",
             }}
           >
-            Ρυθμίσεις
+            Settings
           </MenuItem>
         </MenuList>
       </Menu>
@@ -201,7 +201,7 @@ const Navbar = () => (
             bg: "orange.700",
           }}
         >
-          Έξοδος
+          Exit
         </Button>
       </Box>
     </Flex>

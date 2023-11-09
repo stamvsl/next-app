@@ -21,14 +21,14 @@ export default function Prints() {
             zIndex={"1"}
             fontWeight={"Bold"}
           >
-            <GridItem>τριμηνο</GridItem>
-            <GridItem>ημερομηνια</GridItem>
-            <GridItem>Τελικη τιμη</GridItem>
-            <GridItem>Καθαρη αξια</GridItem>
-            <GridItem>κατηγορια φπα</GridItem>
-            <GridItem>αξια φπα</GridItem>
-            <GridItem>εταιρεια</GridItem>
-            <GridItem>πελατης</GridItem>
+            <GridItem>Quarter</GridItem>
+            <GridItem>Date</GridItem>
+            <GridItem>Gross Value</GridItem>
+            <GridItem>Net Value</GridItem>
+            <GridItem>VAT Class</GridItem>
+            <GridItem>VAT Value</GridItem>
+            <GridItem>Company</GridItem>
+            <GridItem>Client</GridItem>
           </Grid>
         </Box>
 

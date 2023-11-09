@@ -27,8 +27,6 @@ const initialvalues = {
   comments: "",
 };
 
-calculateFormValues();
-
 export default function Entries() {
   const [formData, setFormData] = useState(initialvalues);
 
@@ -58,7 +56,7 @@ export default function Entries() {
       <Flex flexDirection="column">
         <FormControl>
           <HStack>
-            <FormLabel>Ημερομηνία</FormLabel>
+            <FormLabel>Date</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
@@ -70,7 +68,7 @@ export default function Entries() {
         </FormControl>
         <FormControl>
           <HStack>
-            <FormLabel>Αριθμός</FormLabel>
+            <FormLabel>Number</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
@@ -82,7 +80,7 @@ export default function Entries() {
         </FormControl>
         <FormControl>
           <HStack>
-            <FormLabel>Συναλλασσόμενος</FormLabel>
+            <FormLabel>Transactor</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
@@ -95,7 +93,7 @@ export default function Entries() {
 
         <FormControl>
           <HStack>
-            <FormLabel>Περιγραφή</FormLabel>
+            <FormLabel>Description</FormLabel>
             <Input
               type="text"
               borderColor="orange.500"
@@ -108,7 +106,7 @@ export default function Entries() {
 
         <FormControl>
           <HStack>
-            <FormLabel>Καθαρή αξία</FormLabel>
+            <FormLabel>Net Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"
@@ -121,7 +119,7 @@ export default function Entries() {
 
         <FormControl>
           <HStack>
-            <FormLabel>Κατηγορία ΦΠΑ</FormLabel>
+            <FormLabel>VAT Class</FormLabel>
             <Select
               placeholder=">Κατηγορία ΦΠΑ"
               borderColor="orange.500"
@@ -140,7 +138,7 @@ export default function Entries() {
 
         <FormControl>
           <HStack>
-            <FormLabel>Αξία ΦΠΑ αξία</FormLabel>
+            <FormLabel>VAT Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"
@@ -153,7 +151,7 @@ export default function Entries() {
 
         <FormControl>
           <HStack>
-            <FormLabel>Μικτή αξία</FormLabel>
+            <FormLabel>Gross Value</FormLabel>
             <Input
               type="number"
               borderColor="orange.500"

@@ -30,6 +30,30 @@ const calculateFormValues = (currentValues, newName, newValue) => {
     cloneState.vatClass = vatClass;
     cloneState.grossValue = grossValue;
   }
+
+  if (newName === "date") {
+    const date = newValue;
+    cloneState.date = date;
+  }
+
+  if (newName === "number") {
+    const number = newValue;
+    cloneState.number = number;
+  }
+  if (newName === "transactor") {
+    const transactor = newValue;
+    cloneState.transactor = transactor;
+  }
+  if (newName === "description") {
+    const description = newValue;
+    cloneState.description = description;
+  }
+
+  if (newName === "comments") {
+    const comments = newValue;
+    cloneState.comments = comments;
+  }
+
   return cloneState;
 };
 
