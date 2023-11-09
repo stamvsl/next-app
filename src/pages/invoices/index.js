@@ -1,8 +1,6 @@
 import Tables from "@/components/Tables";
 const Invoices = () => {
-  return (
-    <Tables />
-  );
+  return <Tables />;
 };
 export default Invoices;
 
@@ -16,4 +14,4 @@ export default Invoices;
 //   const esoda = await res.json();
 
 //   return { props: { esoda: esoda.data || [] } };
-}
+// }
