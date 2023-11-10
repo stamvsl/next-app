@@ -114,7 +114,7 @@ export default function Entries() {
           ></Input>
         </Flex>
 
-        <Flex flex="20%">
+        <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>Net Value</FormLabel>
           <Input
             type="number"
@@ -127,7 +127,7 @@ export default function Entries() {
           ></Input>
         </Flex>
 
-        <Flex flex="20%">
+        <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>VAT Class</FormLabel>
           <Select
             placeholder=">Κατηγορία ΦΠΑ"
@@ -147,7 +147,7 @@ export default function Entries() {
           </Select>
         </Flex>
 
-        <Flex flex="20%">
+        <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>VAT Value</FormLabel>
           <Input
             type="number"
@@ -160,7 +160,7 @@ export default function Entries() {
           ></Input>
         </Flex>
 
-        <Flex flex="20%">
+        <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>Gross Value</FormLabel>
           <Input
             type="number"
