@@ -93,6 +93,7 @@ const Navbar = () => (
         <Button
           as={"a"}
           display={{ base: "none", md: "inline-flex" }}
+          mr="20px"
           fontSize={"sm"}
           fontWeight={600}
           color={"white"}
@@ -117,6 +118,7 @@ const Navbar = () => (
         <MenuButton
           background={"orange.500"}
           border={"none"}
+          ml="20px"
           as={IconButton}
           aria-label="Options"
           icon={<Icon as={GiHamburgerMenu} color={"white"} />}
@@ -193,6 +195,7 @@ const Navbar = () => (
         <Button
           as={"a"}
           fontSize={"sm"}
+          mr="20px"
           fontWeight={600}
           color={"white"}
           bg={"orange.500"}
