@@ -22,7 +22,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => (
   <>
-    <Flex display={{ base: "none", lg: "flex" }} align="center" height="60px">
+    <Flex
+      display={{ base: "none", lg: "flex" }}
+      align="center"
+      height="60px"
+      bg="orange.300"
+    >
       <Box>
         <Link as={NextLink} href="/">
           <Button
