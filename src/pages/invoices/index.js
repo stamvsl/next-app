@@ -1,4 +1,4 @@
-import Tables from "@/components/Tables";
+import Tables from "@/components/Prints";
 const Invoices = () => {
   return <Tables />;
 };

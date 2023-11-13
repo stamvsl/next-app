@@ -12,11 +12,13 @@ export default function Prints() {
   console.log("esoda: ", esoda);
   return (
     <Box>
-      <Box w={"80vw"} m={"auto"} bg={"orange.200"}>
-        <Box position="sticky" top="60px">
+      <Box w="80vw" m={"auto"}>
+        <Grid>
           <Grid
+            position="sticky"
+            top="60px"
             bg={"orange.300"}
-            templateColumns="repeat(10, 1fr)"
+            templateColumns="repeat(8, 1fr)"
             border={"1px solid black"}
             zIndex={"1"}
             fontWeight={"Bold"}
@@ -30,24 +32,27 @@ export default function Prints() {
             <GridItem>Company</GridItem>
             <GridItem>Client</GridItem>
           </Grid>
-        </Box>
 
-        {esoda.esoda?.map((data, index) => (
-          <Grid
-            key={index}
-            templateColumns="repeat(10, 1fr)"
-            border={"1px solid black"}
-          >
-            <GridItem>{data.q}</GridItem>
-            <GridItem>{data.date}</GridItem>
-            <GridItem>{data.finalPrice}</GridItem>
-            <GridItem>{data.income}</GridItem>
-            <GridItem>{data.vatPerc}</GridItem>
-            <GridItem>{data.vatEuro}</GridItem>
-            <GridItem>{data.forCompany}</GridItem>
-            <GridItem>{data.client}</GridItem>
-          </Grid>
-        ))}
+          {esoda?.map((data, index) => (
+            <Grid
+              key={index}
+              templateColumns="repeat(8, 1fr)"
+              css={{
+                backgroundColor:
+                  index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)",
+              }}
+            >
+              <GridItem>{data.q}</GridItem>
+              <GridItem>{data.date}</GridItem>
+              <GridItem>{data.finalPrice}</GridItem>
+              <GridItem>{data.income}</GridItem>
+              <GridItem>{data.vatPerc}</GridItem>
+              <GridItem>{data.vatEuro}</GridItem>
+              <GridItem>{data.forCompany}</GridItem>
+              <GridItem>{data.client}</GridItem>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Box>
   );
