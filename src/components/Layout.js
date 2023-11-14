@@ -10,10 +10,12 @@ export default function Layout({ children }) {
       minHeight="100vh"
       bg="orange.100"
     >
-      <Box position={"sticky"} top={"0"} zIndex={"1"}>
+      <Box position={"sticky"} top={"0"} zIndex={"2"}>
         <Navbar />
       </Box>
-      <Flex justifyContent="center">{children}</Flex>
+      <Flex top="60px" justifyContent="center">
+        {children}
+      </Flex>
     </Flex>
   );
 }
