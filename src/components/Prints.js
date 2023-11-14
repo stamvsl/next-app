@@ -14,15 +14,23 @@ import {
 
 export default function Prints() {
   const [esoda, setEsoda] = useState([]);
-
+  const [tableHeight, setTableHeight] = useState("100vh");
   useEffect(() => {
     fetch("/api/esoda")
       .then((res) => res.json())
       .then((esoda) => setEsoda(esoda || []));
   }, []);
   console.log("esoda: ", esoda);
+
+  useEffect(() => {
+    if (window) {
+      setTableHeight(`${window.innerHeight - 60}px`);
+    }
+  }, []);
+
+  console.log(tableHeight);
   return (
-    <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" h={"100vh"}>
+    <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" maxH={tableHeight}>
       <Table>
         <Thead>
           <Tr>
