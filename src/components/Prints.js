@@ -124,7 +124,7 @@ export default function Prints() {
               border="none"
             >
               <Td border="none">{data.q}</Td>
-              <Td border="none">{data.date}</Td>
+              <Td border="none">{new Date(data.date).toDateString()}</Td>
               <Td border="none">{data.finalPrice}</Td>
               <Td border="none">{data.income}</Td>
               <Td border="none">{data.vatPerc}</Td>
