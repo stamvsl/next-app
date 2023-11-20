@@ -22,8 +22,9 @@ export default function Entries() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const formattedDate = parseDate(formData.date);
-    console.log(`
+    if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
+      const formattedDate = parseDate(formData.date);
+      console.log(`
     Date: ${formData.date}
     Number: ${formData.number}
     transactor: ${formData.transactor}
@@ -35,6 +36,9 @@ export default function Entries() {
     comments: ${formData.comments}
     new date:${formattedDate}
     `);
+    } else {
+      alert("Enter date in the form DD/MM/YYYY");
+    }
   };
 
   const handleChange = (e) => {
@@ -48,6 +52,16 @@ export default function Entries() {
     return new Date(`${year}-${month - 1}-${day}`);
   };
 
+  const isValidDateFormat = (dateString) => {
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    return dateRegex.test(dateString);
+  };
+
+  const isValidDate = (dateString) => {
+    const date = parseDate(dateString);
+
+    return !isNaN(date.getTime());
+  };
   return (
     <Flex>
       <Flex
