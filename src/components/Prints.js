@@ -1,20 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  Flex,
-  Grid,
-  GridItem,
-  Box,
-  Table,
-  Th,
-  Tr,
-  Td,
-  Thead,
-  Tbody,
-} from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Box, Table, Th, Tr, Td, Thead, Tbody } from "@chakra-ui/react";
 
 export default function Prints() {
   const [esoda, setEsoda] = useState([]);
-  const [tableHeight, setTableHeight] = useState("100vh");
+
   useEffect(() => {
     fetch("/api/esoda")
       .then((res) => res.json())
@@ -22,107 +11,40 @@ export default function Prints() {
   }, []);
   console.log("esoda: ", esoda);
 
-  useEffect(() => {
-    if (window) {
-      setTableHeight(`${window.innerHeight - 60}px`);
-    }
-  }, []);
-
-  console.log(tableHeight);
   return (
-    <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" maxH={tableHeight}>
+    <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" height="calc(100vh - 60px)">
       <Table>
         <Thead>
           <Tr>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Quarter
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Date
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Gross Value
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Net Value
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               VAT Class
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               VAT Value
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Company
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              color="white"
-              bg="green.500"
-              zIndex="stickyHeader"
-              border="none"
-            >
+            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
               Client
             </Th>
           </Tr>
         </Thead>
         <Tbody>
           {esoda?.map((data, index) => (
-            <Tr
-              key={index}
-              bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"}
-              border="none"
-            >
+            <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
               <Td border="none">{data.q}</Td>
               <Td border="none">{new Date(data.date).toDateString()}</Td>
               <Td border="none">{data.finalPrice}</Td>

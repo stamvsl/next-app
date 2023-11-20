@@ -1,16 +1,7 @@
 import calculateFormValues from "./calculateFormValues";
 
 import { useState } from "react";
-import {
-  Flex,
-  Input,
-  Button,
-  HStack,
-  Box,
-  FormLabel,
-  Select,
-  Textarea,
-} from "@chakra-ui/react";
+import { Flex, Input, Button, HStack, Box, FormLabel, Select, Textarea } from "@chakra-ui/react";
 
 const initialvalues = {
   date: "",
@@ -27,8 +18,11 @@ const initialvalues = {
 export default function Entries() {
   const [formData, setFormData] = useState(initialvalues);
 
+  let updatedValue = 0;
+
   const handleClick = (e) => {
     e.preventDefault();
+    const formattedDate = parseDate(formData.date);
     console.log(`
     Date: ${formData.date}
     Number: ${formData.number}
@@ -39,6 +33,7 @@ export default function Entries() {
     vatValue: ${formData.vatValue}
     grossValue: ${formData.grossValue}
     comments: ${formData.comments}
+    new date:${formattedDate}
     `);
   };
 
@@ -46,7 +41,11 @@ export default function Entries() {
     const { name, value } = e.target;
     const cloneState = calculateFormValues(formData, name, value);
     setFormData(cloneState);
-    console.log("change");
+  };
+
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("/");
+    return new Date(`${year}-${month - 1}-${day}`);
   };
 
   return (
