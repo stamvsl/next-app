@@ -1,7 +1,8 @@
-import calculateFormValues from "./calculateFormValues";
-
 import { useState } from "react";
+import axios from "axios";
+import ReactDatePicker from "react-datepicker";
 import { Flex, Input, Button, HStack, Box, FormLabel, Select, Textarea } from "@chakra-ui/react";
+import calculateFormValues from "./calculateFormValues";
 
 const initialvalues = {
   date: "",
@@ -36,20 +37,50 @@ export default function Entries() {
     comments: ${formData.comments}
     new date:${formattedDate}
     `);
+
+      axios
+        .post("/api/entries", {
+          date: formattedDate,
+          number: formData.number,
+          transactor: formData.transactor,
+          description: formData.description,
+          netValue: formData.netValue,
+          vatClass: formData.vatClass,
+          vatValue: formData.vatValue,
+          grossValue: formData.grossValue,
+          comments: formData.comments,
+        })
+        .then(function (response) {
+          console.log("response from entries endpoint: ", response);
+          setFormData(initialvalues);
+        })
+        .catch(function (error) {
+          console.log("axios error: ", error);
+        });
     } else {
       alert("Enter date in the form DD/MM/YYYY");
     }
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   const cloneState = calculateFormValues(formData, name, value);
+  //   setFormData(cloneState);
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const cloneState = calculateFormValues(formData, name, value);
-    setFormData(cloneState);
-  };
 
-  const parseDate = (dateString) => {
-    const [day, month, year] = dateString.split("/");
-    return new Date(`${year}-${month - 1}-${day}`);
+    let formattedValue = value;
+
+    const isTyping = value.length > formData.date.length;
+    if (name === "date" && isTyping) {
+      if (value.length === 2) formattedValue += "/";
+      if (value.length === 5) formattedValue += "/";
+    }
+    console.log(formData.date);
+    const cloneState = calculateFormValues(formData, name, formattedValue);
+    setFormData(cloneState);
   };
 
   const isValidDateFormat = (dateString) => {
@@ -81,6 +112,7 @@ export default function Entries() {
             focusBorderColor="orange.500"
             _hover={{ borderColor: "orange.300" }}
             name="date"
+            placeholder="  /  /    "
             value={formData.date}
             onChange={handleChange}
           ></Input>

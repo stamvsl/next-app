@@ -4,7 +4,7 @@ export default async function handle(req, res) {
   if (req.method == "GET") {
     // creating a new todo.
     // const { title } = req.body;
-    const result = await prisma.User.create({
+    const result = await prisma.Esoda.create({
       data: {
         email: "manos.arvanitakis@gmail.com",
         name: "Manos Arvanitakis",
