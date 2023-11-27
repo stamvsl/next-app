@@ -16,28 +16,28 @@ export default function Prints() {
       <Table>
         <Thead>
           <Tr>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Quarter
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Date
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Gross Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Net Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               VAT Class
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               VAT Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Company
             </Th>
-            <Th position="sticky" top="0" color="white" bg="green.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Client
             </Th>
           </Tr>

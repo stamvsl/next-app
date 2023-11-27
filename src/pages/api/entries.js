@@ -1,15 +1,22 @@
 import prisma from "../../../lib/prisma";
 
+function getQuarter(date) {
+  const dateObject = new Date(date);
+  return Math.floor((dateObject.getMonth() + 3) / 3);
+}
+
 export default async function handle(req, res) {
   if (req.method == "POST") {
     // creating a new todo.
     const { date, number, grossValue, netValue, transactor, vatClass, vatValue } = req.body;
     console.log(req.body);
 
+    const quarter = getQuarter(date);
+
     const result = await prisma.Esoda.create({
       data: {
         userId: 2,
-        q: 1,
+        q: quarter,
         date,
         invoiceNumber: number,
         finalPrice: grossValue,

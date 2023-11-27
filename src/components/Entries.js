@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import ReactDatePicker from "react-datepicker";
 import { Flex, Input, Button, HStack, Box, FormLabel, Select, Textarea } from "@chakra-ui/react";
 import calculateFormValues from "./calculateFormValues";
 
@@ -62,25 +61,37 @@ export default function Entries() {
     }
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   const cloneState = calculateFormValues(formData, name, value);
-  //   setFormData(cloneState);
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     let formattedValue = value;
-
     const isTyping = value.length > formData.date.length;
     if (name === "date" && isTyping) {
       if (value.length === 2) formattedValue += "/";
       if (value.length === 5) formattedValue += "/";
     }
-    console.log(formData.date);
     const cloneState = calculateFormValues(formData, name, formattedValue);
     setFormData(cloneState);
+  };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   if (name === "date") {
+  //     const sanitizedValue = value.replace(/[^0-9]/g, "");
+
+  //     const formattedValue =
+  //       sanitizedValue.substring(0, 2) + "/" + sanitizedValue.substring(2, 4) + "/" + sanitizedValue.substring(4, 8);
+
+  //     setFormData((prevData) => ({ ...prevData, [name]: formattedValue }));
+  //   } else {
+  //     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  //   }
+  // };
+
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("/");
+    //return new Date(`${year}-${month - 1}-${day}`);
+    return new Date(`${year}-${month}-${day}`);
   };
 
   const isValidDateFormat = (dateString) => {
@@ -112,7 +123,7 @@ export default function Entries() {
             focusBorderColor="orange.500"
             _hover={{ borderColor: "orange.300" }}
             name="date"
-            placeholder="  /  /    "
+            placeholder="DD/MM/YYYY"
             value={formData.date}
             onChange={handleChange}
           ></Input>
