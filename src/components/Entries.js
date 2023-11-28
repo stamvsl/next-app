@@ -1,6 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
-import { Flex, Input, Button, HStack, Box, FormLabel, Select, Textarea } from "@chakra-ui/react";
+import {
+  Flex,
+  Input,
+  Button,
+  HStack,
+  Box,
+  FormLabel,
+  Select,
+  Textarea,
+  RadioGroup,
+  Radio,
+  Stack,
+} from "@chakra-ui/react";
 import calculateFormValues from "./calculateFormValues";
 
 const initialvalues = {
@@ -17,14 +29,25 @@ const initialvalues = {
 
 export default function Entries() {
   const [formData, setFormData] = useState(initialvalues);
-
+  const [entryType, setEntryType] = useState("income");
   let updatedValue = 0;
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
-      const formattedDate = parseDate(formData.date);
-      console.log(`
+    if (
+      formData.date === "" ||
+      //formData.Number === "" ||
+      formData.transactor === "" ||
+      formData.description === "" ||
+      formData.netValue === "" ||
+      formData.vatValue === "" ||
+      formData.grossValue === ""
+    ) {
+      alert("There are empty inputs");
+    } else {
+      if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
+        const formattedDate = parseDate(formData.date);
+        console.log(`
     Date: ${formData.date}
     Number: ${formData.number}
     transactor: ${formData.transactor}
@@ -36,28 +59,29 @@ export default function Entries() {
     comments: ${formData.comments}
     new date:${formattedDate}
     `);
-
-      axios
-        .post("/api/entries", {
-          date: formattedDate,
-          number: formData.number,
-          transactor: formData.transactor,
-          description: formData.description,
-          netValue: formData.netValue,
-          vatClass: formData.vatClass,
-          vatValue: formData.vatValue,
-          grossValue: formData.grossValue,
-          comments: formData.comments,
-        })
-        .then(function (response) {
-          console.log("response from entries endpoint: ", response);
-          setFormData(initialvalues);
-        })
-        .catch(function (error) {
-          console.log("axios error: ", error);
-        });
-    } else {
-      alert("Enter date in the form DD/MM/YYYY");
+        const endpoint = getApiEndpoint(entryType);
+        axios
+          .post(`/api/${entryType}Entries`, {
+            date: formattedDate,
+            number: formData.number,
+            transactor: formData.transactor,
+            description: formData.description,
+            netValue: formData.netValue,
+            vatClass: formData.vatClass,
+            vatValue: formData.vatValue,
+            grossValue: formData.grossValue,
+            comments: formData.comments,
+          })
+          .then(function (response) {
+            console.log("response from entries endpoint: ", response);
+            setFormData(initialvalues);
+          })
+          .catch(function (error) {
+            console.log("axios error: ", error);
+          });
+      } else {
+        alert("Enter date in the form DD/MM/YYYY");
+      }
     }
   };
 
@@ -71,6 +95,10 @@ export default function Entries() {
     }
     const cloneState = calculateFormValues(formData, name, formattedValue);
     setFormData(cloneState);
+  };
+
+  const getApiEndpoint = (type) => {
+    return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";
   };
 
   // const handleChange = (e) => {
@@ -115,6 +143,17 @@ export default function Entries() {
         justifyContent="center"
         gap="30px"
       >
+        {" "}
+        <Flex flex="100%" justifyContent="center" bg="orange.300">
+          <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
+            <Radio value="income" colorScheme="green" m="5px">
+              Income
+            </Radio>
+            <Radio value="expenses" colorScheme="red" m="5px">
+              Expenses
+            </Radio>
+          </RadioGroup>
+        </Flex>
         <Flex flex="40%">
           <FormLabel>Date</FormLabel>
           <Input
@@ -128,7 +167,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex="40%">
           <FormLabel>Number</FormLabel>
           <Input
@@ -141,7 +179,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex="80%">
           <FormLabel>Transactor</FormLabel>
           <Input
@@ -155,7 +192,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex="80%">
           <FormLabel>Description</FormLabel>
           <Input
@@ -169,7 +205,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>Net Value</FormLabel>
           <Input
@@ -182,7 +217,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>VAT Class</FormLabel>
           <Select
@@ -202,7 +236,6 @@ export default function Entries() {
             <option value="24">24%</option>
           </Select>
         </Flex>
-
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>VAT Value</FormLabel>
           <Input
@@ -215,7 +248,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>Gross Value</FormLabel>
           <Input
@@ -228,7 +260,6 @@ export default function Entries() {
             onChange={handleChange}
           ></Input>
         </Flex>
-
         <Flex flex="100%">
           <FormLabel>Comments</FormLabel>
           <Textarea
@@ -240,9 +271,9 @@ export default function Entries() {
             name="comments"
             value={formData.comments}
             onChange={handleChange}
+            maxLength={50}
           ></Textarea>
         </Flex>
-
         <Button colorScheme="orange" onClick={handleClick} type="submit">
           Submit
         </Button>
