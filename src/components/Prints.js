@@ -22,9 +22,7 @@ export default function Prints() {
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Date
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
-              Gross Value
-            </Th>
+
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Net Value
             </Th>
@@ -33,6 +31,9 @@ export default function Prints() {
             </Th>
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               VAT Value
+            </Th>
+            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+              Gross Value
             </Th>
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Company
@@ -50,10 +51,10 @@ export default function Prints() {
             <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
               <Td border="none">{data.q}</Td>
               <Td border="none">{new Date(data.date).toDateString()}</Td>
-              <Td border="none">{data.finalPrice}</Td>
               <Td border="none">{data.income}</Td>
-              <Td border="none">{data.vatPerc}</Td>
+              <Td border="none">{data.vatPerc}%</Td>
               <Td border="none">{data.vatEuro}</Td>
+              <Td border="none">{data.finalPrice}</Td>
               <Td border="none">{data.forCompany}</Td>
               <Td border="none">{data.client}</Td>
               <Td border="none">
