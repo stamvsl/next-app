@@ -7,6 +7,8 @@ import {
   HStack,
   Box,
   FormLabel,
+  FormControl,
+  FormErrorMessage,
   Select,
   Textarea,
   RadioGroup,
@@ -30,24 +32,38 @@ const initialvalues = {
 export default function Entries() {
   const [formData, setFormData] = useState(initialvalues);
   const [entryType, setEntryType] = useState("income");
+  const [formErrors, setFormErrors] = useState({
+    date: false,
+    transactor: false,
+    description: false,
+    netValue: false,
+    vatValue: false,
+    grossValue: false,
+  });
   let updatedValue = 0;
+
+  const validateForm = () => {
+    const errors = {
+      date: formData.date === "",
+      transactor: formData.transactor === "",
+      description: formData.description === "",
+      netValue: formData.netValue === "",
+      vatValue: formData.vatValue === "",
+      grossValue: formData.grossValue === "",
+    };
+
+    setFormErrors(errors);
+
+    return Object.values(errors).every((value) => !value);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (
-      formData.date === "" ||
-      //formData.Number === "" ||
-      formData.transactor === "" ||
-      formData.description === "" ||
-      formData.netValue === "" ||
-      formData.vatValue === "" ||
-      formData.grossValue === ""
-    ) {
-      alert("There are empty inputs");
-    } else {
-      if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
-        const formattedDate = parseDate(formData.date);
-        console.log(`
+    if (validateForm()) {
+      {
+        if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
+          const formattedDate = parseDate(formData.date);
+          console.log(`
     Date: ${formData.date}
     Number: ${formData.number}
     transactor: ${formData.transactor}
@@ -60,28 +76,29 @@ export default function Entries() {
     new date:${formattedDate}
     `);
 
-        const endpoint = getApiEndpoint(entryType);
-        axios
-          .post(`/api/${entryType}Entries`, {
-            date: formattedDate,
-            number: formData.number,
-            transactor: formData.transactor,
-            description: formData.description,
-            netValue: formData.netValue,
-            vatClass: formData.vatClass,
-            vatValue: formData.vatValue,
-            grossValue: formData.grossValue,
-            comments: formData.comments,
-          })
-          .then(function (response) {
-            console.log("response from entries endpoint: ", response);
-            setFormData(initialvalues);
-          })
-          .catch(function (error) {
-            console.log("axios error: ", error);
-          });
-      } else {
-        alert("Enter date in the form DD/MM/YYYY");
+          const endpoint = getApiEndpoint(entryType);
+          axios
+            .post(`/api/${entryType}Entries`, {
+              date: formattedDate,
+              number: formData.number,
+              transactor: formData.transactor,
+              description: formData.description,
+              netValue: formData.netValue,
+              vatClass: formData.vatClass,
+              vatValue: formData.vatValue,
+              grossValue: formData.grossValue,
+              comments: formData.comments,
+            })
+            .then(function (response) {
+              console.log("response from entries endpoint: ", response);
+              setFormData(initialvalues);
+            })
+            .catch(function (error) {
+              console.log("axios error: ", error);
+            });
+        } else {
+          alert("Enter date in the form DD/MM/YYYY");
+        }
       }
     }
   };
@@ -101,21 +118,6 @@ export default function Entries() {
   const getApiEndpoint = (type) => {
     return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";
   };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   if (name === "date") {
-  //     const sanitizedValue = value.replace(/[^0-9]/g, "");
-
-  //     const formattedValue =
-  //       sanitizedValue.substring(0, 2) + "/" + sanitizedValue.substring(2, 4) + "/" + sanitizedValue.substring(4, 8);
-
-  //     setFormData((prevData) => ({ ...prevData, [name]: formattedValue }));
-  //   } else {
-  //     setFormData((prevData) => ({ ...prevData, [name]: value }));
-  //   }
-  // };
 
   const parseDate = (dateString) => {
     const [day, month, year] = dateString.split("/");
@@ -182,42 +184,51 @@ export default function Entries() {
           ></Input>
         </Flex>
         <Flex flex="80%">
-          <FormLabel>Transactor</FormLabel>
-          <Input
-            type="text"
-            bg="orange.100"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="transactor"
-            value={formData.transactor}
-            onChange={handleChange}
-          ></Input>
+          <FormControl isInvalid={formErrors.transactor}>
+            <FormLabel>Transactor</FormLabel>
+            <Input
+              type="text"
+              bg="orange.100"
+              borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
+              name="transactor"
+              value={formData.transactor}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Transactor is required</FormErrorMessage>
+          </FormControl>
         </Flex>
         <Flex flex="80%">
-          <FormLabel>Description</FormLabel>
-          <Input
-            type="text"
-            bg="orange.100"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          ></Input>
+          <FormControl isInvalid={formErrors.description}>
+            <FormLabel>Description</FormLabel>
+            <Input
+              type="text"
+              bg="orange.100"
+              borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Description is required</FormErrorMessage>
+          </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormLabel>Net Value</FormLabel>
-          <Input
-            type="number"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="netValue"
-            value={formData.netValue}
-            onChange={handleChange}
-          ></Input>
+          <FormControl isInvalid={formErrors.netValue}>
+            <FormLabel>Net Value</FormLabel>
+            <Input
+              type="number"
+              borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
+              name="netValue"
+              value={formData.netValue}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Net Value is required</FormErrorMessage>
+          </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormLabel>VAT Class</FormLabel>
@@ -239,28 +250,34 @@ export default function Entries() {
           </Select>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormLabel>VAT Value</FormLabel>
-          <Input
-            type="number"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="vatValue"
-            value={formData.vatValue}
-            onChange={handleChange}
-          ></Input>
+          <FormControl isInvalid={formErrors.vatValue}>
+            <FormLabel>VAT Value</FormLabel>
+            <Input
+              type="number"
+              borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
+              name="vatValue"
+              value={formData.vatValue}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Vat Value is required</FormErrorMessage>
+          </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormLabel>Gross Value</FormLabel>
-          <Input
-            type="number"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="grossValue"
-            value={formData.grossValue}
-            onChange={handleChange}
-          ></Input>
+          <FormControl isInvalid={formErrors.grossValue}>
+            <FormLabel>Gross Value</FormLabel>
+            <Input
+              type="number"
+              borderColor="orange.500"
+              focusBorderColor="orange.500"
+              _hover={{ borderColor: "orange.300" }}
+              name="grossValue"
+              value={formData.grossValue}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Gross Value is required</FormErrorMessage>
+          </FormControl>
         </Flex>
         <Flex flex="100%">
           <FormLabel>Comments</FormLabel>
