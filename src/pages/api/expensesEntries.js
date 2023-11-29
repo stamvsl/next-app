@@ -8,7 +8,7 @@ function getQuarter(date) {
 export default async function handle(req, res) {
   if (req.method == "POST") {
     // creating a new todo.
-    const { date, number, grossValue, netValue, transactor, vatClass, vatValue } = req.body;
+    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments } = req.body;
     console.log(req.body);
 
     const quarter = getQuarter(date);
@@ -25,6 +25,7 @@ export default async function handle(req, res) {
           vatPerc: vatClass,
           vatEuro: vatValue,
           client: transactor,
+          comments: comments,
         },
       ],
     });

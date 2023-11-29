@@ -59,6 +59,7 @@ export default function Entries() {
     comments: ${formData.comments}
     new date:${formattedDate}
     `);
+
         const endpoint = getApiEndpoint(entryType);
         axios
           .post(`/api/${entryType}Entries`, {
@@ -132,6 +133,7 @@ export default function Entries() {
 
     return !isNaN(date.getTime());
   };
+
   return (
     <Flex>
       <Flex
