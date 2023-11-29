@@ -1,18 +1,41 @@
 import { useState, useEffect } from "react";
-import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip } from "@chakra-ui/react";
+import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Button } from "@chakra-ui/react";
 
 export default function Prints() {
   const [esoda, setEsoda] = useState([]);
+  const [entryType, setEntryType] = useState("income");
 
-  useEffect(() => {
-    fetch("/api/esoda")
-      .then((res) => res.json())
-      .then((esoda) => setEsoda(esoda || []));
-  }, []);
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    // useEffect(() => {
+    if (entryType === "income") {
+      fetch("/api/esoda")
+        .then((res) => res.json())
+        .then((esoda) => setEsoda(esoda || []));
+    } else if (entryType === "expenses") {
+      fetch("/api/exoda")
+        .then((res) => res.json())
+        .then((esoda) => setEsoda(esoda || []));
+    }
+    // }, []);
+  };
   // console.log("esoda: ", esoda);
 
   return (
     <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" height="calc(100vh - 60px)">
+      <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
+        <Radio value="income" colorScheme="green" m="5px">
+          Income
+        </Radio>
+        <Radio value="expenses" colorScheme="red" m="5px">
+          Expenses
+        </Radio>
+      </RadioGroup>
+      <Button type="submit" onClick={handleClick}>
+        {" "}
+        Search
+      </Button>
       <Table>
         <Thead>
           <Tr>
