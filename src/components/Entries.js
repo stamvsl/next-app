@@ -209,6 +209,7 @@ export default function Entries() {
               focusBorderColor="orange.500"
               _hover={{ borderColor: "orange.300" }}
               name="description"
+              maxLength={70}
               value={formData.description}
               onChange={handleChange}
             ></Input>
@@ -290,7 +291,7 @@ export default function Entries() {
             name="comments"
             value={formData.comments}
             onChange={handleChange}
-            maxLength={50}
+            maxLength={200}
           ></Textarea>
         </Flex>
         <Button colorScheme="orange" onClick={handleClick} type="submit">

@@ -5,10 +5,8 @@ export default function Prints() {
   const [esoda, setEsoda] = useState([]);
   const [entryType, setEntryType] = useState("income");
 
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    // useEffect(() => {
+  useEffect(() => {
+    //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
     if (entryType === "income") {
       fetch("/api/esoda")
         .then((res) => res.json())
@@ -18,12 +16,12 @@ export default function Prints() {
         .then((res) => res.json())
         .then((esoda) => setEsoda(esoda || []));
     }
-    // }, []);
-  };
+  }, [entryType]);
+
   // console.log("esoda: ", esoda);
 
   return (
-    <Box w={{ base: "100vw", lg: "80vw" }} overflow="scroll" height="calc(100vh - 60px)">
+    <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
       <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
         <Radio value="income" colorScheme="green" m="5px">
           Income
@@ -32,10 +30,6 @@ export default function Prints() {
           Expenses
         </Radio>
       </RadioGroup>
-      <Button type="submit" onClick={handleClick}>
-        {" "}
-        Search
-      </Button>
       <Table>
         <Thead>
           <Tr>
