@@ -6,6 +6,15 @@ export default function Prints() {
   const [entryType, setEntryType] = useState("income");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
+
+  const requestSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
 
   //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
 
@@ -13,34 +22,37 @@ export default function Prints() {
     setIsLoading(true);
     setError(null);
 
-    if (entryType === "income") {
-      fetch("/api/esoda")
-        .then((res) => res.json())
-        .then(
-          (esoda) => {
-            setEsoda(esoda || []);
-            setIsLoading(false);
-          },
-          (error) => {
-            setError(error);
-            setIsLoading(false);
-          }
-        );
-    } else if (entryType === "expenses") {
-      fetch("/api/exoda")
-        .then((res) => res.json())
-        .then(
-          (esoda) => {
-            setEsoda(esoda || []);
-            setIsLoading(false);
-          },
-          (error) => {
-            setError(error);
-            setIsLoading(false);
-          }
-        );
-    }
+    const endpoint = entryType === "income" ? "/api/esoda" : "/api/exoda";
+    fetch(endpoint)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          setEsoda(data || []);
+          setIsLoading(false);
+        },
+        (error) => {
+          setError(error);
+          setIsLoading(false);
+        }
+      );
   }, [entryType]);
+
+  useEffect(() => {
+    console.log("Sort by: ", sortConfig);
+    let sortedArr = [];
+    if (sortConfig.key) {
+      sortedArr = esoda.toSorted((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+      setEsoda(sortedArr);
+    }
+  }, [sortConfig]);
 
   if (isLoading) {
     return (
@@ -68,29 +80,93 @@ export default function Prints() {
       <Table>
         <Thead>
           <Tr>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("q")}
+            >
               Quarter
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("date")}
+            >
               Date
             </Th>
 
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("income")}
+            >
               Net Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatPerc")}
+            >
               VAT Class
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatEuro")}
+            >
               VAT Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("finalPrice")}
+            >
               Gross Value
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("forCompany")}
+            >
               Company
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("client")}
+            >
               Client
             </Th>
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
