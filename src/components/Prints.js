@@ -4,25 +4,68 @@ import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Butto
 export default function Prints() {
   const [esoda, setEsoda] = useState([]);
   const [entryType, setEntryType] = useState("income");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
-    if (entryType === "income") {
-      fetch("/api/esoda")
-        .then((res) => res.json())
-        .then((esoda) => setEsoda(esoda || []));
-    } else if (entryType === "expenses") {
-      fetch("/api/exoda")
-        .then((res) => res.json())
-        .then((esoda) => setEsoda(esoda || []));
-    }
-  }, [entryType]);
+  // useEffect(() => {
+  //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
+  //   if (entryType === "income") {
+  //     fetch("/api/esoda")
+  //       .then((res) => res.json())
+  //       .then((esoda) => setEsoda(esoda || []));
+  //   } else if (entryType === "expenses") {
+  //     fetch("/api/exoda")
+  //       .then((res) => res.json())
+  //       .then((esoda) => setEsoda(esoda || []));
+  //   }
+  // }, [entryType]);
 
   // console.log("esoda: ", esoda);
 
+  useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+
+    if (entryType === "income") {
+      fetch("/api/esoda")
+        .then((res) => res.json())
+        .then(
+          (esoda) => {
+            setEsoda(esoda || []);
+            setIsLoading(false);
+          },
+          (error) => {
+            setError(error);
+            setIsLoading(false);
+          }
+        );
+    } else if (entryType === "expenses") {
+      fetch("/api/exoda")
+        .then((res) => res.json())
+        .then(
+          (esoda) => {
+            setEsoda(esoda || []);
+            setIsLoading(false);
+          },
+          (error) => {
+            setError(error);
+            setIsLoading(false);
+          }
+        );
+    }
+  }, [entryType]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
   return (
     <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
-      <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
+      <RadioGroup value={entryType} onChange={(value) => setEntryType(value)}>
         <Radio value="income" colorScheme="green" m="5px">
           Income
         </Radio>
