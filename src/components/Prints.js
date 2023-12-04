@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Button } from "@chakra-ui/react";
+import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Spinner, Flex } from "@chakra-ui/react";
 
 export default function Prints() {
   const [esoda, setEsoda] = useState([]);
@@ -7,20 +7,7 @@ export default function Prints() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
   //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
-  //   if (entryType === "income") {
-  //     fetch("/api/esoda")
-  //       .then((res) => res.json())
-  //       .then((esoda) => setEsoda(esoda || []));
-  //   } else if (entryType === "expenses") {
-  //     fetch("/api/exoda")
-  //       .then((res) => res.json())
-  //       .then((esoda) => setEsoda(esoda || []));
-  //   }
-  // }, [entryType]);
-
-  // console.log("esoda: ", esoda);
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,7 +43,12 @@ export default function Prints() {
   }, [entryType]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Flex alignItems="center">
+        Loading...
+        <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" m="20px" />
+      </Flex>
+    );
   }
 
   if (error) {
