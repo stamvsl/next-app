@@ -5,8 +5,8 @@ export default function CustomButton({ Icon, link, text }) {
     <Flex
       justifyContent="center"
       alignItems="center"
-      h={{ base: "120", sm: "250", md: "350" }}
-      minW={{ base: "120", sm: "250", md: "350" }}
+      h={{ base: "120", sm: "180", md: "300", lg: "350" }}
+      minW={{ base: "120", sm: "180", md: "300", lg: "350" }}
       margin="15px 0 15px 0"
       shadow="lg"
       bg="tomato"
