@@ -16,6 +16,13 @@ export default function Prints() {
     setSortConfig({ key, direction });
   };
 
+  const getSortIndicator = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === "ascending" ? "▲" : "▼";
+    }
+    return null;
+  };
+
   //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
 
   useEffect(() => {
@@ -79,7 +86,7 @@ export default function Prints() {
       </RadioGroup>
       <Table>
         <Thead>
-          <Tr>
+          <Tr cursor="pointer">
             <Th
               position="sticky"
               top="0"
@@ -89,7 +96,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("id")}
             >
-              A/A
+              A/A {getSortIndicator("id")}
             </Th>
             <Th
               position="sticky"
@@ -100,7 +107,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("q")}
             >
-              Q
+              Q {getSortIndicator("q")}
             </Th>
             <Th
               position="sticky"
@@ -111,7 +118,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("date")}
             >
-              Date
+              Date {getSortIndicator("date")}
             </Th>
 
             <Th
@@ -123,7 +130,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("income")}
             >
-              Net Value
+              Net Value {getSortIndicator("income")}
             </Th>
             <Th
               position="sticky"
@@ -134,7 +141,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("vatPerc")}
             >
-              VAT Class
+              VAT Class {getSortIndicator("vatPerc")}
             </Th>
             <Th
               position="sticky"
@@ -145,7 +152,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("vatEuro")}
             >
-              VAT Value
+              VAT Value {getSortIndicator("vatEuro")}
             </Th>
             <Th
               position="sticky"
@@ -156,7 +163,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("finalPrice")}
             >
-              Gross Value
+              Gross Value {getSortIndicator("finalPrice")}
             </Th>
             <Th
               position="sticky"
@@ -167,7 +174,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("forCompany")}
             >
-              Company
+              Company {getSortIndicator("forCompany")}
             </Th>
             <Th
               position="sticky"
@@ -178,7 +185,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("client")}
             >
-              Client
+              Client {getSortIndicator("Client")}
             </Th>
             <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
               Comments
