@@ -6,7 +6,7 @@ export default function Prints() {
   const [entryType, setEntryType] = useState("income");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
+  const [sortConfig, setSortConfig] = useState({ key: "id", direction: "ascending" });
 
   const requestSort = (key) => {
     let direction = "ascending";
@@ -87,9 +87,20 @@ export default function Prints() {
               bg="orange.500"
               zIndex="stickyHeader"
               border="none"
+              onClick={() => requestSort("id")}
+            >
+              A/A
+            </Th>
+            <Th
+              position="sticky"
+              top="0"
+              color="white"
+              bg="orange.500"
+              zIndex="stickyHeader"
+              border="none"
               onClick={() => requestSort("q")}
             >
-              Quarter
+              Q
             </Th>
             <Th
               position="sticky"
@@ -177,6 +188,7 @@ export default function Prints() {
         <Tbody>
           {esoda?.map((data, index) => (
             <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
+              <Td border="none">{data.id}</Td>
               <Td border="none">{data.q}</Td>
               <Td border="none">{new Date(data.date).toDateString()}</Td>
               <Td border="none">{data.income}</Td>
