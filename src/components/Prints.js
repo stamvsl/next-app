@@ -23,8 +23,6 @@ export default function Prints() {
     return null;
   };
 
-  //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
-
   useEffect(() => {
     setIsLoading(true);
     setError(null);
@@ -73,6 +71,8 @@ export default function Prints() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+
+  console.log("date is: ", typeof esoda[0].date);
 
   return (
     <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
@@ -197,7 +197,7 @@ export default function Prints() {
             <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
               <Td border="none">{data.id}</Td>
               <Td border="none">{data.q}</Td>
-              <Td border="none">{new Date(data.date).toDateString()}</Td>
+              <Td border="none">{new Date(data.date).toLocaleDateString("en-GB")}</Td>
               <Td border="none">{data.income}</Td>
               <Td border="none">{data.vatPerc}%</Td>
               <Td border="none">{data.vatEuro}</Td>
