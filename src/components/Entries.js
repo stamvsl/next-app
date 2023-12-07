@@ -148,7 +148,7 @@ export default function Entries() {
         gap="30px"
       >
         {" "}
-        <Flex flex="100%" justifyContent="center" bg="orange.300">
+        <Flex flex="100%" justifyContent="center" bg="teal.700">
           <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
             <Radio value="income" colorScheme="green" m="5px">
               Income
@@ -162,9 +162,10 @@ export default function Entries() {
           <FormLabel>Date</FormLabel>
           <Input
             type="text"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
+            bg="cyan.100"
+            borderColor="teal.500"
+            focusBorderColor="teal.500"
+            _hover={{ borderColor: "teal.300" }}
             name="date"
             placeholder="DD/MM/YYYY"
             value={formData.date}
@@ -175,9 +176,10 @@ export default function Entries() {
           <FormLabel>Number</FormLabel>
           <Input
             type="text"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
+            bg="cyan.100"
+            borderColor="teal.500"
+            focusBorderColor="teal.500"
+            _hover={{ borderColor: "teal.300" }}
             name="number"
             value={formData.number}
             onChange={handleChange}
@@ -188,10 +190,10 @@ export default function Entries() {
             <FormLabel>Transactor</FormLabel>
             <Input
               type="text"
-              bg="orange.100"
-              borderColor="orange.500"
-              focusBorderColor="orange.500"
-              _hover={{ borderColor: "orange.300" }}
+              bg="cyan.100"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
               name="transactor"
               value={formData.transactor}
               onChange={handleChange}
@@ -204,10 +206,10 @@ export default function Entries() {
             <FormLabel>Description</FormLabel>
             <Input
               type="text"
-              bg="orange.100"
-              borderColor="orange.500"
-              focusBorderColor="orange.500"
-              _hover={{ borderColor: "orange.300" }}
+              bg="cyan.100"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
               name="description"
               maxLength={70}
               value={formData.description}
@@ -221,9 +223,10 @@ export default function Entries() {
             <FormLabel>Net Value</FormLabel>
             <Input
               type="number"
-              borderColor="orange.500"
-              focusBorderColor="orange.500"
-              _hover={{ borderColor: "orange.300" }}
+              bg="cyan.100"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
               name="netValue"
               value={formData.netValue}
               onChange={handleChange}
@@ -232,32 +235,35 @@ export default function Entries() {
           </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormLabel>VAT Class</FormLabel>
-          <Select
-            placeholder=">Κατηγορία ΦΠΑ"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
-            name="vatClass"
-            onChange={handleChange}
-            defaultValue={24}
-            bg="orange.100"
-          >
-            <option value="0">0%</option>
-            <option value="6">6%</option>
-            <option value="13">13%</option>
-            <option value="17">17%</option>
-            <option value="24">24%</option>
-          </Select>
+          <FormControl>
+            <FormLabel>VAT Class</FormLabel>
+            <Select
+              placeholder=">Select Class"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
+              name="vatClass"
+              onChange={handleChange}
+              defaultValue={24}
+              bg="cyan.100"
+            >
+              <option value="0">0%</option>
+              <option value="6">6%</option>
+              <option value="13">13%</option>
+              <option value="17">17%</option>
+              <option value="24">24%</option>
+            </Select>
+          </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
           <FormControl isInvalid={formErrors.vatValue}>
             <FormLabel>VAT Value</FormLabel>
             <Input
               type="number"
-              borderColor="orange.500"
-              focusBorderColor="orange.500"
-              _hover={{ borderColor: "orange.300" }}
+              bg="cyan.100"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
               name="vatValue"
               value={formData.vatValue}
               onChange={handleChange}
@@ -270,9 +276,10 @@ export default function Entries() {
             <FormLabel>Gross Value</FormLabel>
             <Input
               type="number"
-              borderColor="orange.500"
-              focusBorderColor="orange.500"
-              _hover={{ borderColor: "orange.300" }}
+              bg="cyan.100"
+              borderColor="teal.500"
+              focusBorderColor="teal.500"
+              _hover={{ borderColor: "teal.300" }}
               name="grossValue"
               value={formData.grossValue}
               onChange={handleChange}
@@ -283,18 +290,18 @@ export default function Entries() {
         <Flex flex="100%">
           <FormLabel>Comments</FormLabel>
           <Textarea
-            bg="orange.100"
+            bg="cyan.100"
             type="text"
-            borderColor="orange.500"
-            focusBorderColor="orange.500"
-            _hover={{ borderColor: "orange.300" }}
+            borderColor="teal.500"
+            focusBorderColor="teal.500"
+            _hover={{ borderColor: "teal.300" }}
             name="comments"
             value={formData.comments}
             onChange={handleChange}
             maxLength={200}
           ></Textarea>
         </Flex>
-        <Button colorScheme="orange" onClick={handleClick} type="submit">
+        <Button colorScheme="cyan" onClick={handleClick} type="submit">
           Submit
         </Button>
       </Flex>

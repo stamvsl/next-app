@@ -91,7 +91,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("id")}
@@ -102,7 +102,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("q")}
@@ -113,7 +113,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("date")}
@@ -125,7 +125,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("income")}
@@ -136,7 +136,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("vatPerc")}
@@ -147,7 +147,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("vatEuro")}
@@ -158,7 +158,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("finalPrice")}
@@ -169,7 +169,7 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("forCompany")}
@@ -180,21 +180,21 @@ export default function Prints() {
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("client")}
             >
               Client {getSortIndicator("Client")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none">
               Comments
             </Th>
           </Tr>
         </Thead>
         <Tbody>
           {esoda?.map((data, index) => (
-            <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
+            <Tr key={index} bg={index % 2 === 0 ? "blue.100" : "gray.200"} border="none">
               <Td border="none">{data.id}</Td>
               <Td border="none">{data.q}</Td>
               <Td border="none">{new Date(data.date).toLocaleDateString("en-GB")}</Td>

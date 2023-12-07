@@ -1,18 +1,7 @@
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 import Entries from "./Entries";
-import {
-  Box,
-  Flex,
-  Icon,
-  Button,
-  Spacer,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton,
-} from "@chakra-ui/react";
+import { Box, Flex, Icon, Button, Spacer, Menu, MenuButton, MenuList, MenuItem, IconButton } from "@chakra-ui/react";
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { BsPeople } from "react-icons/bs";
@@ -22,70 +11,35 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => (
   <>
-    <Flex
-      display={{ base: "none", lg: "flex" }}
-      align="center"
-      height="60px"
-      bg="orange.300"
-    >
+    <Flex display={{ base: "none", lg: "flex" }} align="center" height="60px" bg="gray.800">
       <Box>
         <Link as={NextLink} href="/">
-          <Button
-            fontSize={{ base: "1.5em", xl: "2em" }}
-            fontWeight={"bold"}
-            variant={"link"}
-            color={"white"}
-            mx="15px"
-          >
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight="bold" variant="link" color="white" mx="15px">
             <Icon as={AiFillHome} />
           </Button>
         </Link>
 
         <Link as={NextLink} href="/entries">
-          <Button
-            fontSize={{ base: "1.5em", xl: "2em" }}
-            fontWeight={400}
-            variant={"link"}
-            color={"white"}
-            mx="15px"
-          >
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
             Entries
           </Button>
         </Link>
 
         <Link as={NextLink} href="/transactors">
-          <Button
-            fontSize={{ base: "1.5em", xl: "2em" }}
-            fontWeight={400}
-            variant={"link"}
-            color={"white"}
-            mx="15px"
-          >
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
             Transactors
           </Button>
         </Link>
         <Link as={NextLink} href="/prints">
-          <Button
-            fontSize={{ base: "1.5em", xl: "2em" }}
-            fontWeight={400}
-            variant={"link"}
-            color={"white"}
-            mx="15px"
-          >
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
             Prints
           </Button>
         </Link>
-        <Button
-          as={"a"}
-          fontSize={{ base: "1.5em", xl: "2em" }}
-          fontWeight={400}
-          variant={"link"}
-          href={"/prints"}
-          color={"white"}
-          mx="15px"
-        >
-          Settings
-        </Button>
+        <Link as={NextLink} href="/settings">
+          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
+            Settings
+          </Button>
+        </Link>
       </Box>
       <Spacer />
 
@@ -97,10 +51,10 @@ const Navbar = () => (
           fontSize={"sm"}
           fontWeight={600}
           color={"white"}
-          bg={"orange.500"}
+          bg={"red.500"}
           href={"#"}
           _hover={{
-            bg: "orange.700",
+            bg: "red.700",
           }}
         >
           Exit
@@ -108,12 +62,7 @@ const Navbar = () => (
       </Box>
     </Flex>
 
-    <Flex
-      display={{ base: "flex", lg: "none" }}
-      bg="orange.300"
-      minH={"60px"}
-      alignItems={"center"}
-    >
+    <Flex display={{ base: "flex", lg: "none" }} bg="orange.300" minH={"60px"} alignItems={"center"}>
       <Menu>
         <MenuButton
           background={"orange.500"}
@@ -178,16 +127,18 @@ const Navbar = () => (
               Prints
             </MenuItem>
           </Link>
-          <MenuItem
-            icon={<Icon as={MdAppRegistration} color={"white"} />}
-            bg="orange.300"
-            color="white"
-            _hover={{
-              background: "orange.500",
-            }}
-          >
-            Settings
-          </MenuItem>
+          <Link as={NextLink} href="/settings">
+            <MenuItem
+              icon={<Icon as={MdAppRegistration} color={"white"} />}
+              bg="orange.300"
+              color="white"
+              _hover={{
+                background: "orange.500",
+              }}
+            >
+              Settings
+            </MenuItem>
+          </Link>
         </MenuList>
       </Menu>
       <Spacer />
@@ -198,10 +149,10 @@ const Navbar = () => (
           mr="20px"
           fontWeight={600}
           color={"white"}
-          bg={"orange.500"}
+          bg={"tomato"}
           href={"#"}
           _hover={{
-            bg: "orange.700",
+            bg: "tomato",
           }}
         >
           Exit
