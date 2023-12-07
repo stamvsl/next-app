@@ -9,10 +9,10 @@ export default function CustomButton({ Icon, link, text }) {
       minW={{ base: "120", sm: "180", md: "300", lg: "350" }}
       margin="15px 0 15px 0"
       shadow="lg"
-      bg="tomato"
+      bg="teal.400"
       borderRadius="30"
       _hover={{
-        bg: "orange.300",
+        bg: "teal.700",
       }}
     >
       <Icon size="50%" color="white" />

@@ -10,13 +10,7 @@ import { MdAppRegistration } from "react-icons/md";
 export default function Boxes() {
   return (
     <Flex justifyContent={"center"}>
-      <Flex
-        flexGrow="2"
-        flexWrap="wrap"
-        gap="50px"
-        justifyContent={"center"}
-        mt="30px"
-      >
+      <Flex flexGrow="2" flexWrap="wrap" gap="50px" justifyContent={"center"} mt="30px">
         <Box>
           <Link as={NextLink} href="/entries">
             <CustomButton Icon={MdAppRegistration} />
@@ -34,7 +28,7 @@ export default function Boxes() {
           </Link>
         </Box>
         <Box>
-          <Link as={NextLink} href="/entries">
+          <Link as={NextLink} href="/settings">
             <CustomButton Icon={IoSettingsOutline} />
           </Link>
         </Box>

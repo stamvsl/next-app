@@ -16,7 +16,12 @@ export default function Prints() {
     setSortConfig({ key, direction });
   };
 
-  //   //@TODO: we need to handle the case where the data are empty and we get an error. Also we need to add a loader.
+  const getSortIndicator = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === "ascending" ? "▲" : "▼";
+    }
+    return null;
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -67,6 +72,8 @@ export default function Prints() {
     return <p>Error: {error.message}</p>;
   }
 
+  console.log("date is: ", typeof esoda[0].date);
+
   return (
     <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
       <RadioGroup value={entryType} onChange={(value) => setEntryType(value)}>
@@ -79,118 +86,118 @@ export default function Prints() {
       </RadioGroup>
       <Table>
         <Thead>
-          <Tr>
+          <Tr cursor="pointer">
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("id")}
             >
-              A/A
+              A/A {getSortIndicator("id")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("q")}
             >
-              Q
+              Q {getSortIndicator("q")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("date")}
             >
-              Date
+              Date {getSortIndicator("date")}
             </Th>
 
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("income")}
             >
-              Net Value
+              Net Value {getSortIndicator("income")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("vatPerc")}
             >
-              VAT Class
+              VAT Class {getSortIndicator("vatPerc")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("vatEuro")}
             >
-              VAT Value
+              VAT Value {getSortIndicator("vatEuro")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("finalPrice")}
             >
-              Gross Value
+              Gross Value {getSortIndicator("finalPrice")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("forCompany")}
             >
-              Company
+              Company {getSortIndicator("forCompany")}
             </Th>
             <Th
               position="sticky"
               top="0"
               color="white"
-              bg="orange.500"
+              bg="teal.600"
               zIndex="stickyHeader"
               border="none"
               onClick={() => requestSort("client")}
             >
-              Client
+              Client {getSortIndicator("Client")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="orange.500" zIndex="stickyHeader" border="none">
+            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none">
               Comments
             </Th>
           </Tr>
         </Thead>
         <Tbody>
           {esoda?.map((data, index) => (
-            <Tr key={index} bg={index % 2 === 0 ? "rgb(251,211,141)" : "rgb(246,173,85)"} border="none">
+            <Tr key={index} bg={index % 2 === 0 ? "blue.100" : "gray.200"} border="none">
               <Td border="none">{data.id}</Td>
               <Td border="none">{data.q}</Td>
-              <Td border="none">{new Date(data.date).toDateString()}</Td>
+              <Td border="none">{new Date(data.date).toLocaleDateString("en-GB")}</Td>
               <Td border="none">{data.income}</Td>
               <Td border="none">{data.vatPerc}%</Td>
               <Td border="none">{data.vatEuro}</Td>
