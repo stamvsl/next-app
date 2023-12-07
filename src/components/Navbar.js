@@ -62,10 +62,10 @@ const Navbar = () => (
       </Box>
     </Flex>
 
-    <Flex display={{ base: "flex", lg: "none" }} bg="orange.300" minH={"60px"} alignItems={"center"}>
+    <Flex display={{ base: "flex", lg: "none" }} bg="gray.800" minH={"60px"} alignItems={"center"}>
       <Menu>
         <MenuButton
-          background={"orange.500"}
+          background={"gray.800"}
           border={"none"}
           ml="20px"
           as={IconButton}
@@ -73,19 +73,19 @@ const Navbar = () => (
           icon={<Icon as={GiHamburgerMenu} color={"white"} />}
           variant="outline"
           _hover={{
-            background: "orange.100",
+            background: "gray.800",
           }}
-          _expanded={{ bg: "orange.100" }}
+          _expanded={{ bg: "gray.800" }}
         />
 
-        <MenuList bg="orange.300" border={"none"}>
+        <MenuList bg="gray.800" border={"none"}>
           <Link as={NextLink} href="/">
             <MenuItem
               icon={<Icon as={AiFillHome} color={"white"} />}
-              bg="orange.300"
+              bg="gray.800"
               color="white"
               _hover={{
-                background: "orange.500",
+                background: "gray.800",
               }}
             >
               Home
@@ -94,10 +94,10 @@ const Navbar = () => (
           <Link as={NextLink} href="/entries">
             <MenuItem
               icon={<Icon as={MdAppRegistration} color={"white"} />}
-              bg="orange.300"
+              bg="gray.800"
               color="white"
               _hover={{
-                background: "orange.500",
+                background: "gray.800",
               }}
             >
               Entries
@@ -106,10 +106,10 @@ const Navbar = () => (
           <Link as={NextLink} href="/transactors">
             <MenuItem
               icon={<Icon as={BsPeople} color={"white"} />}
-              bg="orange.300"
+              bg="gray.800"
               color="white"
               _hover={{
-                background: "orange.500",
+                background: "gray.800",
               }}
             >
               Transactors
@@ -118,10 +118,10 @@ const Navbar = () => (
           <Link as={NextLink} href="/prints">
             <MenuItem
               icon={<Icon as={AiOutlinePrinter} color={"white"} />}
-              bg="orange.300"
+              bg="gray.800"
               color="white"
               _hover={{
-                background: "orange.500",
+                background: "gray.800",
               }}
             >
               Prints
@@ -130,10 +130,10 @@ const Navbar = () => (
           <Link as={NextLink} href="/settings">
             <MenuItem
               icon={<Icon as={MdAppRegistration} color={"white"} />}
-              bg="orange.300"
+              bg="gray.800"
               color="white"
               _hover={{
-                background: "orange.500",
+                background: "gray.800",
               }}
             >
               Settings

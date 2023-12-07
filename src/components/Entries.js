@@ -148,7 +148,7 @@ export default function Entries() {
         gap="30px"
       >
         {" "}
-        <Flex flex="100%" justifyContent="center" bg="teal.700">
+        <Flex flex="100%" justifyContent="center">
           <RadioGroup defaultValue="income" onChange={(value) => setEntryType(value)}>
             <Radio value="income" colorScheme="green" m="5px">
               Income
