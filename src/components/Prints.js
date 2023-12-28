@@ -14,8 +14,17 @@ export default function Prints() {
   const [filterVisible, setFilterVisible] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   //@TODO: Create one state called filters as an object
-  const [fromNetValue, setFromNetValue] = useState("");
-  const [toNetValue, setToNetValue] = useState("");
+  const [filters, setFilters] = useState({
+    fromNetValue: "",
+    toNetValue: "",
+    fromGrossValue: "",
+    toGrossValue: "",
+    startDate: "",
+    endDate: "",
+    fromQuarter: "",
+    toQuarter: "",
+    client: "",
+  });
 
   const requestSort = (key) => {
     let direction = "ascending";
@@ -55,10 +64,25 @@ export default function Prints() {
   const filterData = () => {
     const filteredData = esoda.filter((data) => {
       const netValue = parseFloat(data.income);
-      const isNetValueInRange = (!fromNetValue || netValue >= parseFloat(fromNetValue)) && (!toNetValue || netValue <= parseFloat(toNetValue));
+      const grossValue = parseFloat(data.finalPrice);
+      const quarter = parseInt(data.q);
+      const dataDate = new Date(data.date).toLocaleDateString("en-GB");
 
-      return isNetValueInRange;
+      const isNetValueInRange =
+        (!filters.fromNetValue || netValue >= parseFloat(filters.fromNetValue)) &&
+        (!filters.toNetValue || netValue <= parseFloat(filters.toNetValue));
+      const isGrossValueInRange =
+        (!filters.fromGrossValue || grossValue >= parseFloat(filters.fromGrossValue)) &&
+        (!filters.toGrossValue || grossValue <= parseFloat(filters.toGrossValue));
+      const isDateInRange =
+        (!filters.startDate || dataDate >= new Date(filters.startDate)) && (!filters.endDate || dataDate <= new Date(filters.endDate));
+      const isQuarterInRange =
+        (!filters.fromQuarter || quarter >= parseFloat(filters.fromQuarter)) && (!filters.toQuarter || quarter <= parseFloat(filters.toQuarter));
+      const isClientMatch = !filters.client || data.client.toLowerCase().includes(filters.client.toLowerCase());
+
+      return isNetValueInRange && isGrossValueInRange && isDateInRange && isQuarterInRange && isClientMatch;
     });
+
     setFilteredData(filteredData);
     setSortConfig({
       key: sortConfig.key,
@@ -122,43 +146,142 @@ export default function Prints() {
           {" "}
           Filters
         </Button>
-        {filterVisible && (
-          <Flex flexDirection="column" m="30px" w="50%">
-            <Flex flex="100%">
-              <FormLabel>From Net Value: </FormLabel>
-              <Input type="number" bg="gray.100" name="fromNetValue" value={fromNetValue} onChange={(e) => setFromNetValue(e.target.value)}></Input>
 
-              <FormLabel>To Net Value: </FormLabel>
-              <Input type="number" bg="gray.100" name="toNetValue" value={toNetValue} onChange={(e) => setToNetValue(e.target.value)}></Input>
+        {filterVisible && (
+          <Flex flexDirection="column" m="30px" w="80%">
+            <Flex flex="100%" margin="5px">
+              <FormLabel width="50%">From Net Value: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="fromNetValue"
+                value={filters.fromNetValue}
+                onChange={(e) => setFilters({ ...filters, fromNetValue: e.target.value })}
+              />
+
+              <FormLabel width="50%">To Net Value: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="toNetValue"
+                value={filters.toNetValue}
+                onChange={(e) => setFilters({ ...filters, toNetValue: e.target.value })}
+              />
             </Flex>
-            <Button
-              onClick={filterData}
-              width="80px"
-              ml="50px"
-              bg="blue.500"
-              _hover={{
-                bg: "blue.700",
-              }}
-            >
-              Apply
-            </Button>
-            <Button
-              onClick={() => {
-                setFilteredData(esoda);
-                setSortConfig({
-                  key: sortConfig.key,
-                  direction: sortConfig.direction,
-                });
-              }}
-              width="80px"
-              ml="50px"
-              bg="blue.500"
-              _hover={{
-                bg: "blue.700",
-              }}
-            >
-              Clear
-            </Button>
+
+            <Flex flex="100%" margin="5px">
+              <FormLabel width="50%">From Gross Value: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="fromNetValue"
+                value={filters.fromGrossValue}
+                onChange={(e) => setFilters({ ...filters, fromGrossValue: e.target.value })}
+              />
+
+              <FormLabel width="50%">To Gross Value: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="toNetValue"
+                value={filters.toGrossValue}
+                onChange={(e) => setFilters({ ...filters, toGrossValue: e.target.value })}
+              />
+            </Flex>
+
+            <Flex flex="100%" margin="5px">
+              <FormLabel width="50%">From Date: </FormLabel>
+              <Input
+                type="text"
+                bg="gray.100"
+                name="startdDate"
+                value={filters.startDate}
+                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+              />
+
+              <FormLabel width="50%">To Date: </FormLabel>
+              <Input
+                type="text"
+                bg="gray.100"
+                name="endDate"
+                value={filters.endDate}
+                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+              />
+            </Flex>
+
+            <Flex flex="100%" margin="5px">
+              <FormLabel width="50%">From Qtr: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="fromQuarter"
+                value={filters.fromQuarter}
+                onChange={(e) => setFilters({ ...filters, fromQuarter: e.target.value })}
+              />
+
+              <FormLabel width="50%">To Qtr: </FormLabel>
+              <Input
+                type="number"
+                bg="gray.100"
+                name="toQuarter"
+                value={filters.toQuarter}
+                onChange={(e) => setFilters({ ...filters, toQuarter: e.target.value })}
+              />
+            </Flex>
+
+            <Flex flex="100%" margin="5px" width="50%">
+              <FormLabel>Client: </FormLabel>
+              <Input
+                type="text"
+                bg="gray.100"
+                name="client"
+                value={filters.client}
+                onChange={(e) => setFilters({ ...filters, client: e.target.value })}
+              />
+            </Flex>
+
+            <Flex>
+              <Button
+                onClick={filterData}
+                width="80px"
+                ml="50px"
+                bg="blue.500"
+                _hover={{
+                  bg: "blue.700",
+                }}
+              >
+                Apply
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setFilters({
+                    fromNetValue: "",
+                    toNetValue: "",
+                    fromGrossValue: "",
+                    toGrossValue: "",
+                    startDate: "",
+                    endDate: "",
+                    fromQuarter: "",
+                    toQuarter: "",
+                    client: "",
+                  });
+                  setFilteredData(esoda);
+                  setSortConfig({
+                    key: sortConfig.key,
+                    direction: sortConfig.direction,
+                  });
+                }}
+                width="80px"
+                ml="50px"
+                bg="blue.500"
+                _hover={{
+                  bg: "blue.700",
+                }}
+              >
+                Clear
+              </Button>
+            </Flex>
           </Flex>
         )}
       </RadioGroup>
