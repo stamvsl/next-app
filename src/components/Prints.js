@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import NextLink from "next/link";
 
 import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Spinner, Flex, Button, Link, FormLabel, Input } from "@chakra-ui/react";
-import PrintFilters from "./PrintFilters";
+import { parseDate, isValidDateFormat, isValidDate } from "./Helpers"; // Import the date helper functions
+
 import { LiaCommentDotsSolid } from "react-icons/lia";
 
 export default function Prints() {
@@ -74,8 +75,31 @@ export default function Prints() {
       const isGrossValueInRange =
         (!filters.fromGrossValue || grossValue >= parseFloat(filters.fromGrossValue)) &&
         (!filters.toGrossValue || grossValue <= parseFloat(filters.toGrossValue));
-      const isDateInRange =
-        (!filters.startDate || dataDate >= new Date(filters.startDate)) && (!filters.endDate || dataDate <= new Date(filters.endDate));
+
+      let isDateInRange = true;
+
+      if (filters.startDate && filters.endDate) {
+        // Both start and end dates are provided
+        const startDateObj = new Date(filters.startDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3-$2-$1"));
+        const endDateObj = new Date(filters.endDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3-$2-$1 23:59:59"));
+
+        isDateInRange =
+          isValidDateFormat(filters.startDate) &&
+          isValidDate(filters.startDate) &&
+          isValidDateFormat(filters.endDate) &&
+          isValidDate(filters.endDate) &&
+          new Date(data.date) >= startDateObj &&
+          new Date(data.date) <= endDateObj;
+      } else if (filters.startDate) {
+        // Only start date is provided
+        const startDateObj = new Date(filters.startDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3-$2-$1"));
+        isDateInRange = isValidDateFormat(filters.startDate) && isValidDate(filters.startDate) && new Date(data.date) >= startDateObj;
+      } else if (filters.endDate) {
+        // Only end date is provided
+        const endDateObj = new Date(filters.endDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3-$2-$1 23:59:59"));
+        isDateInRange = isValidDateFormat(filters.endDate) && isValidDate(filters.endDate) && new Date(data.date) <= endDateObj;
+      }
+
       const isQuarterInRange =
         (!filters.fromQuarter || quarter >= parseFloat(filters.fromQuarter)) && (!filters.toQuarter || quarter <= parseFloat(filters.toQuarter));
       const isClientMatch = !filters.client || data.client.toLowerCase().includes(filters.client.toLowerCase());
@@ -150,6 +174,28 @@ export default function Prints() {
         {filterVisible && (
           <Flex flexDirection="column" m="30px" w="80%">
             <Flex flex="100%" margin="5px">
+              <FormLabel width="50%">From Date: </FormLabel>
+              <Input
+                type="text"
+                placeholder="DD/MM/YYYY"
+                bg="gray.100"
+                name="startDate"
+                value={filters.startDate}
+                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+              />
+
+              <FormLabel width="50%">To Date: </FormLabel>
+              <Input
+                type="text"
+                placeholder="DD/MM/YYYY"
+                bg="gray.100"
+                name="endDate"
+                value={filters.endDate}
+                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+              />
+            </Flex>
+
+            <Flex flex="100%" margin="5px">
               <FormLabel width="50%">From Net Value: </FormLabel>
               <Input
                 type="number"
@@ -174,7 +220,7 @@ export default function Prints() {
               <Input
                 type="number"
                 bg="gray.100"
-                name="fromNetValue"
+                name="fromGrossValue"
                 value={filters.fromGrossValue}
                 onChange={(e) => setFilters({ ...filters, fromGrossValue: e.target.value })}
               />
@@ -183,29 +229,9 @@ export default function Prints() {
               <Input
                 type="number"
                 bg="gray.100"
-                name="toNetValue"
+                name="toGrossValue"
                 value={filters.toGrossValue}
                 onChange={(e) => setFilters({ ...filters, toGrossValue: e.target.value })}
-              />
-            </Flex>
-
-            <Flex flex="100%" margin="5px">
-              <FormLabel width="50%">From Date: </FormLabel>
-              <Input
-                type="text"
-                bg="gray.100"
-                name="startdDate"
-                value={filters.startDate}
-                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-              />
-
-              <FormLabel width="50%">To Date: </FormLabel>
-              <Input
-                type="text"
-                bg="gray.100"
-                name="endDate"
-                value={filters.endDate}
-                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
               />
             </Flex>
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
 import {
   Flex,
   Input,
@@ -119,22 +120,22 @@ export default function Entries() {
     return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";
   };
 
-  const parseDate = (dateString) => {
-    const [day, month, year] = dateString.split("/");
-    //return new Date(`${year}-${month - 1}-${day}`);
-    return new Date(`${year}-${month}-${day}`);
-  };
+  // const parseDate = (dateString) => {
+  //   const [day, month, year] = dateString.split("/");
+  //   //return new Date(`${year}-${month - 1}-${day}`);
+  //   return new Date(`${year}-${month}-${day}`);
+  // };
 
-  const isValidDateFormat = (dateString) => {
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    return dateRegex.test(dateString);
-  };
+  // const isValidDateFormat = (dateString) => {
+  //   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+  //   return dateRegex.test(dateString);
+  // };
 
-  const isValidDate = (dateString) => {
-    const date = parseDate(dateString);
+  // const isValidDate = (dateString) => {
+  //   const date = parseDate(dateString);
 
-    return !isNaN(date.getTime());
-  };
+  //   return !isNaN(date.getTime());
+  // };
 
   return (
     <Flex>
@@ -163,8 +164,8 @@ export default function Entries() {
           <Input
             type="text"
             bg="white"
-            borderColor="gray.800"
-            focusBorderColor="gray.800"
+            borderColor="gray.600"
+            focusBorderColor="gray.600"
             _hover={{ borderColor: "gray.500" }}
             name="date"
             placeholder="DD/MM/YYYY"
@@ -177,8 +178,8 @@ export default function Entries() {
           <Input
             type="text"
             bg="white"
-            borderColor="gray.800"
-            focusBorderColor="gray.800"
+            borderColor="gray.600"
+            focusBorderColor="gray.600"
             _hover={{ borderColor: "gray.500" }}
             name="number"
             value={formData.number}
@@ -191,8 +192,8 @@ export default function Entries() {
             <Input
               type="text"
               bg="white"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="transactor"
               value={formData.transactor}
@@ -207,8 +208,8 @@ export default function Entries() {
             <Input
               type="text"
               bg="white"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="description"
               maxLength={70}
@@ -224,8 +225,8 @@ export default function Entries() {
             <Input
               type="number"
               bg="white"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="netValue"
               value={formData.netValue}
@@ -239,8 +240,8 @@ export default function Entries() {
             <FormLabel>VAT Class</FormLabel>
             <Select
               placeholder=">Select Class"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="vatClass"
               onChange={handleChange}
@@ -261,8 +262,8 @@ export default function Entries() {
             <Input
               type="number"
               bg="white"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="vatValue"
               value={formData.vatValue}
@@ -277,8 +278,8 @@ export default function Entries() {
             <Input
               type="number"
               bg="white"
-              borderColor="gray.800"
-              focusBorderColor="gray.800"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
               _hover={{ borderColor: "gray.500" }}
               name="grossValue"
               value={formData.grossValue}
@@ -292,8 +293,8 @@ export default function Entries() {
           <Textarea
             bg="white"
             type="text"
-            borderColor="gray.800"
-            focusBorderColor="gray.800"
+            borderColor="gray.600"
+            focusBorderColor="gray.600"
             _hover={{ borderColor: "gray.500" }}
             name="comments"
             value={formData.comments}

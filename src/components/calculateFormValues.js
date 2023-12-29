@@ -31,7 +31,7 @@ const calculateFormValues = (currentValues, newName, newValue) => {
     cloneState.grossValue = grossValue;
   }
 
-  if (newName === "date") {
+  if (newName === "date" || newName === "startDate" || newName === "endDate") {
     const date = newValue;
     cloneState.date = date;
   }
