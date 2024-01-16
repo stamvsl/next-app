@@ -1,4 +1,5 @@
 import NextLink from "next/link";
+import { signOut } from "next-auth/react";
 import { Link } from "@chakra-ui/react";
 import Entries from "./Entries";
 import { Box, Flex, Icon, Button, Spacer, Menu, MenuButton, MenuList, MenuItem, IconButton } from "@chakra-ui/react";
@@ -8,6 +9,10 @@ import { BsPeople } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdAppRegistration } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+const handleLogout = () => {
+  signOut({ redirect: true, callbackUrl: "/" });
+};
 
 const Navbar = () => (
   <>
@@ -45,7 +50,7 @@ const Navbar = () => (
 
       <Box>
         <Button
-          as={"a"}
+          onClick={handleLogout}
           display={{ base: "none", md: "inline-flex" }}
           mr="20px"
           fontSize={"sm"}
@@ -57,7 +62,7 @@ const Navbar = () => (
             bg: "red.700",
           }}
         >
-          Exit
+          Logout
         </Button>
       </Box>
     </Flex>

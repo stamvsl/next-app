@@ -17,6 +17,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@prisma/client": "^5.4.2",
     "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
+    "bcryptjs-react": "^2.4.6",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",

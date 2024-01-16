@@ -1,11 +1,12 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Flex, Button, Box, Input } from "@chakra-ui/react";
 
 const SignIn = (props) => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
-
+  const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -14,7 +15,12 @@ const SignIn = (props) => {
       password: userInfo.password,
       redirect: false,
     });
-    console.log(res);
+
+    if (res.ok) {
+      router.push("/main");
+    } else {
+      console.log("Failed to log in:", res.error);
+    }
   };
 
   return (
