@@ -26,6 +26,15 @@ const SignIn = (props) => {
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column" height="80vh">
       <h1>Login</h1>
+
+      <Input
+        margin="10px"
+        value={userInfo.name}
+        onChange={({ target }) => setUserInfo({ ...userInfo, name: target.value })}
+        type="string"
+        placeholder="name"
+        focusBorderColor="white"
+      />
       <Input
         margin="10px"
         value={userInfo.email}
@@ -45,6 +54,9 @@ const SignIn = (props) => {
       <Button type="submit" onClick={handleLogin} value="Login">
         Login
       </Button>
+
+      <p>or</p>
+      <Button onClick={() => router.push("/auth/signupPage")}>Sign up</Button>
     </Flex>
   );
 };

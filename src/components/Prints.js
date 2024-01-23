@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
-
+import { useSession, getSession } from "next-auth/react";
 import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Spinner, Flex, Button, Link, FormLabel, Input } from "@chakra-ui/react";
 import { parseDate, isValidDateFormat, isValidDate } from "./Helpers"; // Import the date helper functions
 
@@ -42,25 +42,31 @@ export default function Prints() {
     return null;
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    setError(null);
+  const { data: session } = useSession();
 
-    const endpoint = entryType === "income" ? "/api/esoda" : "/api/exoda";
-    fetch(endpoint)
-      .then((res) => res.json())
-      .then(
-        (data) => {
+  useEffect(() => {
+    if (session) {
+      setIsLoading(true);
+      setError(null);
+
+      const endpoint = entryType === "income" ? "/api/esoda" : "/api/exoda";
+      fetch(`${endpoint}?userId=${session.user.id}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch data");
+          return res.json();
+        })
+        .then((data) => {
           setEsoda(data || []);
           setFilteredData(data || []);
-          setIsLoading(false);
-        },
-        (error) => {
+        })
+        .catch((error) => {
           setError(error);
+        })
+        .finally(() => {
           setIsLoading(false);
-        }
-      );
-  }, [entryType]);
+        });
+    }
+  }, [entryType, session]);
 
   const filterData = () => {
     const filteredData = esoda.filter((data) => {
@@ -115,7 +121,7 @@ export default function Prints() {
   };
 
   useEffect(() => {
-    console.log("Sort by: ", sortConfig);
+    //console.log("Sort by: ", sortConfig);
     let sortedArr = [];
     if (sortConfig.key) {
       sortedArr = filteredData.toSorted((a, b) => {

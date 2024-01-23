@@ -9,19 +9,6 @@ const authOptions = {
   session: {
     strategy: "jwt",
   },
-  // providers: [
-  //   CredentialsProvider({
-  //     type: "credentials",
-  //     credentials: {},
-  //     authorize(credentials, req) {
-  //       const { email, password } = credentials;
-  //       if (email !== "john@gmail.com" || password !== "1234") {
-  //         throw new Error("Invalid credentials");
-  //       }
-  //       return { id: "1234", name: "John Doe", email: "john@gmail.com", role: "admin" };
-  //     },
-  //   }),
-  // ],
 
   providers: [
     CredentialsProvider({
@@ -45,12 +32,17 @@ const authOptions = {
     // signOut: "/auth/signout"
   },
   callbacks: {
-    jwt(params) {
-      if (params.user?.role) {
-        params.token.role = params.user.role;
+    async jwt({ token, user }) {
+      // user object is only available on initial signin
+      if (user) {
+        token.id = user.id; // Add the user's ID to the JWT token
       }
+      return token;
+    },
 
-      return params.token;
+    async session({ session, token }) {
+      session.user.id = token.id; // Add the user's ID to the session
+      return session;
     },
   },
 };

@@ -4,7 +4,7 @@ import { Flex, Input, Button } from "@chakra-ui/react";
 
 const SignUp = () => {
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [userInfo, setUserInfo] = useState({ email: "", password: "", name: "" });
 
   const handleSignUp = async () => {
     const response = await fetch("/api/auth/signup", {
@@ -25,6 +25,16 @@ const SignUp = () => {
     <Flex justifyContent="center" alignItems="center" flexDirection="column" height="80vh">
       <h1>Sign up</h1>
       <Input
+        required
+        type="string"
+        margin="10px"
+        focusBorderColor="white"
+        placeholder="Name"
+        value={userInfo.name}
+        onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
+      />
+      <Input
+        required
         type="email"
         margin="10px"
         placeholder="Email"
@@ -33,6 +43,7 @@ const SignUp = () => {
         onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
       />
       <Input
+        required
         type="password"
         margin="10px"
         focusBorderColor="white"
@@ -40,6 +51,7 @@ const SignUp = () => {
         value={userInfo.password}
         onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
       />
+
       <Button type="submit" onClick={handleSignUp}>
         Sign Up
       </Button>

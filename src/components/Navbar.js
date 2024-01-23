@@ -9,162 +9,168 @@ import { BsPeople } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdAppRegistration } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSession, getSession } from "next-auth/react";
 
 const handleLogout = () => {
   signOut({ redirect: true, callbackUrl: "/" });
 };
+export default function Navbar() {
+  const session = useSession();
 
-const Navbar = () => (
-  <>
-    <Flex display={{ base: "none", lg: "flex" }} align="center" height="60px" bg="gray.800">
-      <Box>
-        <Link as={NextLink} href="/">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight="bold" variant="link" color="white" mx="15px">
-            <Icon as={AiFillHome} />
-          </Button>
-        </Link>
-
-        <Link as={NextLink} href="/entries">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
-            Entries
-          </Button>
-        </Link>
-
-        <Link as={NextLink} href="/transactors">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
-            Transactors
-          </Button>
-        </Link>
-        <Link as={NextLink} href="/prints">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
-            Prints
-          </Button>
-        </Link>
-        <Link as={NextLink} href="/settings">
-          <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
-            Settings
-          </Button>
-        </Link>
-      </Box>
-      <Spacer />
-
-      <Box>
-        <Button
-          onClick={handleLogout}
-          display={{ base: "none", md: "inline-flex" }}
-          mr="20px"
-          fontSize={"sm"}
-          fontWeight={600}
-          color={"white"}
-          bg={"red.500"}
-          href={"#"}
-          _hover={{
-            bg: "red.700",
-          }}
-        >
-          Logout
-        </Button>
-      </Box>
-    </Flex>
-
-    <Flex display={{ base: "flex", lg: "none" }} bg="gray.800" minH={"60px"} alignItems={"center"}>
-      <Menu>
-        <MenuButton
-          background={"gray.800"}
-          border={"none"}
-          ml="20px"
-          as={IconButton}
-          aria-label="Options"
-          icon={<Icon as={GiHamburgerMenu} color={"white"} />}
-          variant="outline"
-          _hover={{
-            background: "gray.800",
-          }}
-          _expanded={{ bg: "gray.800" }}
-        />
-
-        <MenuList bg="gray.800" border={"none"}>
+  return (
+    <>
+      <Flex display={{ base: "none", lg: "flex" }} align="center" height="60px" bg="gray.800">
+        <Box>
           <Link as={NextLink} href="/">
-            <MenuItem
-              icon={<Icon as={AiFillHome} color={"white"} />}
-              bg="gray.800"
-              color="white"
-              _hover={{
-                background: "gray.800",
-              }}
-            >
-              Home
-            </MenuItem>
+            <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight="bold" variant="link" color="white" mx="15px">
+              <Icon as={AiFillHome} />
+            </Button>
           </Link>
+
           <Link as={NextLink} href="/entries">
-            <MenuItem
-              icon={<Icon as={MdAppRegistration} color={"white"} />}
-              bg="gray.800"
-              color="white"
-              _hover={{
-                background: "gray.800",
-              }}
-            >
+            <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
               Entries
-            </MenuItem>
+            </Button>
           </Link>
+
           <Link as={NextLink} href="/transactors">
-            <MenuItem
-              icon={<Icon as={BsPeople} color={"white"} />}
-              bg="gray.800"
-              color="white"
-              _hover={{
-                background: "gray.800",
-              }}
-            >
+            <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
               Transactors
-            </MenuItem>
+            </Button>
           </Link>
           <Link as={NextLink} href="/prints">
-            <MenuItem
-              icon={<Icon as={AiOutlinePrinter} color={"white"} />}
-              bg="gray.800"
-              color="white"
-              _hover={{
-                background: "gray.800",
-              }}
-            >
+            <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
               Prints
-            </MenuItem>
+            </Button>
           </Link>
           <Link as={NextLink} href="/settings">
-            <MenuItem
-              icon={<Icon as={MdAppRegistration} color={"white"} />}
-              bg="gray.800"
-              color="white"
-              _hover={{
-                background: "gray.800",
-              }}
-            >
+            <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
               Settings
-            </MenuItem>
+            </Button>
           </Link>
-        </MenuList>
-      </Menu>
-      <Spacer />
-      <Box>
-        <Button
-          as={"a"}
-          fontSize={"sm"}
-          mr="20px"
-          fontWeight={600}
-          color={"white"}
-          bg={"tomato"}
-          href={"#"}
-          _hover={{
-            bg: "tomato",
-          }}
-        >
-          Exit
-        </Button>
-      </Box>
-    </Flex>
-  </>
-);
+        </Box>
+        <Spacer />
 
-export default Navbar;
+        <Box color="white" m="10px">
+          Logged in as {session.data.user.name}
+        </Box>
+
+        <Box>
+          <Button
+            onClick={handleLogout}
+            display={{ base: "none", md: "inline-flex" }}
+            mr="20px"
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"red.500"}
+            href={"#"}
+            _hover={{
+              bg: "red.700",
+            }}
+          >
+            Logout
+          </Button>
+        </Box>
+      </Flex>
+
+      <Flex display={{ base: "flex", lg: "none" }} bg="gray.800" minH={"60px"} alignItems={"center"}>
+        <Menu>
+          <MenuButton
+            background={"gray.800"}
+            border={"none"}
+            ml="20px"
+            as={IconButton}
+            aria-label="Options"
+            icon={<Icon as={GiHamburgerMenu} color={"white"} />}
+            variant="outline"
+            _hover={{
+              background: "gray.800",
+            }}
+            _expanded={{ bg: "gray.800" }}
+          />
+
+          <MenuList bg="gray.800" border={"none"}>
+            <Link as={NextLink} href="/">
+              <MenuItem
+                icon={<Icon as={AiFillHome} color={"white"} />}
+                bg="gray.800"
+                color="white"
+                _hover={{
+                  background: "gray.800",
+                }}
+              >
+                Home
+              </MenuItem>
+            </Link>
+            <Link as={NextLink} href="/entries">
+              <MenuItem
+                icon={<Icon as={MdAppRegistration} color={"white"} />}
+                bg="gray.800"
+                color="white"
+                _hover={{
+                  background: "gray.800",
+                }}
+              >
+                Entries
+              </MenuItem>
+            </Link>
+            <Link as={NextLink} href="/transactors">
+              <MenuItem
+                icon={<Icon as={BsPeople} color={"white"} />}
+                bg="gray.800"
+                color="white"
+                _hover={{
+                  background: "gray.800",
+                }}
+              >
+                Transactors
+              </MenuItem>
+            </Link>
+            <Link as={NextLink} href="/prints">
+              <MenuItem
+                icon={<Icon as={AiOutlinePrinter} color={"white"} />}
+                bg="gray.800"
+                color="white"
+                _hover={{
+                  background: "gray.800",
+                }}
+              >
+                Prints
+              </MenuItem>
+            </Link>
+            <Link as={NextLink} href="/settings">
+              <MenuItem
+                icon={<Icon as={MdAppRegistration} color={"white"} />}
+                bg="gray.800"
+                color="white"
+                _hover={{
+                  background: "gray.800",
+                }}
+              >
+                Settings
+              </MenuItem>
+            </Link>
+          </MenuList>
+        </Menu>
+        <Spacer />
+        <Box>
+          <Button
+            as={"a"}
+            fontSize={"sm"}
+            mr="20px"
+            fontWeight={600}
+            color={"white"}
+            bg={"tomato"}
+            href={"#"}
+            _hover={{
+              bg: "tomato",
+            }}
+          >
+            Exit
+          </Button>
+        </Box>
+      </Flex>
+    </>
+  );
+}

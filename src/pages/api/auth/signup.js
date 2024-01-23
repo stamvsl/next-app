@@ -8,13 +8,14 @@ export default async function signup(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   try {
     const newUser = await prisma.user.create({
       data: {
         email,
         password,
+        name,
         // Add other user details as necessary
       },
     });

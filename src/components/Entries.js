@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+
 import axios from "axios";
 import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
 import {
@@ -31,6 +33,7 @@ const initialvalues = {
 };
 
 export default function Entries() {
+  const { data: session } = useSession();
   const [formData, setFormData] = useState(initialvalues);
   const [entryType, setEntryType] = useState("income");
   const [formErrors, setFormErrors] = useState({
@@ -79,23 +82,42 @@ export default function Entries() {
 
           const endpoint = getApiEndpoint(entryType);
           axios
-            .post(`/api/${entryType}Entries`, {
-              date: formattedDate,
-              number: formData.number,
-              transactor: formData.transactor,
-              description: formData.description,
-              netValue: formData.netValue,
-              vatClass: formData.vatClass,
-              vatValue: formData.vatValue,
-              grossValue: formData.grossValue,
-              comments: formData.comments,
-            })
+            .post(
+              `/api/${entryType}Entries`,
+              {
+                date: formattedDate,
+                number: formData.number,
+                transactor: formData.transactor,
+                description: formData.description,
+                netValue: formData.netValue,
+                vatClass: formData.vatClass,
+                vatValue: formData.vatValue,
+                grossValue: formData.grossValue,
+                comments: formData.comments,
+              },
+              {
+                withCredentials: true,
+              }
+            )
             .then(function (response) {
               console.log("response from entries endpoint: ", response);
               setFormData(initialvalues);
             })
             .catch(function (error) {
               console.log("axios error: ", error);
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error("Error data: ", error.response.data);
+                console.error("Error status: ", error.response.status);
+                console.error("Error headers: ", error.response.headers);
+              } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Error request: ", error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error("Error message: ", error.message);
+              }
             });
         } else {
           alert("Enter date in the form DD/MM/YYYY");
