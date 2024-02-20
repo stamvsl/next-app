@@ -9,7 +9,7 @@ import { BsPeople } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdAppRegistration } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const handleLogout = () => {
   signOut({ redirect: true, callbackUrl: "/" });

@@ -1,11 +1,10 @@
 import NextAuth, { NextAuthOptions } from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-const authOptions = {
+export const authOptions = {
   session: {
     strategy: "jwt",
   },
@@ -17,14 +16,18 @@ const authOptions = {
           where: { email: credentials.email },
         });
 
+        console.log("***credentials are: ", credentials);
+        console.log("user is: ", user);
+
         if (!user || user.password !== credentials.password) {
           throw new Error("Invalid credentials");
         }
-
         return { id: user.id, name: user.name, email: user.email };
       },
     }),
   ],
+
+  secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
     signIn: "/auth/signin",
@@ -33,15 +36,17 @@ const authOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // user object is only available on initial signin
       if (user) {
-        token.id = user.id; // Add the user's ID to the JWT token
+        token.id = user.id;
       }
       return token;
     },
 
     async session({ session, token }) {
-      session.user.id = token.id; // Add the user's ID to the session
+      if (token.id) {
+        session.user.id = token.id;
+      }
+
       return session;
     },
   },

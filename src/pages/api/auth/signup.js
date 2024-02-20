@@ -16,7 +16,6 @@ export default async function signup(req, res) {
         email,
         password,
         name,
-        // Add other user details as necessary
       },
     });
 

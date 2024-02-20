@@ -1,5 +1,6 @@
 import prisma from "../../../lib/prisma";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
 
 function getQuarter(date) {
   const dateObject = new Date(date);
@@ -7,15 +8,19 @@ function getQuarter(date) {
 }
 
 export default async function handle(req, res) {
-  const session = await getSession({ req });
-  console.log("Session:", session);
-  if (!session) {
+  const session = await getServerSession(req, res, authOptions);
+
+  console.log("Session in API Route:", session);
+
+  if (!session || !session.user.id) {
+    console.error("Session or user ID missing in API route", { session });
     return res.status(401).json({ message: "Unauthorized" });
   }
+
+  const userId = session.user.id;
+
   if (req.method == "POST") {
-    // creating a new todo.
-    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments } = req.body;
-    console.log(req.body);
+    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments, forCompany = 0 } = req.body;
 
     const quarter = getQuarter(date);
 
@@ -23,7 +28,7 @@ export default async function handle(req, res) {
       const result = await prisma.Esoda.createMany({
         data: [
           {
-            userId: session.user.id,
+            userId,
             q: quarter,
             date,
             invoiceNumber: number,
@@ -33,6 +38,7 @@ export default async function handle(req, res) {
             vatEuro: vatValue,
             client: transactor,
             comments: comments,
+            forCompany, //TODO: Add to form
           },
         ],
       });

@@ -30,10 +30,10 @@ const initialvalues = {
   vatValue: "",
   grossValue: "",
   comments: "",
+  forCompany: "",
 };
 
 export default function Entries() {
-  const { data: session } = useSession();
   const [formData, setFormData] = useState(initialvalues);
   const [entryType, setEntryType] = useState("income");
   const [formErrors, setFormErrors] = useState({
@@ -43,6 +43,7 @@ export default function Entries() {
     netValue: false,
     vatValue: false,
     grossValue: false,
+    forCompany: false,
   });
   let updatedValue = 0;
 
@@ -54,6 +55,7 @@ export default function Entries() {
       netValue: formData.netValue === "",
       vatValue: formData.vatValue === "",
       grossValue: formData.grossValue === "",
+      forCompany: formData.forCompany === "",
     };
 
     setFormErrors(errors);
@@ -67,47 +69,53 @@ export default function Entries() {
       {
         if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
           const formattedDate = parseDate(formData.date);
-          console.log(`
-    Date: ${formData.date}
-    Number: ${formData.number}
-    transactor: ${formData.transactor}
-    description: ${formData.description}
-    netValue: ${formData.netValue}
-    vatClass: ${formData.vatClass}%
-    vatValue: ${formData.vatValue}
-    grossValue: ${formData.grossValue}
-    comments: ${formData.comments}
-    new date:${formattedDate}
-    `);
 
           const endpoint = getApiEndpoint(entryType);
-          axios
-            .post(
-              `/api/${entryType}Entries`,
-              {
-                date: formattedDate,
-                number: formData.number,
-                transactor: formData.transactor,
-                description: formData.description,
-                netValue: formData.netValue,
-                vatClass: formData.vatClass,
-                vatValue: formData.vatValue,
-                grossValue: formData.grossValue,
-                comments: formData.comments,
-              },
-              {
-                withCredentials: true,
-              }
-            )
-            .then(function (response) {
-              console.log("response from entries endpoint: ", response);
+          // axios
+          //   .post(
+          //     `/api/${entryType}Entries`,
+          // {
+          //   date: formattedDate,
+          //   number: formData.number,
+          //   transactor: formData.transactor,
+          //   description: formData.description,
+          //   netValue: formData.netValue,
+          //   vatClass: formData.vatClass,
+          //   vatValue: formData.vatValue,
+          //   grossValue: formData.grossValue,
+          //   comments: formData.comments,
+          // },
+          //     {
+          //       withCredentials: true,
+          //     }
+          //   )
+          fetch(`/api/${entryType}Entries`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              date: formattedDate,
+              number: formData.number,
+              transactor: formData.transactor,
+              description: formData.description,
+              netValue: formData.netValue,
+              vatClass: formData.vatClass,
+              vatValue: formData.vatValue,
+              grossValue: formData.grossValue,
+              comments: formData.comments,
+              forCompany: formData.forCompany,
+            }),
+          })
+            .then((response) => response.json)
+            .then(function (data) {
               setFormData(initialvalues);
             })
             .catch(function (error) {
               console.log("axios error: ", error);
               if (error.response) {
                 // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.error("Error data: ", error.response.data);
                 console.error("Error status: ", error.response.status);
                 console.error("Error headers: ", error.response.headers);
@@ -141,23 +149,6 @@ export default function Entries() {
   const getApiEndpoint = (type) => {
     return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";
   };
-
-  // const parseDate = (dateString) => {
-  //   const [day, month, year] = dateString.split("/");
-  //   //return new Date(`${year}-${month - 1}-${day}`);
-  //   return new Date(`${year}-${month}-${day}`);
-  // };
-
-  // const isValidDateFormat = (dateString) => {
-  //   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-  //   return dateRegex.test(dateString);
-  // };
-
-  // const isValidDate = (dateString) => {
-  //   const date = parseDate(dateString);
-
-  //   return !isNaN(date.getTime());
-  // };
 
   return (
     <Flex>
@@ -308,6 +299,22 @@ export default function Entries() {
               onChange={handleChange}
             ></Input>
             <FormErrorMessage>Gross Value is required</FormErrorMessage>
+          </FormControl>
+        </Flex>
+        <Flex flex={{ base: "100%", md: "20%" }}>
+          <FormControl isInvalid={formErrors.forCompany}>
+            <FormLabel>For Company</FormLabel>
+            <Input
+              type="number"
+              bg="white"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
+              _hover={{ borderColor: "gray.500" }}
+              name="forCompany"
+              value={formData.forCompany}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Value for Company is required</FormErrorMessage>
           </FormControl>
         </Flex>
         <Flex flex="100%">

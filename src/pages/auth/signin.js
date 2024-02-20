@@ -2,10 +2,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Flex, Button, Box, Input } from "@chakra-ui/react";
+import { Flex, Button, Box, Input, Tooltip } from "@chakra-ui/react";
 
 const SignIn = (props) => {
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [userInfo, setUserInfo] = useState({ email: "test@user.com", password: "test" });
   const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,17 +24,10 @@ const SignIn = (props) => {
   };
 
   return (
-    <Flex justifyContent="center" alignItems="center" flexDirection="column" height="80vh">
-      <h1>Login</h1>
-
-      <Input
-        margin="10px"
-        value={userInfo.name}
-        onChange={({ target }) => setUserInfo({ ...userInfo, name: target.value })}
-        type="string"
-        placeholder="name"
-        focusBorderColor="white"
-      />
+    <Flex justifyContent="center" alignItems="center" flexDirection="column" height="80vh" width="20vw">
+      <Tooltip isOpen placement="top" label="Welcome! Sign in as test user to browse our app or create a new account">
+        <h1>Login</h1>
+      </Tooltip>
       <Input
         margin="10px"
         value={userInfo.email}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Spinner, Flex, Button, Link, FormLabel, Input } from "@chakra-ui/react";
 import { parseDate, isValidDateFormat, isValidDate } from "./Helpers"; // Import the date helper functions
 
@@ -56,6 +56,7 @@ export default function Prints() {
           return res.json();
         })
         .then((data) => {
+          console.log(data);
           setEsoda(data || []);
           setFilteredData(data || []);
         })
