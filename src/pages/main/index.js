@@ -1,8 +1,8 @@
-import Boxes from "@/components/Boxes";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Boxes from "@/components/Boxes";
 
-export default function Main() {
+export default function MainPage() {
   const router = useRouter();
   const { status } = useSession();
   if (status === "loading") return null;

@@ -21,7 +21,7 @@ export default function Navbar() {
     <>
       <Flex display={{ base: "none", lg: "flex" }} align="center" height="60px" bg="gray.800">
         <Box>
-          <Link as={NextLink} href="/">
+          <Link as={NextLink} href="/main">
             <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight="bold" variant="link" color="white" mx="15px">
               <Icon as={AiFillHome} />
             </Button>
@@ -91,7 +91,7 @@ export default function Navbar() {
           />
 
           <MenuList bg="gray.800" border={"none"}>
-            <Link as={NextLink} href="/">
+            <Link as={NextLink} href="/main">
               <MenuItem
                 icon={<Icon as={AiFillHome} color={"white"} />}
                 bg="gray.800"
