@@ -1,4 +1,6 @@
 import prisma from "../../../lib/prisma";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
 
 function getQuarter(date) {
   const dateObject = new Date(date);
@@ -6,31 +8,47 @@ function getQuarter(date) {
 }
 
 export default async function handle(req, res) {
+  const session = await getServerSession(req, res, authOptions);
+
+  console.log("Session in API Route:", session);
+
+  if (!session || !session.user.id) {
+    console.error("Session or user ID missing in API route", { session });
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const userId = session.user.id;
+
   if (req.method == "POST") {
-    // creating a new todo.
-    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments } = req.body;
-    console.log(req.body);
+    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments, forCompany = 0 } = req.body;
 
     const quarter = getQuarter(date);
 
-    const result = await prisma.Esoda.create({
-      data: {
-        userId: 2,
-        q: quarter,
-        date,
-        invoiceNumber: number,
-        finalPrice: grossValue,
-        income: netValue,
-        vatPerc: vatClass,
-        vatEuro: vatValue,
-        forCompany: 0,
-        client: transactor,
-        comments: comments,
-      },
-    });
-    return res.json(result);
+    try {
+      const result = await prisma.Esoda.createMany({
+        data: [
+          {
+            userId,
+            q: quarter,
+            date,
+            invoiceNumber: number,
+            finalPrice: grossValue,
+            income: netValue,
+            vatPerc: vatClass,
+            vatEuro: vatValue,
+            client: transactor,
+            comments: comments,
+            forCompany, //TODO: Add to form
+          },
+        ],
+      });
+
+      return res.json(result);
+    } catch (error) {
+      console.error("Error creating Esoda entry: ", error);
+      return res.status(500).json({ message: "Error creating data", error });
+    }
   } else {
-    // return error msg
     return res.status(405).json({ msg: "We only support POST" });
   }
 }

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+
 import axios from "axios";
 import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
 import {
@@ -28,6 +30,7 @@ const initialvalues = {
   vatValue: "",
   grossValue: "",
   comments: "",
+  forCompany: "",
 };
 
 export default function Entries() {
@@ -40,6 +43,7 @@ export default function Entries() {
     netValue: false,
     vatValue: false,
     grossValue: false,
+    forCompany: false,
   });
   let updatedValue = 0;
 
@@ -51,6 +55,7 @@ export default function Entries() {
       netValue: formData.netValue === "",
       vatValue: formData.vatValue === "",
       grossValue: formData.grossValue === "",
+      forCompany: formData.forCompany === "",
     };
 
     setFormErrors(errors);
@@ -64,22 +69,33 @@ export default function Entries() {
       {
         if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
           const formattedDate = parseDate(formData.date);
-          console.log(`
-    Date: ${formData.date}
-    Number: ${formData.number}
-    transactor: ${formData.transactor}
-    description: ${formData.description}
-    netValue: ${formData.netValue}
-    vatClass: ${formData.vatClass}%
-    vatValue: ${formData.vatValue}
-    grossValue: ${formData.grossValue}
-    comments: ${formData.comments}
-    new date:${formattedDate}
-    `);
 
           const endpoint = getApiEndpoint(entryType);
-          axios
-            .post(`/api/${entryType}Entries`, {
+          // axios
+          //   .post(
+          //     `/api/${entryType}Entries`,
+          // {
+          //   date: formattedDate,
+          //   number: formData.number,
+          //   transactor: formData.transactor,
+          //   description: formData.description,
+          //   netValue: formData.netValue,
+          //   vatClass: formData.vatClass,
+          //   vatValue: formData.vatValue,
+          //   grossValue: formData.grossValue,
+          //   comments: formData.comments,
+          // },
+          //     {
+          //       withCredentials: true,
+          //     }
+          //   )
+          fetch(`/api/${entryType}Entries`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
               date: formattedDate,
               number: formData.number,
               transactor: formData.transactor,
@@ -89,13 +105,27 @@ export default function Entries() {
               vatValue: formData.vatValue,
               grossValue: formData.grossValue,
               comments: formData.comments,
-            })
-            .then(function (response) {
-              console.log("response from entries endpoint: ", response);
+              forCompany: formData.forCompany,
+            }),
+          })
+            .then((response) => response.json)
+            .then(function (data) {
               setFormData(initialvalues);
             })
             .catch(function (error) {
               console.log("axios error: ", error);
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Error data: ", error.response.data);
+                console.error("Error status: ", error.response.status);
+                console.error("Error headers: ", error.response.headers);
+              } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Error request: ", error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error("Error message: ", error.message);
+              }
             });
         } else {
           alert("Enter date in the form DD/MM/YYYY");
@@ -119,23 +149,6 @@ export default function Entries() {
   const getApiEndpoint = (type) => {
     return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";
   };
-
-  // const parseDate = (dateString) => {
-  //   const [day, month, year] = dateString.split("/");
-  //   //return new Date(`${year}-${month - 1}-${day}`);
-  //   return new Date(`${year}-${month}-${day}`);
-  // };
-
-  // const isValidDateFormat = (dateString) => {
-  //   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-  //   return dateRegex.test(dateString);
-  // };
-
-  // const isValidDate = (dateString) => {
-  //   const date = parseDate(dateString);
-
-  //   return !isNaN(date.getTime());
-  // };
 
   return (
     <Flex>
@@ -286,6 +299,22 @@ export default function Entries() {
               onChange={handleChange}
             ></Input>
             <FormErrorMessage>Gross Value is required</FormErrorMessage>
+          </FormControl>
+        </Flex>
+        <Flex flex={{ base: "100%", md: "20%" }}>
+          <FormControl isInvalid={formErrors.forCompany}>
+            <FormLabel>For Company</FormLabel>
+            <Input
+              type="number"
+              bg="white"
+              borderColor="gray.600"
+              focusBorderColor="gray.600"
+              _hover={{ borderColor: "gray.500" }}
+              name="forCompany"
+              value={formData.forCompany}
+              onChange={handleChange}
+            ></Input>
+            <FormErrorMessage>Value for Company is required</FormErrorMessage>
           </FormControl>
         </Flex>
         <Flex flex="100%">

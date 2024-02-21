@@ -1,5 +1,13 @@
 import Tables from "@/components/Prints";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 const Invoices = () => {
+  const { status } = useSession();
+  const router = useRouter();
+  if (status === "loading") return null;
+  if (status === "unauthenticated") {
+    router.push("/auth/signin");
+  }
   return <Tables />;
 };
 export default Invoices;

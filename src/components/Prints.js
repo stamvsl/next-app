@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
-
+import { useSession } from "next-auth/react";
 import { Box, Table, Th, Tr, Td, Thead, Tbody, Tooltip, Radio, RadioGroup, Spinner, Flex, Button, Link, FormLabel, Input } from "@chakra-ui/react";
 import { parseDate, isValidDateFormat, isValidDate } from "./Helpers"; // Import the date helper functions
 
@@ -42,25 +42,32 @@ export default function Prints() {
     return null;
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    setError(null);
+  const { data: session } = useSession();
 
-    const endpoint = entryType === "income" ? "/api/esoda" : "/api/exoda";
-    fetch(endpoint)
-      .then((res) => res.json())
-      .then(
-        (data) => {
+  useEffect(() => {
+    if (session) {
+      setIsLoading(true);
+      setError(null);
+
+      const endpoint = entryType === "income" ? "/api/esoda" : "/api/exoda";
+      fetch(`${endpoint}?userId=${session.user.id}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch data");
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
           setEsoda(data || []);
           setFilteredData(data || []);
-          setIsLoading(false);
-        },
-        (error) => {
+        })
+        .catch((error) => {
           setError(error);
+        })
+        .finally(() => {
           setIsLoading(false);
-        }
-      );
-  }, [entryType]);
+        });
+    }
+  }, [entryType, session]);
 
   const filterData = () => {
     const filteredData = esoda.filter((data) => {
@@ -115,7 +122,7 @@ export default function Prints() {
   };
 
   useEffect(() => {
-    console.log("Sort by: ", sortConfig);
+    //console.log("Sort by: ", sortConfig);
     let sortedArr = [];
     if (sortConfig.key) {
       sortedArr = filteredData.toSorted((a, b) => {
@@ -321,28 +328,100 @@ export default function Prints() {
             <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("q")}>
               Q {getSortIndicator("q")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("date")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("date")}
+            >
               Date {getSortIndicator("date")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("income")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("income")}
+            >
               Net Value {getSortIndicator("income")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("vatPerc")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatPerc")}
+            >
               VAT Class {getSortIndicator("vatPerc")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("vatEuro")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatEuro")}
+            >
               VAT Value {getSortIndicator("vatEuro")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("finalPrice")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("finalPrice")}
+            >
               Gross Value {getSortIndicator("finalPrice")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("forCompany")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("forCompany")}
+            >
               Company {getSortIndicator("forCompany")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("client")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("client")}
+            >
               Client {getSortIndicator("Client")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("comments")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("comments")}
+            >
               Comments {getSortIndicator("comments")}
             </Th>
           </Tr>
@@ -350,16 +429,34 @@ export default function Prints() {
         <Tbody>
           {filteredData.map((data, index) => (
             <Tr key={index} bg={index % 2 === 0 ? "blue.100" : "gray.200"} border="none">
-              <Td border="none">{data.id}</Td>
-              <Td border="none">{data.q}</Td>
-              <Td border="none">{new Date(data.date).toLocaleDateString("en-GB")}</Td>
-              <Td border="none">{data.income}</Td>
-              <Td border="none">{data.vatPerc}%</Td>
-              <Td border="none">{data.vatEuro}</Td>
-              <Td border="none">{data.finalPrice}</Td>
-              <Td border="none">{data.forCompany}</Td>
-              <Td border="none">{data.client}</Td>
-              <Td border="none">
+              <Td border="none" textAlign="center">
+                {data.id}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.q}
+              </Td>
+              <Td border="none" textAlign="center">
+                {new Date(data.date).toLocaleDateString("en-GB")}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.income}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.vatPerc}%
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.vatEuro}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.finalPrice}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.forCompany}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.client}
+              </Td>
+              <Td border="none" textAlign="center">
                 {data.comments && (
                   <Tooltip label={data.comments} hasArrow placement="left">
                     <Box>

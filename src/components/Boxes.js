@@ -7,7 +7,14 @@ import { BsPeople } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdAppRegistration } from "react-icons/md";
 
+import { useSession } from "next-auth/react";
+
 export default function Boxes() {
+  const { data: session, status } = useSession();
+
+  // Log the session data and status for debugging
+  console.log("Session data:", session);
+  console.log("Session status:", status);
   return (
     <Flex justifyContent={"center"}>
       <Flex flexGrow="2" flexWrap="wrap" gap="50px" justifyContent={"center"} mt="30px">
