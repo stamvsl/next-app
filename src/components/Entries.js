@@ -55,8 +55,10 @@ export default function Entries() {
       netValue: formData.netValue === "",
       vatValue: formData.vatValue === "",
       grossValue: formData.grossValue === "",
-      forCompany: formData.forCompany === "",
     };
+    if (entryType === "income") {
+      errors.forCompany = formData.forCompany === "";
+    }
 
     setFormErrors(errors);
 
@@ -71,24 +73,7 @@ export default function Entries() {
           const formattedDate = parseDate(formData.date);
 
           const endpoint = getApiEndpoint(entryType);
-          // axios
-          //   .post(
-          //     `/api/${entryType}Entries`,
-          // {
-          //   date: formattedDate,
-          //   number: formData.number,
-          //   transactor: formData.transactor,
-          //   description: formData.description,
-          //   netValue: formData.netValue,
-          //   vatClass: formData.vatClass,
-          //   vatValue: formData.vatValue,
-          //   grossValue: formData.grossValue,
-          //   comments: formData.comments,
-          // },
-          //     {
-          //       withCredentials: true,
-          //     }
-          //   )
+
           fetch(`/api/${entryType}Entries`, {
             method: "POST",
             credentials: "include",
@@ -301,22 +286,24 @@ export default function Entries() {
             <FormErrorMessage>Gross Value is required</FormErrorMessage>
           </FormControl>
         </Flex>
-        <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormControl isInvalid={formErrors.forCompany}>
-            <FormLabel>For Company</FormLabel>
-            <Input
-              type="number"
-              bg="white"
-              borderColor="gray.600"
-              focusBorderColor="gray.600"
-              _hover={{ borderColor: "gray.500" }}
-              name="forCompany"
-              value={formData.forCompany}
-              onChange={handleChange}
-            ></Input>
-            <FormErrorMessage>Value for Company is required</FormErrorMessage>
-          </FormControl>
-        </Flex>
+        {entryType === "income" && (
+          <Flex flex={{ base: "100%", md: "20%" }}>
+            <FormControl isInvalid={formErrors.forCompany}>
+              <FormLabel>For Company</FormLabel>
+              <Input
+                type="number"
+                bg="white"
+                borderColor="gray.600"
+                focusBorderColor="gray.600"
+                _hover={{ borderColor: "gray.500" }}
+                name="forCompany"
+                value={formData.forCompany}
+                onChange={handleChange}
+              ></Input>
+              <FormErrorMessage>Value for Company is required</FormErrorMessage>
+            </FormControl>
+          </Flex>
+        )}
         <Flex flex="100%">
           <FormLabel>Comments</FormLabel>
           <Textarea

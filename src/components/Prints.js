@@ -388,18 +388,20 @@ export default function Prints() {
             >
               Gross Value {getSortIndicator("finalPrice")}
             </Th>
-            <Th
-              position="sticky"
-              top="0"
-              textAlign="center"
-              color="white"
-              bg="teal.600"
-              zIndex="stickyHeader"
-              border="none"
-              onClick={() => requestSort("forCompany")}
-            >
-              Company {getSortIndicator("forCompany")}
-            </Th>
+            {entryType === "income" && (
+              <Th
+                position="sticky"
+                top="0"
+                textAlign="center"
+                color="white"
+                bg="teal.600"
+                zIndex="stickyHeader"
+                border="none"
+                onClick={() => requestSort("forCompany")}
+              >
+                For Company {getSortIndicator("forCompany")}
+              </Th>
+            )}
             <Th
               position="sticky"
               top="0"
@@ -410,7 +412,7 @@ export default function Prints() {
               border="none"
               onClick={() => requestSort("client")}
             >
-              Client {getSortIndicator("Client")}
+              Transactor {getSortIndicator("Client")}
             </Th>
             <Th
               position="sticky"
@@ -450,9 +452,11 @@ export default function Prints() {
               <Td border="none" textAlign="center">
                 {data.finalPrice}
               </Td>
-              <Td border="none" textAlign="center">
-                {data.forCompany}
-              </Td>
+              {entryType === "income" && (
+                <Td border="none" textAlign="center">
+                  {data.forCompany}
+                </Td>
+              )}
               <Td border="none" textAlign="center">
                 {data.client}
               </Td>

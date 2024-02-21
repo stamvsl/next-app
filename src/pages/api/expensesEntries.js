@@ -18,7 +18,6 @@ export default async function handle(req, res) {
   const userId = session.user.id;
 
   if (req.method == "POST") {
-    // creating a new todo.
     const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments } = req.body;
 
     const quarter = getQuarter(date);
