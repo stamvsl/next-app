@@ -38,7 +38,7 @@ export default async function handle(req, res) {
             vatEuro: vatValue,
             client: transactor,
             comments: comments,
-            forCompany, //TODO: Add to form
+            forCompany,
           },
         ],
       });
