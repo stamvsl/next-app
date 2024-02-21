@@ -10,20 +10,6 @@ export const authOptions = {
     strategy: "jwt",
   },
 
-  // providers: [
-  //   CredentialsProvider({
-  //     authorize: async (credentials) => {
-  //       const user = await prisma.user.findUnique({
-  //         where: { email: credentials.email },
-  //       });
-
-  //       if (!user || user.password !== credentials.password) {
-  //         throw new Error("Invalid credentials");
-  //       }
-  //       return { id: user.id, name: user.name, email: user.email };
-  //     },
-  //   }),
-  // ],
   providers: [
     CredentialsProvider({
       async authorize(credentials) {

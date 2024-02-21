@@ -10,8 +10,6 @@ function getQuarter(date) {
 export default async function handle(req, res) {
   const session = await getServerSession(req, res, authOptions);
 
-  console.log("Session in API Route:", session);
-
   if (!session || !session.user.id) {
     console.error("Session or user ID missing in API route", { session });
     return res.status(401).json({ message: "Unauthorized" });
@@ -38,7 +36,7 @@ export default async function handle(req, res) {
             vatEuro: vatValue,
             client: transactor,
             comments: comments,
-            forCompany, //TODO: Add to form
+            forCompany,
           },
         ],
       });

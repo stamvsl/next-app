@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { getSession } from "next-auth/react";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "src/pages/api/auth/[...nextauth]";
 
 const prisma = new PrismaClient();
@@ -14,15 +13,6 @@ export default async function handle(req, res) {
     }
 
     try {
-      // const esodaEntries = await prisma.User.findUnique({
-      //   where: {
-      //     id: session.user.id, // Replace with the specific user ID you want to query
-      //   },
-      //   include: {
-      //     esoda: true,
-      //   },
-      // });
-      // Assuming 'userId' is a field in your 'esoda' table that references the user
       const esodaEntries = await prisma.esoda.findMany({
         where: {
           userId: session.user.id,
