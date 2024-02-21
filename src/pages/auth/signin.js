@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Flex, Button, Box, Input, Tooltip } from "@chakra-ui/react";
 
 const SignIn = (props) => {
-  const [userInfo, setUserInfo] = useState({ email: "test@user.com", password: "test" });
+  const [userInfo, setUserInfo] = useState({ email: "test@user.test", password: "test" });
   const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();

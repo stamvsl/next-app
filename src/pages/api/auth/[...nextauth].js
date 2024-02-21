@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -9,20 +10,34 @@ export const authOptions = {
     strategy: "jwt",
   },
 
+  // providers: [
+  //   CredentialsProvider({
+  //     authorize: async (credentials) => {
+  //       const user = await prisma.user.findUnique({
+  //         where: { email: credentials.email },
+  //       });
+
+  //       if (!user || user.password !== credentials.password) {
+  //         throw new Error("Invalid credentials");
+  //       }
+  //       return { id: user.id, name: user.name, email: user.email };
+  //     },
+  //   }),
+  // ],
   providers: [
     CredentialsProvider({
-      authorize: async (credentials) => {
+      async authorize(credentials) {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
-        console.log("***credentials are: ", credentials);
-        console.log("user is: ", user);
-
-        if (!user || user.password !== credentials.password) {
+        if (user && (await bcrypt.compare(credentials.password, user.password))) {
+          // Passwords match
+          return { id: user.id, name: user.name, email: user.email };
+        } else {
+          // User not found or passwords don't match
           throw new Error("Invalid credentials");
         }
-        return { id: user.id, name: user.name, email: user.email };
       },
     }),
   ],

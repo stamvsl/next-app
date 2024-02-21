@@ -328,28 +328,100 @@ export default function Prints() {
             <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("q")}>
               Q {getSortIndicator("q")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("date")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("date")}
+            >
               Date {getSortIndicator("date")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("income")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("income")}
+            >
               Net Value {getSortIndicator("income")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("vatPerc")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatPerc")}
+            >
               VAT Class {getSortIndicator("vatPerc")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("vatEuro")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("vatEuro")}
+            >
               VAT Value {getSortIndicator("vatEuro")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("finalPrice")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("finalPrice")}
+            >
               Gross Value {getSortIndicator("finalPrice")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("forCompany")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("forCompany")}
+            >
               Company {getSortIndicator("forCompany")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("client")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("client")}
+            >
               Client {getSortIndicator("Client")}
             </Th>
-            <Th position="sticky" top="0" color="white" bg="teal.600" zIndex="stickyHeader" border="none" onClick={() => requestSort("comments")}>
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("comments")}
+            >
               Comments {getSortIndicator("comments")}
             </Th>
           </Tr>
@@ -357,16 +429,34 @@ export default function Prints() {
         <Tbody>
           {filteredData.map((data, index) => (
             <Tr key={index} bg={index % 2 === 0 ? "blue.100" : "gray.200"} border="none">
-              <Td border="none">{data.id}</Td>
-              <Td border="none">{data.q}</Td>
-              <Td border="none">{new Date(data.date).toLocaleDateString("en-GB")}</Td>
-              <Td border="none">{data.income}</Td>
-              <Td border="none">{data.vatPerc}%</Td>
-              <Td border="none">{data.vatEuro}</Td>
-              <Td border="none">{data.finalPrice}</Td>
-              <Td border="none">{data.forCompany}</Td>
-              <Td border="none">{data.client}</Td>
-              <Td border="none">
+              <Td border="none" textAlign="center">
+                {data.id}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.q}
+              </Td>
+              <Td border="none" textAlign="center">
+                {new Date(data.date).toLocaleDateString("en-GB")}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.income}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.vatPerc}%
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.vatEuro}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.finalPrice}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.forCompany}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.client}
+              </Td>
+              <Td border="none" textAlign="center">
                 {data.comments && (
                   <Tooltip label={data.comments} hasArrow placement="left">
                     <Box>
