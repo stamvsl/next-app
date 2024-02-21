@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { Input, Container, Text } from "@chakra-ui/react";
 import Entries from "@/components/Entries";
 
-export default function entries() {
+export default function Entries() {
   const router = useRouter();
   const { status } = useSession();
   if (status === "loading") return null;
