@@ -2,7 +2,7 @@ import Settings from "@/components/Settings";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-export default function Settings() {
+export default function SettingsPage() {
   const { status } = useSession();
   const router = useRouter();
   if (status === "loading") return null;
