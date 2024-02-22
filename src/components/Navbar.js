@@ -154,20 +154,24 @@ export default function Navbar() {
           </MenuList>
         </Menu>
         <Spacer />
+
+        <Box color="white" m="10px">
+          Logged in as {session.data.user.name}
+        </Box>
         <Box>
           <Button
-            as={"a"}
-            fontSize={"sm"}
+            onClick={handleLogout}
             mr="20px"
+            fontSize={"sm"}
             fontWeight={600}
             color={"white"}
-            bg={"tomato"}
+            bg={"red.500"}
             href={"#"}
             _hover={{
-              bg: "tomato",
+              bg: "red.700",
             }}
           >
-            Exit
+            Logout
           </Button>
         </Box>
       </Flex>
