@@ -15,7 +15,7 @@ const calculateFormValues = (currentValues, newName, newValue) => {
     const netValue = parseFloat(newValue);
     const vatClass = cloneState.vatClass;
     const vatValue = parseFloat((netValue * (vatClass / 100)).toFixed(2));
-    const grossValue = parseFloat(netValue + vatValue);
+    const grossValue = parseFloat((netValue + vatValue).toFixed(2));
     cloneState.vatValue = vatValue;
     cloneState.netValue = netValue;
     cloneState.grossValue = grossValue;

@@ -58,7 +58,6 @@ export default function Navbar() {
         <Box>
           <Button
             onClick={handleLogout}
-            display={{ base: "none", md: "inline-flex" }}
             mr="20px"
             fontSize={"sm"}
             fontWeight={600}
