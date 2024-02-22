@@ -3,21 +3,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
-import {
-  Flex,
-  Input,
-  Button,
-  HStack,
-  Box,
-  FormLabel,
-  FormControl,
-  FormErrorMessage,
-  Select,
-  Textarea,
-  RadioGroup,
-  Radio,
-  Stack,
-} from "@chakra-ui/react";
+import { Flex, Input, Button, FormLabel, FormControl, FormErrorMessage, Select, Textarea, RadioGroup, Radio } from "@chakra-ui/react";
 import calculateFormValues from "./calculateFormValues";
 
 const initialvalues = {
@@ -122,6 +108,7 @@ export default function Entries() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     let formattedValue = value;
+    console.log("type", name, ": ", typeof formattedValue);
     const isTyping = value.length > formData.date.length;
     if (name === "date" && isTyping) {
       if (value.length === 2) formattedValue += "/";
@@ -229,6 +216,7 @@ export default function Entries() {
               name="netValue"
               value={formData.netValue}
               onChange={handleChange}
+              // onBlur={handleBlur}
             ></Input>
             <FormErrorMessage>Net Value is required</FormErrorMessage>
           </FormControl>
@@ -282,6 +270,7 @@ export default function Entries() {
               name="grossValue"
               value={formData.grossValue}
               onChange={handleChange}
+              // onBlur={handleBlur}
             ></Input>
             <FormErrorMessage>Gross Value is required</FormErrorMessage>
           </FormControl>
@@ -299,6 +288,7 @@ export default function Entries() {
                 name="forCompany"
                 value={formData.forCompany}
                 onChange={handleChange}
+                // onBlur={handleBlur}
               ></Input>
               <FormErrorMessage>Value for Company is required</FormErrorMessage>
             </FormControl>
