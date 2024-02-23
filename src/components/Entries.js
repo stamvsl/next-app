@@ -25,7 +25,7 @@ export default function Entries() {
   const [formErrors, setFormErrors] = useState({
     date: false,
     transactor: false,
-    description: false,
+    // description: false,
     netValue: false,
     vatValue: false,
     grossValue: false,
@@ -40,7 +40,7 @@ export default function Entries() {
     const errors = {
       date: formData.date === "",
       transactor: formData.transactor === "",
-      description: formData.description === "",
+      // description: formData.description === "",
       netValue: formData.netValue === "",
       vatValue: formData.vatValue === "",
       grossValue: formData.grossValue === "",
@@ -209,7 +209,7 @@ export default function Entries() {
           </FormControl>
         </Flex>
         <Flex flex="80%">
-          <FormControl isInvalid={formErrors.description}>
+          <FormControl>
             <FormLabel>Description</FormLabel>
             <Input
               type="text"
@@ -222,7 +222,6 @@ export default function Entries() {
               value={formData.description}
               onChange={handleChange}
             ></Input>
-            <FormErrorMessage>Description is required</FormErrorMessage>
           </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
