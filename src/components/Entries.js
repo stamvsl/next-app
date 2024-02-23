@@ -263,7 +263,7 @@ export default function Entries() {
           </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormControl isInvalid={formErrors.vatValue}>
+          <FormControl isDisabled isInvalid={formErrors.vatValue}>
             <FormLabel>VAT Value</FormLabel>
             <Input
               type="number"
