@@ -18,7 +18,7 @@ export default async function handle(req, res) {
   const userId = session.user.id;
 
   if (req.method == "POST") {
-    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments } = req.body;
+    const { date, number, grossValue, netValue, transactor, vatClass, vatValue, comments, description } = req.body;
 
     const quarter = getQuarter(date);
 
@@ -36,6 +36,7 @@ export default async function handle(req, res) {
             vatEuro: vatValue,
             client: transactor,
             comments: comments,
+            description: description,
           },
         ],
       });
