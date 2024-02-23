@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
-import { Flex, Input, Button, FormLabel, FormControl, FormErrorMessage, Select, Textarea, RadioGroup, Radio } from "@chakra-ui/react";
+import { Flex, Input, Button, FormLabel, FormControl, FormErrorMessage, Select, Textarea, RadioGroup, Radio, Box, useToast } from "@chakra-ui/react";
 import calculateFormValues from "./calculateFormValues";
 
 const initialvalues = {
@@ -25,19 +25,22 @@ export default function Entries() {
   const [formErrors, setFormErrors] = useState({
     date: false,
     transactor: false,
-    description: false,
+    // description: false,
     netValue: false,
     vatValue: false,
     grossValue: false,
     forCompany: false,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToast();
+
   let updatedValue = 0;
 
   const validateForm = () => {
     const errors = {
       date: formData.date === "",
       transactor: formData.transactor === "",
-      description: formData.description === "",
+      // description: formData.description === "",
       netValue: formData.netValue === "",
       vatValue: formData.vatValue === "",
       grossValue: formData.grossValue === "",
@@ -59,7 +62,7 @@ export default function Entries() {
           const formattedDate = parseDate(formData.date);
 
           const endpoint = getApiEndpoint(entryType);
-
+          setIsSubmitting(true);
           fetch(`/api/${entryType}Entries`, {
             method: "POST",
             credentials: "include",
@@ -82,8 +85,25 @@ export default function Entries() {
             .then((response) => response.json)
             .then(function (data) {
               setFormData(initialvalues);
+              setIsSubmitting(false);
+              toast({
+                title: "Submission successful.",
+                description: "Your entry has been saved.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "bottom",
+              });
             })
             .catch(function (error) {
+              toast({
+                title: "Error.",
+                description: "Your entry has not been saved.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "bottom",
+              });
               console.log("axios error: ", error);
               if (error.response) {
                 // The request was made and the server responded with a status code
@@ -97,6 +117,7 @@ export default function Entries() {
                 // Something happened in setting up the request that triggered an Error
                 console.error("Error message: ", error.message);
               }
+              setIsSubmitting(false);
             });
         } else {
           alert("Enter date in the form DD/MM/YYYY");
@@ -188,7 +209,7 @@ export default function Entries() {
           </FormControl>
         </Flex>
         <Flex flex="80%">
-          <FormControl isInvalid={formErrors.description}>
+          <FormControl>
             <FormLabel>Description</FormLabel>
             <Input
               type="text"
@@ -201,7 +222,6 @@ export default function Entries() {
               value={formData.description}
               onChange={handleChange}
             ></Input>
-            <FormErrorMessage>Description is required</FormErrorMessage>
           </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
@@ -243,7 +263,7 @@ export default function Entries() {
           </FormControl>
         </Flex>
         <Flex flex={{ base: "100%", md: "20%" }}>
-          <FormControl isInvalid={formErrors.vatValue}>
+          <FormControl isDisabled isInvalid={formErrors.vatValue}>
             <FormLabel>VAT Value</FormLabel>
             <Input
               type="number"

@@ -34,6 +34,7 @@ model Esoda {
   forCompany Float
   client     String
   comments  String?
+  description String?
 }
 
 model Exoda {
@@ -49,4 +50,5 @@ model Exoda {
   vatEuro    Float
   client     String
   comments  String?
+  description String?
 }

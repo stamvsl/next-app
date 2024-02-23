@@ -340,6 +340,20 @@ export default function Prints() {
             >
               Date {getSortIndicator("date")}
             </Th>
+
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("invoiceNumber")}
+            >
+              Number {getSortIndicator("invoiceNumber")}
+            </Th>
+
             <Th
               position="sticky"
               top="0"
@@ -414,6 +428,19 @@ export default function Prints() {
             >
               Transactor {getSortIndicator("Client")}
             </Th>
+
+            <Th
+              position="sticky"
+              top="0"
+              textAlign="center"
+              color="white"
+              bg="teal.600"
+              zIndex="stickyHeader"
+              border="none"
+              onClick={() => requestSort("description")}
+            >
+              Description {getSortIndicator("description")}
+            </Th>
             <Th
               position="sticky"
               top="0"
@@ -441,6 +468,9 @@ export default function Prints() {
                 {new Date(data.date).toLocaleDateString("en-GB")}
               </Td>
               <Td border="none" textAlign="center">
+                {data.invoiceNumber}
+              </Td>
+              <Td border="none" textAlign="center">
                 {data.income}
               </Td>
               <Td border="none" textAlign="center">
@@ -459,6 +489,9 @@ export default function Prints() {
               )}
               <Td border="none" textAlign="center">
                 {data.client}
+              </Td>
+              <Td border="none" textAlign="center">
+                {data.description}
               </Td>
               <Td border="none" textAlign="center">
                 {data.comments && (
