@@ -496,9 +496,9 @@ export default function Prints() {
               <Td border="none" textAlign="center">
                 {data.comments && (
                   <Tooltip label={data.comments} hasArrow placement="left">
-                    <Box>
+                    <Button bg="none">
                       <LiaCommentDotsSolid />
-                    </Box>
+                    </Button>
                   </Tooltip>
                 )}
               </Td>
