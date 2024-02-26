@@ -10,6 +10,10 @@ export default function Home() {
   if (status === "unauthenticated") {
     router.push("/auth/signin");
   }
+  if (status === "authenticated") {
+    router.push("/main");
+  }
+
   return (
     <>
       <Head>
