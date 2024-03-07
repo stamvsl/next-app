@@ -18,6 +18,7 @@ model User {
   name  String
   esoda Esoda[]
   exoda Exoda[] 
+  organizations Organization[]
 }
 
 model Esoda {
@@ -51,4 +52,10 @@ model Exoda {
   client     String
   comments  String?
   description String?
+}
+
+model Organization {
+  id     Int    @id @default(autoincrement())
+  name   String
+  users  User[] 
 }
