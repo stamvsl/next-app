@@ -1,8 +1,8 @@
-import Settings from "@/components/Settings";
+import Summaries from "@/components/Summaries";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-export default function SettingsPage() {
+export default function SummariesPage() {
   const { status } = useSession();
   const router = useRouter();
   if (status === "loading") return null;
@@ -11,7 +11,7 @@ export default function SettingsPage() {
   }
   return (
     <>
-      <Settings />
+      <Summaries />
     </>
   );
 }

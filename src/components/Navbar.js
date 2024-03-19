@@ -43,9 +43,9 @@ export default function Navbar() {
               Prints
             </Button>
           </Link>
-          <Link as={NextLink} href="/settings">
+          <Link as={NextLink} href="/summaries">
             <Button fontSize={{ base: "1.5em", xl: "2em" }} fontWeight={400} variant={"link"} color={"white"} mx="15px">
-              Settings
+              Summaries
             </Button>
           </Link>
         </Box>
@@ -138,7 +138,7 @@ export default function Navbar() {
                 Prints
               </MenuItem>
             </Link>
-            <Link as={NextLink} href="/settings">
+            <Link as={NextLink} href="/summaries">
               <MenuItem
                 icon={<Icon as={MdAppRegistration} color={"white"} />}
                 bg="gray.800"
@@ -147,7 +147,7 @@ export default function Navbar() {
                   background: "gray.800",
                 }}
               >
-                Settings
+                Summaries
               </MenuItem>
             </Link>
           </MenuList>
