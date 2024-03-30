@@ -166,8 +166,15 @@ export default function Prints() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Delete successful:", data);
-        setEsoda(esoda.filter((item) => item.id !== esodaId));
+        if (data.success) {
+          const updatedData = esoda.filter((item) => item.id !== esodaId);
+          setEsoda(updatedData);
+
+          const updatedFilteredData = filteredData.filter((item) => item.id !== esodaId);
+          setFilteredData(updatedFilteredData);
+        } else {
+          console.error("Deletion failed:", data.message);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
