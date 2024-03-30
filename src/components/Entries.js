@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-
+import ReactDatePicker from "react-datepicker";
 import axios from "axios";
 import { parseDate, isValidDate, isValidDateFormat } from "./Helpers";
 import { Flex, Input, Button, FormLabel, FormControl, FormErrorMessage, Select, Textarea, RadioGroup, Radio, Box, useToast } from "@chakra-ui/react";
@@ -56,6 +56,7 @@ export default function Entries() {
 
   const handleClick = (e) => {
     e.preventDefault();
+
     if (validateForm()) {
       {
         if (isValidDateFormat(formData.date) && isValidDate(formData.date)) {
@@ -138,6 +139,13 @@ export default function Entries() {
     const cloneState = calculateFormValues(formData, name, formattedValue);
     setFormData(cloneState);
   };
+
+  // const handleBlur = (e) => {
+  //   const { name, value } = e.target;
+  //   if (["netValue", "vatValue", "grossValue", "forCompany"].includes(name)) {
+  //     setFormData({ ...formData, [name]: formatNumber(value) });
+  //   }
+  // };
 
   const getApiEndpoint = (type) => {
     return type === "income" ? "/api/incomeEntries" : "/api/expensesEntries";

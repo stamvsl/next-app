@@ -35,7 +35,7 @@ export default function Boxes() {
           </Link>
         </Box>
         <Box>
-          <Link as={NextLink} href="/settings">
+          <Link as={NextLink} href="/summaries">
             <CustomButton Icon={IoSettingsOutline} />
           </Link>
         </Box>

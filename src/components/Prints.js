@@ -156,6 +156,24 @@ export default function Prints() {
     setFilterVisible(!filterVisible);
   };
 
+  const handleDelete = (esodaId) => {
+    fetch(`/api/${entryType}Entries?id=${esodaId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Delete successful:", data);
+        setEsoda(esoda.filter((item) => item.id !== esodaId));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
       <RadioGroup m="10px" value={entryType} onChange={(value) => setEntryType(value)}>
@@ -453,11 +471,19 @@ export default function Prints() {
             >
               Comments {getSortIndicator("comments")}
             </Th>
+            <Th position="sticky" top="0" textAlign="center" color="white" bg="teal.600" zIndex="stickyHeader" border="none"></Th>
           </Tr>
         </Thead>
         <Tbody>
           {filteredData.map((data, index) => (
-            <Tr key={index} bg={index % 2 === 0 ? "blue.100" : "gray.200"} border="none">
+            <Tr
+              key={index}
+              bg={index % 2 === 0 ? "blue.100" : "gray.200"}
+              border="none"
+              _hover={{
+                bg: "blue.300",
+              }}
+            >
               <Td border="none" textAlign="center">
                 {data.id}
               </Td>
@@ -496,11 +522,16 @@ export default function Prints() {
               <Td border="none" textAlign="center">
                 {data.comments && (
                   <Tooltip label={data.comments} hasArrow placement="left">
-                    <Box>
+                    <Button bg="none">
                       <LiaCommentDotsSolid />
-                    </Box>
+                    </Button>
                   </Tooltip>
                 )}
+              </Td>
+              <Td border="none" textAlign="center">
+                <Button colorScheme="red" onClick={() => handleDelete(data.id)}>
+                  X
+                </Button>
               </Td>
             </Tr>
           ))}
