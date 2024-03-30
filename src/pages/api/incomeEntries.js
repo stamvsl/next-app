@@ -47,6 +47,30 @@ export default async function handle(req, res) {
       console.error("Error creating Esoda entry: ", error);
       return res.status(500).json({ message: "Error creating data", error });
     }
+  } else if (req.method === "DELETE") {
+    const { id } = req.query;
+
+    if (!id) {
+      return res.status(400).json({ message: "Esoda ID is required" });
+    }
+
+    try {
+      const esodaId = parseInt(id);
+
+      const esoda = await prisma.Esoda.findFirst({ where: { id: esodaId, userId } });
+      if (!esoda) {
+        return res.status(404).json({ message: "Esoda entry not found" });
+      }
+
+      await prisma.Esoda.delete({
+        where: { id: esodaId },
+      });
+
+      return res.status(200).json({ message: "Esoda entry deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Esoda entry: ", error);
+      return res.status(500).json({ message: "Error deleting data", error });
+    }
   } else {
     return res.status(405).json({ msg: "We only support POST" });
   }
