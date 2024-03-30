@@ -122,10 +122,9 @@ export default function Prints() {
   };
 
   useEffect(() => {
-    //console.log("Sort by: ", sortConfig);
-    let sortedArr = [];
     if (sortConfig.key) {
-      sortedArr = filteredData.toSorted((a, b) => {
+      // Create a new array to avoid mutating the original array
+      const sortedArr = [...filteredData].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "ascending" ? -1 : 1;
         }
@@ -134,10 +133,10 @@ export default function Prints() {
         }
         return 0;
       });
-    }
 
-    setFilteredData(sortedArr);
-  }, [sortConfig]);
+      setFilteredData(sortedArr);
+    }
+  }, [sortConfig, filteredData]);
 
   if (isLoading) {
     return (
