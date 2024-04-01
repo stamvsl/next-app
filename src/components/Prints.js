@@ -14,7 +14,7 @@ export default function Prints() {
   const [sortConfig, setSortConfig] = useState({ key: "id", direction: "ascending" });
   const [filterVisible, setFilterVisible] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  //@TODO: Create one state called filters as an object
+
   const [filters, setFilters] = useState({
     fromNetValue: "",
     toNetValue: "",
@@ -123,7 +123,6 @@ export default function Prints() {
 
   useEffect(() => {
     if (sortConfig.key) {
-      // Create a new array to avoid mutating the original array
       const sortedArr = [...filteredData].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "ascending" ? -1 : 1;
