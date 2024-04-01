@@ -34,5 +34,10 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
