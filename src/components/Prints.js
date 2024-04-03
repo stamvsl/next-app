@@ -135,7 +135,7 @@ export default function Prints() {
 
       setFilteredData(sortedArr);
     }
-  }, [sortConfig, filteredData]);
+  }, [sortConfig]);
 
   if (isLoading) {
     return (
@@ -154,30 +154,31 @@ export default function Prints() {
     setFilterVisible(!filterVisible);
   };
 
-  const handleDelete = (esodaId) => {
-    fetch(`/api/${entryType}Entries?id=${esodaId}`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          const updatedData = esoda.filter((item) => item.id !== esodaId);
-          setEsoda(updatedData);
+  // const handleDelete = (esodaId) => {
+  //   fetch(`/api/${entryType}Entries?id=${esodaId}`, {
+  //     method: "DELETE",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.success) {
 
-          const updatedFilteredData = filteredData.filter((item) => item.id !== esodaId);
-          setFilteredData(updatedFilteredData);
-        } else {
-          console.error("Deletion failed:", data.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
+  //         const updatedData = esoda.filter((item) => item.id !== esodaId);
+  //         setEsoda(updatedData);
+
+  //         const updatedFilteredData = filteredData.filter((item) => item.id !== esodaId);
+  //         setFilteredData(updatedFilteredData);
+  //       } else {
+  //         console.error("Deletion failed:", data.message);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // };
 
   return (
     <Box w="100vw" overflowY="scroll" height="calc(100vh - 60px)">
@@ -534,9 +535,9 @@ export default function Prints() {
                 )}
               </Td>
               <Td border="none" textAlign="center">
-                <Button colorScheme="red" onClick={() => handleDelete(data.id)}>
+                {/* <Button colorScheme="red" onClick={() => handleDelete(data.id)}>
                   X
-                </Button>
+                </Button> */}
               </Td>
             </Tr>
           ))}

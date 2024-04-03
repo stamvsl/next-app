@@ -24,29 +24,31 @@ export default async function handle(req, res) {
     } catch (error) {
       res.status(500).json({ message: "Error fetching data", error });
     }
-  } else if (req.method === "DELETE") {
-    const session = await getServerSession(req, res, authOptions);
+  }
+  //  else if (req.method === "DELETE") {
+  //   const session = await getServerSession(req, res, authOptions);
 
-    if (!session) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+  //   if (!session) {
+  //     return res.status(401).json({ message: "Unauthorized" });
+  //   }
 
-    const esodaId = parseInt(req.query.id); // Assuming the ID is sent as a query parameter
+  //   const esodaId = parseInt(req.query.id); // Assuming the ID is sent as a query parameter
 
-    if (!esodaId) {
-      return res.status(400).json({ message: "Esoda ID is required" });
-    }
+  //   if (!esodaId) {
+  //     return res.status(400).json({ message: "Esoda ID is required" });
+  //   }
 
-    try {
-      const deletedEsoda = await prisma.esoda.delete({
-        where: { id: esodaId },
-      });
+  //   try {
+  //     const deletedEsoda = await prisma.esoda.delete({
+  //       where: { id: esodaId },
+  //     });
 
-      res.status(200).json({ message: "Esoda deleted successfully", deletedEsoda });
-    } catch (error) {
-      res.status(500).json({ message: "Error deleting esoda entry", error });
-    }
-  } else {
+  //     res.status(200).json({ message: "Esoda deleted successfully", deletedEsoda });
+  //   } catch (error) {
+  //     res.status(500).json({ message: "Error deleting esoda entry", error });
+  //   }
+  // }
+  else {
     // return error msg
     return res.status(405).json({ msg: "We only support GET" });
   }
