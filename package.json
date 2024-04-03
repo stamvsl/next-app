@@ -31,13 +31,5 @@
   },
   "devDependencies": {
     "prisma": "^5.10.2"
-  },
-  "engines": {
-    "node": "18.x"
-  },
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
   }
 }
