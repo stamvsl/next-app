@@ -46,30 +46,32 @@ export default async function handle(req, res) {
       console.error("Error creating Exoda entry: ", error);
       return res.status(500).json({ message: "Error creating data", error });
     }
-  } else if (req.method === "DELETE") {
-    const { id } = req.query;
+  }
+  //  else if (req.method === "DELETE") {
+  //   const { id } = req.query;
 
-    if (!id) {
-      return res.status(400).json({ message: "Expense ID is required" });
-    }
+  //   if (!id) {
+  //     return res.status(400).json({ message: "Expense ID is required" });
+  //   }
 
-    try {
-      const expenseId = parseInt(id);
+  //   try {
+  //     const expenseId = parseInt(id);
 
-      const expense = await prisma.Exoda.findFirst({ where: { id: expenseId, userId } });
-      if (!expense) {
-        return res.status(404).json({ message: "Expense entry not found" });
-      }
+  //     const expense = await prisma.Exoda.findFirst({ where: { id: expenseId, userId } });
+  //     if (!expense) {
+  //       return res.status(404).json({ message: "Expense entry not found" });
+  //     }
 
-      await prisma.Exoda.delete({
-        where: { id: expenseId },
-      });
+  //     await prisma.Exoda.delete({
+  //       where: { id: expenseId },
+  //     });
 
-      return res.status(200).json({ message: "Expense entry deleted successfully" });
-    } catch (error) {
-      return res.status(500).json({ message: "Error deleting data", error });
-    }
-  } else {
+  //     return res.status(200).json({ message: "Expense entry deleted successfully" });
+  //   } catch (error) {
+  //     return res.status(500).json({ message: "Error deleting data", error });
+  //   }
+  // }
+  else {
     return res.status(405).json({ msg: "We only support POST" });
   }
 }
