@@ -135,6 +135,7 @@ export default function Prints() {
 
       setFilteredData(sortedArr);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortConfig]);
 
   if (isLoading) {
