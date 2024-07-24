@@ -72,19 +72,29 @@ export default function Sums() {
           console.log("Fetched Exoda Data:", exodaData);
 
           // Extract unique years from both datasets
-          const esodaYears = [
-            ...new Set(
-              esodaData.map((item) => new Date(item.date).getFullYear())
-            ),
-          ];
-          const exodaYears = [
-            ...new Set(
-              exodaData.map((item) => new Date(item.date).getFullYear())
-            ),
-          ];
+          const esodaYears =
+            esodaData.length > 0
+              ? [
+                  ...new Set(
+                    esodaData.map((item) => new Date(item.date).getFullYear())
+                  ),
+                ]
+              : [];
+          const exodaYears =
+            exodaData.length > 0
+              ? [
+                  ...new Set(
+                    exodaData.map((item) => new Date(item.date).getFullYear())
+                  ),
+                ]
+              : [];
           const allYears = Array.from(
             new Set([...esodaYears, ...exodaYears])
           ).sort((a, b) => b - a); // Sort years in descending order
+
+          if (allYears.length === 0) {
+            allYears.push(new Date().getFullYear()); // Add current year if no data found
+          }
 
           setYears(allYears);
 
