@@ -71,6 +71,7 @@ export default function Sums() {
           console.log("Fetched Esoda Data:", esodaData);
           console.log("Fetched Exoda Data:", exodaData);
 
+          // Extract unique years from both datasets
           const esodaYears = [
             ...new Set(
               esodaData.map((item) => new Date(item.date).getFullYear())
@@ -83,14 +84,18 @@ export default function Sums() {
           ];
           const allYears = Array.from(
             new Set([...esodaYears, ...exodaYears])
-          ).sort((a, b) => b - a);
+          ).sort((a, b) => b - a); // Sort years in descending order
+
           setYears(allYears);
 
-          const calculateQuarterlyTotals = (data, type) => {
-            const quarters = { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
+          const calculateQuarterlyTotals = (data, types) => {
+            const quarters = { Q1: {}, Q2: {}, Q3: {}, Q4: {} };
             data.forEach((item) => {
               const quarterKey = `Q${item.q}`;
-              quarters[quarterKey] += item[type];
+              types.forEach((type) => {
+                quarters[quarterKey][type] =
+                  (quarters[quarterKey][type] || 0) + item[type];
+              });
             });
             return quarters;
           };
@@ -102,22 +107,15 @@ export default function Sums() {
             (item) => new Date(item.date).getFullYear() === selectedYear
           );
 
-          const incomeQuarters = calculateQuarterlyTotals(
-            filteredEsoda,
-            "income"
-          );
-          const incomeVATQuarters = calculateQuarterlyTotals(
-            filteredEsoda,
-            "vatEuro"
-          );
-          const expensesQuarters = calculateQuarterlyTotals(
-            filteredExoda,
-            "income"
-          );
-          const expensesVATQuarters = calculateQuarterlyTotals(
-            filteredExoda,
-            "vatEuro"
-          );
+          const incomeQuarters = calculateQuarterlyTotals(filteredEsoda, [
+            "income",
+            "vatEuro",
+            "forCompany",
+          ]);
+          const expensesQuarters = calculateQuarterlyTotals(filteredExoda, [
+            "income",
+            "vatEuro",
+          ]); // Assuming 'income' field here is correct for expenses
 
           const totalIncome = filteredEsoda.reduce(
             (acc, item) => acc + item.income,
@@ -134,7 +132,7 @@ export default function Sums() {
           const totalExpenses = filteredExoda.reduce(
             (acc, item) => acc + item.income,
             0
-          );
+          ); // Assuming 'income' field here is correct for expenses
           const totalExpensesVAT = filteredExoda.reduce(
             (acc, item) => acc + item.vatEuro,
             0
@@ -147,9 +145,7 @@ export default function Sums() {
             totalExpenses,
             totalExpensesVAT,
             incomeQuarters,
-            incomeVATQuarters,
             expensesQuarters,
-            expensesVATQuarters,
           });
 
           setSummaryData({
@@ -160,32 +156,32 @@ export default function Sums() {
             totalExpensesVAT: totalExpensesVAT.toFixed(2),
             quarters: {
               Q1: {
-                income: incomeQuarters.Q1.toFixed(2),
-                incomeVAT: incomeVATQuarters.Q1.toFixed(2),
-                expenses: expensesQuarters.Q1.toFixed(2),
-                expensesVAT: expensesVATQuarters.Q1.toFixed(2),
-                forCompany: 0,
+                income: (incomeQuarters.Q1.income || 0).toFixed(2),
+                incomeVAT: (incomeQuarters.Q1.vatEuro || 0).toFixed(2),
+                expenses: (expensesQuarters.Q1.income || 0).toFixed(2),
+                expensesVAT: (expensesQuarters.Q1.vatEuro || 0).toFixed(2),
+                forCompany: (incomeQuarters.Q1.forCompany || 0).toFixed(2),
               },
               Q2: {
-                income: incomeQuarters.Q2.toFixed(2),
-                incomeVAT: incomeVATQuarters.Q2.toFixed(2),
-                expenses: expensesQuarters.Q2.toFixed(2),
-                expensesVAT: expensesVATQuarters.Q2.toFixed(2),
-                forCompany: 0,
+                income: (incomeQuarters.Q2.income || 0).toFixed(2),
+                incomeVAT: (incomeQuarters.Q2.vatEuro || 0).toFixed(2),
+                expenses: (expensesQuarters.Q2.income || 0).toFixed(2),
+                expensesVAT: (expensesQuarters.Q2.vatEuro || 0).toFixed(2),
+                forCompany: (incomeQuarters.Q2.forCompany || 0).toFixed(2),
               },
               Q3: {
-                income: incomeQuarters.Q3.toFixed(2),
-                incomeVAT: incomeVATQuarters.Q3.toFixed(2),
-                expenses: expensesQuarters.Q3.toFixed(2),
-                expensesVAT: expensesVATQuarters.Q3.toFixed(2),
-                forCompany: 0,
+                income: (incomeQuarters.Q3.income || 0).toFixed(2),
+                incomeVAT: (incomeQuarters.Q3.vatEuro || 0).toFixed(2),
+                expenses: (expensesQuarters.Q3.income || 0).toFixed(2),
+                expensesVAT: (expensesQuarters.Q3.vatEuro || 0).toFixed(2),
+                forCompany: (incomeQuarters.Q3.forCompany || 0).toFixed(2),
               },
               Q4: {
-                income: incomeQuarters.Q4.toFixed(2),
-                incomeVAT: incomeVATQuarters.Q4.toFixed(2),
-                expenses: expensesQuarters.Q4.toFixed(2),
-                expensesVAT: expensesVATQuarters.Q4.toFixed(2),
-                forCompany: 0,
+                income: (incomeQuarters.Q4.income || 0).toFixed(2),
+                incomeVAT: (incomeQuarters.Q4.vatEuro || 0).toFixed(2),
+                expenses: (expensesQuarters.Q4.income || 0).toFixed(2),
+                expensesVAT: (expensesQuarters.Q4.vatEuro || 0).toFixed(2),
+                forCompany: (incomeQuarters.Q4.forCompany || 0).toFixed(2),
               },
             },
           });
